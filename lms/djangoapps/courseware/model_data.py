@@ -61,7 +61,6 @@ class FieldDataCache(object):
         self.select_for_update = select_for_update
         self.course_id = course_id
         self.user = user
-
         if user.is_authenticated():
             for scope, fields in self._fields_to_cache().items():
                 for field_object in self._retrieve_fields(scope, fields):
@@ -288,7 +287,6 @@ class DjangoKeyValueStore(KeyValueStore):
         Scope.preferences,
         Scope.user_info,
     )
-
 
     def __init__(self, field_data_cache):
         self._field_data_cache = field_data_cache

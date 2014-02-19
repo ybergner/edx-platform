@@ -60,6 +60,11 @@ xqueue_interface = XQueueInterface(
 )
 
 
+class LmsModuleRenderError(Exception):
+    """An exception class for exceptions thrown by module render that don't fit well elsewhere"""
+    pass
+
+
 def make_track_function(request):
     '''
     Make a tracking function that logs what happened.
@@ -304,6 +309,7 @@ def get_module_for_descriptor_internal(user, descriptor, field_data_cache, cours
         )
 
         student_module = field_data_cache.find_or_create(key)
+
         # Update the grades
         student_module.grade = event.get('value')
         student_module.max_grade = event.get('max_value')
@@ -332,6 +338,28 @@ def get_module_for_descriptor_internal(user, descriptor, field_data_cache, cours
             handle_grade_event(block, event_type, event)
         else:
             track_function(event_type, event)
+
+    def get_user_module_for_noauth(real_user):
+        """
+        A function that allows an module to get a module instance bound to a real user.  Will only work
+        within a module bound to an AnonymousUser, e.g. one that's instantiated by the noauth_handler.
+        """
+        if user.is_authenticated():
+            err_msg = ("get_user_module_for_noauth can only be called from a module bound to "
+                       "an anonymous user")
+            log.error(err_msg)
+            raise LmsModuleRenderError(err_msg)
+
+        field_data_cache_real_user = FieldDataCache.cache_for_descriptor_descendents(
+            course_id,
+            real_user,
+            descriptor
+        )
+
+        return get_module_for_descriptor_internal(real_user, descriptor, field_data_cache_real_user, course_id,
+                                                  track_function, xqueue_callback_url_prefix,
+                                                  position, wrap_xmodule_display, grade_bucket_type,
+                                                  static_asset_path)
 
     # Build a list of wrapping functions that will be applied in order
     # to the Fragment content coming out of the xblocks that are about to be rendered.
@@ -418,6 +446,7 @@ def get_module_for_descriptor_internal(user, descriptor, field_data_cache, cours
         ),
         node_path=settings.NODE_PATH,
         publish=publish,
+        get_user_module_for_noauth=get_user_module_for_noauth,
         anonymous_student_id=anonymous_student_id,
         course_id=course_id,
         open_ended_grading_interface=open_ended_grading_interface,

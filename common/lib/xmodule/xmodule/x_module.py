@@ -1154,7 +1154,7 @@ class ModuleSystem(MetricsMixin,ConfigurableFragmentWrapper, Runtime):  # pylint
             open_ended_grading_interface=None, s3_interface=None,
             cache=None, can_execute_unsafe_code=None, replace_course_urls=None,
             replace_jump_to_id_urls=None, error_descriptor_class=None, get_real_user=None,
-            field_data=None, get_user_role=None,
+            field_data=None, get_user_role=None, get_user_module_for_noauth=None,
             **kwargs):
         """
         Create a closure around the system environment.
@@ -1213,6 +1213,9 @@ class ModuleSystem(MetricsMixin,ConfigurableFragmentWrapper, Runtime):  # pylint
             for LMS and Studio.
 
         field_data - the `FieldData` to use for backing XBlock storage.
+
+        get_user_module_for_noauth - returns an instance of this module for a different user...used in LTI
+           modules, which have an anonymous handler, to set legitimate users' data
         """
 
         # Usage_store is unused, and field_data is often supplanted with an
@@ -1251,6 +1254,7 @@ class ModuleSystem(MetricsMixin,ConfigurableFragmentWrapper, Runtime):  # pylint
 
         self.get_user_role = get_user_role
         self.descriptor_runtime = descriptor_runtime
+        self.get_user_module_for_noauth = get_user_module_for_noauth
 
     def get(self, attr):
         """	provide uniform access to attributes (like etree)."""
