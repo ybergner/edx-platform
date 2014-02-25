@@ -205,6 +205,15 @@ To add a component to the unit, click the component type that you want under
 .. image:: ../Images/AddNewComponent.png
   :alt: Image of adding a new component
 
+After adding a component, you can:
+
+* `Edit a Component`_
+* `Set the Display Name for a Component`_
+* `Duplicate a Component`_
+* `Delete a Component`_
+
+You can also work with `Components that Contain Other Components`_.
+
 For more information, see the documentation for the specific component type that
 you want:
 
@@ -294,6 +303,118 @@ header:
 
 Click the Delete icon.  Then follow instructions for the type of component you
 are editing.
+
+
+.. _Nested Components:
+
+******************************************
+Components that Contain Other Components
+******************************************
+
+You can configure your course content so that components contain other
+components.  For example, if you want to include conditional components or A/B tests, you have to create components inside components. See :ref:`Setting Up A/B Tests` for more information.
+
+The component that contains other components is referred to as the *parent*; the
+contained components are *referred to as *children*.
+
+In the unit page, a parent component appears with the display name and a **VIEW** link. For example:
+
+.. image:: ../Images/component_container.png
+ :alt: Image of a unit page with a parent component
+
+When you click **VIEW**, the parent component page opens, showing all child
+components. In this example, Child Component A contains an HTML component and
+a video:
+
+.. image:: ../Images/child-components-a.png
+ :alt: Image of an expanded child component
+
+Click the arrow next to a child component name to collapse it and hide the component's contents: 
+
+.. image:: ../Images/child-components.png
+ :alt: Image of a child component page
+
+Click the arrow again to expand the component.
+
+.. note:: In this release, you cannot create parent and child components in Studio. You must export the course and set up components and their relationships in the course XML files outside of Studio. After you import the course into Studio, you can work with child components just as you can with any other component, if the containing unit is Private or in draft. 
+
+See:
+
+* `Edit a Component`_
+* `Set the Display Name for a Component`_
+* `Duplicate a Component`_
+* `Delete a Component`_
+
+
+======================================
+XML for Parent and Child Components
+======================================
+
+You develop parent and child components in XML, then import the XML course into
+Studio to verify that the structure is as you intended. 
+
+For more information about working with your course's XML files, including information about terminology, see the `edX XML Tutorial <http://edx.readthedocs.org/projects/devdata/en/latest/course_data_formats/course_xml.html>`_.
+
+The following examples show the XML used to create the unit and components shown in Studio above.
+
+The XML for the unit is:
+
+.. code-block:: xml
+
+    <vertical display_name="Unit 1">
+        <html url_name="6a5cf0ea41a54b209e0815147896d1b2"/>
+        <vertical url_name="131a499ddaa3474194c1aa2eced34455"/>
+    </vertical>
+
+The ``<vertical url_name="131a499ddaa3474194c1aa2eced34455"/>`` element above
+references the parent component file that contains the child components:
+ 
+.. code-block:: xml
+
+    <vertical display_name="Parent Component">
+        <vertical url_name="2758bbc495dd40d59050da15b40bd9a5"/>
+        <vertical url_name="c5c8b27c2c5546e784432f3b2b6cf2ea"/>
+    </vertical>
+
+The two verticals referenced by the parent component refer to the child
+components, which contain the actual content of your course:
+
+.. code-block:: xml
+
+    <vertical display_name="Child Component A">
+        <html url_name="4471618afafb45bfb86cbe511973e225"/>
+        <video url_name="fbd800d0bdbd4cb69ac70c47c9f699e1"/>
+    </vertical>
+
+.. code-block:: xml
+
+    <vertical display_name="Child Component B">
+        <html url_name="dd6ef295fda74a639842e1a49c66b2c7"/>
+        <problem url_name="b40ecbe4ed1b4280ae93e2a158edae6f"/>
+    </vertical>
+
+Theoretically, there is no limit to the levels of component nesting you can use
+in your course.
+
+
+======================================
+The Student View of Nested Components
+======================================
+
+For students, all parent and child components are displayed on the unit page.
+The following example shows the student view of the unit described above:
+
+TO REPLACE WHEN WORKING IN LMS
+
+.. image:: ../Images/nested_components_student_view.png
+ :alt: Image of the student's view of nested components
+
+.. note:: The visibility of nested components depends on the visibility of the
+ parent unit. The parent unit must be public for students to see nested
+ components. For more information, see :ref:`Visibility of Components
+ Contained by Other Components`.
+
+
 
 .. _Reorganize Your Course:
 
