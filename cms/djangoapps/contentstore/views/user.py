@@ -92,8 +92,7 @@ def _course_team_user(request, course_key, email):
     if has_course_access(request.user, course_key, role=CourseInstructorRole):
         # instructors have full permissions
         pass
-    elif has_course_access(request.user, course_key, role=CourseStaffRole) and email == request.user.email:
-        # staff can only affect themselves
+    elif has_course_access(request.user, course_key, role=CourseStaffRole) and email == request.user.email:        # staff can only affect themselves
         pass
     else:
         msg = {

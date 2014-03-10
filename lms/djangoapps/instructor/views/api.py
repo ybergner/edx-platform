@@ -65,7 +65,10 @@ from .tools import (
 )
 from xmodule.modulestore import Location
 from xmodule.modulestore.keys import CourseKey
+<<<<<<< HEAD
 from xmodule.modulestore.locations import SlashSeparatedCourseKey
+=======
+>>>>>>> f488e44... Fix all uses of UsageKeys and CourseKeys, and all of their tests.
 
 log = logging.getLogger(__name__)
 

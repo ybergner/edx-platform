@@ -210,7 +210,6 @@ def get_email_params(request, course, auto_enroll):
     `auto_enroll` is a flag for auto enrolling non-registered students: (a `boolean`)
     Returns a dict of parameters
     """
-
     stripped_site_name = settings.SITE_NAME
     registration_url = request.build_absolute_uri(reverse('student.views.register_user'))
     is_shib_course = uses_shib(course)

@@ -105,6 +105,9 @@ def xblock_handler(request, usage_key_string):
         if not has_course_access(request.user, usage_key.course_key):
             raise PermissionDenied()
 
+        if not has_course_access(request.user, old_location.course_key):
+            raise PermissionDenied()
+
         if request.method == 'GET':
             accept_header = request.META.get('HTTP_ACCEPT', 'application/json')
 

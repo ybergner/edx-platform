@@ -21,6 +21,7 @@ from xmodule.error_module import ErrorDescriptor
 from xmodule.modulestore.django import modulestore
 from xmodule.contentstore.content import StaticContent
 from xmodule.tabs import PDFTextbookTabs
+from xmodule.modulestore.keys import CourseKey
 
 from xmodule.modulestore.exceptions import ItemNotFoundError, InvalidLocationError
 from xmodule.modulestore.locations import Location, SlashSeparatedCourseKey
@@ -54,6 +55,7 @@ from student.roles import CourseRole
 
 from xmodule.html_module import AboutDescriptor
 from xmodule.modulestore.keys import CourseKey, UsageKey
+from xmodule.modulestore.locator import BlockUsageLocator, CourseLocator
 from course_creators.views import get_course_creator_status, add_user_with_status_unrequested
 from contentstore import utils
 from student.roles import CourseInstructorRole, CourseStaffRole, CourseCreatorRole, GlobalStaff
@@ -82,7 +84,7 @@ def _get_course_module(course_key, user, depth=0):
 # pylint: disable=unused-argument
 @login_required
 def course_handler(request, course_key_string=None):
-    """
+   """
     The restful handler for course specific requests.
     It provides the course tree with the necessary information for identifying and labeling the parts. The root
     will typically be a 'course' object but may not be especially as we support modules.
@@ -134,7 +136,6 @@ def _course_json(request, course_key):
     """
     course_module = _get_course_module(course_key, request.user, depth=None)
     return _xmodule_json(course_module, course_module.id)
-
 
 def _xmodule_json(xmodule, course_id):
     """
@@ -265,7 +266,6 @@ def course_index(request, course_key):
     course_module = _get_course_module(course_key, request.user, depth=3)
     lms_link = get_lms_link_for_item(course_module.location, course_module.id)
     sections = course_module.get_children()
-
 
     return render_to_response('overview.html', {
         'context_course': course_module,

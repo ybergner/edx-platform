@@ -16,7 +16,6 @@ def has_course_access(user, course_key, role=CourseStaffRole):
         return True
     return auth.has_access(user, role(course_key))
 
-
 def get_user_role(user, course_id):
     """
     Return corresponding string if user has staff or instructor role in Studio.
