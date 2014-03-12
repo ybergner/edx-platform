@@ -39,7 +39,10 @@ class SlashSeparatedCourseKey(CourseKey):
 
     @classmethod
     def _from_string(cls, serialized):
+<<<<<<< HEAD
         serialized = serialized.replace("+", "/")
+=======
+>>>>>>> 45c0a33... Implementation of old-style keys as OpaqueKeys (Location and course_id)
         if serialized.count('/') != 2:
             raise InvalidKeyError(cls, serialized)
 
@@ -47,8 +50,13 @@ class SlashSeparatedCourseKey(CourseKey):
         return cls(*serialized.split('/'))
 
     def _to_string(self):
+<<<<<<< HEAD
         # Turns slashes into pluses
         return self.to_deprecated_string().replace("/", "+")
+=======
+        # Turns slashes into encoded slashes
+        return self.to_deprecated_string()
+>>>>>>> 45c0a33... Implementation of old-style keys as OpaqueKeys (Location and course_id)
 
     @property
     def offering(self):
@@ -101,6 +109,7 @@ class LocationBase(object):
     """
     KEY_FIELDS = ('org', 'course', 'run', 'category', 'name', 'revision')
 
+<<<<<<< HEAD
     # TODO: These __eq__, __ne__, and __hash__ methods are terrible hacks.
     # We still have some functions and tests that have only org/course, and our other hacks to
     # try and make things not-break without `run` have failed.  We can probably fix that in a
@@ -131,6 +140,8 @@ class LocationBase(object):
         hashlist = [self.org, self.course, self.category, self.name, self.revision]
         return hash('~'.join(item for item in hashlist if item))
 
+=======
+>>>>>>> 45c0a33... Implementation of old-style keys as OpaqueKeys (Location and course_id)
     @classmethod
     def _check_location_part(cls, val, regexp):
         """
@@ -231,7 +242,11 @@ class LocationBase(object):
     def from_deprecated_string(cls, serialized):
         match = URL_RE.match(serialized)
         if match is None:
+<<<<<<< HEAD
             raise InvalidKeyError(Location, serialized)
+=======
+            raise InvalidKeyError(Location, location_url)
+>>>>>>> 45c0a33... Implementation of old-style keys as OpaqueKeys (Location and course_id)
         groups = match.groupdict()
         if 'tag' in groups:
             del groups['tag']
@@ -250,11 +265,19 @@ class LocationBase(object):
         )
         if self.revision:
             output += u'@{}'.format(self.revision)
+<<<<<<< HEAD
         return output.replace("/", "+")
 
     @classmethod
     def _from_string(cls, serialized):
         serialized = serialized.replace("+", "/")
+=======
+        return output
+
+    @classmethod
+    def _from_string(cls, serialized):
+
+>>>>>>> 45c0a33... Implementation of old-style keys as OpaqueKeys (Location and course_id)
         pattern = """
             (?P<org>[^/]+)/
             (?P<course>[^/]+)/
@@ -305,6 +328,7 @@ class AssetLocation(LocationBase, AssetKey):
     @property
     def path(self):
         return self.name
+<<<<<<< HEAD
 
 
 class i4xEncoder(json.JSONEncoder):
@@ -319,3 +343,5 @@ class i4xEncoder(json.JSONEncoder):
             else:
                 return unicode(o)
         super(i4xEncoder, self).default(o)
+=======
+>>>>>>> 45c0a33... Implementation of old-style keys as OpaqueKeys (Location and course_id)
