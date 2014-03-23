@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from lettuce import world, step
 from lettuce.django import django_url
-
+from terrain.ui_helpers import css_has_text, is_css_not_present, is_css_present
 from common import course_id, visit_scenario_item
 from courseware.tests.factories import InstructorFactory, BetaTesterFactory
 
@@ -253,44 +253,29 @@ def visit_lti_component(_step):
     visit_scenario_item('LTI')
 
 
-@step('I see progress div with text "([^"]*)"$')
+@step('I see progress with text "([^"]*)"$')
 def see_progress_div(_step, text):
-    selector = 'problem-progress'
-    xpath = '//div[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert (text in node.first.text)
+    selector = '.problem-progress'
+    assert css_has_text(selector, text)
 
 
-@step('I see feedback div with text "([^"]*)"$')
+
+@step('I see feedback with text "([^"]*)"$')
 def see_feedback_div(_step, text):
-    selector = 'problem-feedback'
-    xpath = '//div[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert (text in node.first.text)
+    selector = '.problem-feedback'
+    assert css_has_text(selector, text)
 
 
-@step('I do not see feedback div')
+@step('I do not see feedback$')
 def not_see_feedback_div(_step):
-    selector = 'problem-feedback'
-    xpath = '//div[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert not node
+    selector = '.problem-feedback'
+    assert is_css_not_present(selector)
 
 
-@step('I do not see progress div')
+@step('I do not see progress$')
 def not_see_progress_div(_step):
-    selector = 'problem-progress'
-    xpath = '//div[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert not node
+    selector = '.problem-progress'
+    assert is_css_not_present(selector)
 
 
 @step('I see text "([^"]*)"$')
@@ -372,31 +357,19 @@ def switch_view(_step, view):
         world.wait_for_ajax_complete()
 
 
-@step("I do not see a launch button")
+@step("I do not see a launch button$")
 def check_no_launch_button(_step):
-    selector = 'link_lti_new_window'
-    xpath = '//a[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert not node
+    selector = '.link_lti_new_window'
+    assert is_css_not_present(selector)
 
 
-@step("I do see the module title")
+@step("I do see the module title$")
 def check_module_title(_step):
-    selector = 'title'
-    xpath = '//h3[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert node
+    selector = '.title'
+    assert is_css_present(selector)
 
 
-@step("I do not see an provider iframe")
+@step("I do not see an provider iframe$")
 def check_no_provider_iframe(_step):
-    selector = 'ltiLaunchFrame'
-    xpath = '//iframe[@class="{selector}"]'.format(
-        selector=selector,
-    )
-    node = world.browser.find_by_xpath(xpath)
-    assert not node
+    selector = '.ltiLaunchFrame'
+    assert is_css_not_present(selector)
