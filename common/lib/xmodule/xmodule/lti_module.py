@@ -22,6 +22,11 @@ A resource to test the LTI protocol (PHP realization):
 
     http://www.imsglobal.org/developers/LTI/test/v1p1/lms.php
 
+We have also begun to add support for LTI 1.2/2.0.  We will keep this
+docstring in synch with what support is available.  The first LTI 2.0
+feature to be supported is the REST API results service, see specification
+at
+http://www.imsglobal.org/lti/ltiv2p0/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/Result/service.html
 
 What is supported:
 ------------------
@@ -30,9 +35,20 @@ What is supported:
 2.) Multiple LTI components on a single page.
 3.) The use of multiple LTI providers per course.
 4.) Use of advanced LTI component that provides back a grade.
-    a.) The LTI provider sends back a grade to a specified URL.
-    b.) Currently only action "update" is supported. "Read", and "delete"
-        actions initially weren't required.
+    A) LTI 1.1.1 XML endpoint
+        a.) The LTI provider sends back a grade to a specified URL.
+        b.) Currently only action "update" is supported. "Read", and "delete"
+            actions initially weren't required.
+    B) LTI 2.0 Result Service JSON REST endpoint
+       (http://www.imsglobal.org/lti/ltiv2p0/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/Result/service.html)
+        a.) Discovery of all such LTI http endpoints for a course.  External tools GET from this discovery
+            endpoint and receive URLs for interacting with individual grading units.
+            (see lms/djangoapps/courseware/views.py:get_course_lti_endpoints)
+        b.) GET, PUT and DELETE in LTI Result JSON binding
+            (http://www.imsglobal.org/lti/ltiv2p0/mediatype/application/vnd/ims/lis/v2/result+json/index.html)
+            for a provider to synchronize grades into edx-platform.  Reading, Setting, and Deleteing
+            Numeric grades between 0 and 1 and text + basic HTML feedback comments are supported, via
+            GET / PUT / DELETE HTTP methods respectively
 """
 
 import logging
@@ -761,7 +777,7 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
             },
         )
         user_module.module_score = LTIModule.module_score.default
-        user_module.score_comment = LTIModule.module_score.default
+        user_module.score_comment = LTIModule.score_comment.default
 
     @classmethod
     def set_user_module_score(cls, user, user_module, score, max_score, comment=""):
