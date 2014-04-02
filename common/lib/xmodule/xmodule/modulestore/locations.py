@@ -3,7 +3,6 @@
 import logging
 import re
 import urllib
-
 from opaque_keys import InvalidKeyError, OpaqueKey
 
 from xmodule.modulestore.keys import CourseKey, UsageKey, DefinitionKey, AssetKey
