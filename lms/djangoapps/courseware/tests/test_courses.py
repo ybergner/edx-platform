@@ -10,7 +10,6 @@ from xmodule.modulestore.django import get_default_store_name_for_current_reques
 from xmodule.modulestore.keys import CourseKey
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory
-from xmodule.modulestore.keys import CourseKey
 from xmodule.tests.xml import factories as xml
 from xmodule.tests.xml import XModuleXmlImportTest
 
@@ -18,6 +17,7 @@ from courseware.courses import (
     get_course_by_id, get_cms_course_link, course_image_url,
     get_course_info_section, get_course_about_section
 )
+# @cale plz review, get_course(_by_id) doesn't raise 404 for malformed course id
 from courseware.tests.helpers import get_request_for_user
 from courseware.tests.tests import TEST_DATA_MONGO_MODULESTORE, TEST_DATA_MIXED_MODULESTORE
 from xmodule.modulestore.keys import CourseKey
