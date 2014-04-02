@@ -65,10 +65,7 @@ from .tools import (
 )
 from xmodule.modulestore import Location
 from xmodule.modulestore.keys import CourseKey
-<<<<<<< HEAD
 from xmodule.modulestore.locations import SlashSeparatedCourseKey
-=======
->>>>>>> f488e44... Fix all uses of UsageKeys and CourseKeys, and all of their tests.
 
 log = logging.getLogger(__name__)
 
@@ -1043,7 +1040,7 @@ def send_email(request, course_id):
     email = CourseEmail.create(course_id, request.user, send_to, subject, message)
 
     # Submit the task, so that the correct InstructorTask object gets created (for monitoring purposes)
-    instructor_task.api.submit_bulk_course_email(request, course_id, email.id)  # pylint: disable=E1101
+    instructor_task.api.submit_bulk_course_email(request, course_id.to_deprecated_string(), email.id)  # pylint: disable=E1101
 
     response_payload = {'course_id': course_id.to_deprecated_string()}
     return JsonResponse(response_payload)
