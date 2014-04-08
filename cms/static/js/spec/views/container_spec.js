@@ -9,10 +9,10 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
 
                 var model, containerView, mockContainerHTML, respondWithMockXBlockFragment;
 
+                // TODO: this will all need to be updated according to Andy's mock HTML,
+                // and locators should be draft.
                 var splitTestUrl = "/xblock/ccc.dd.ee/branch/draft/block/AB_Test";
 
-                // TODO: why did these end up being published locators in the HTML? Should be draft.
-                // Check functionality in app and update mock HTML appropriately.
                 var groupAUrl = "/xblock/ccc.dd.ee/branch/published/block/group_a";
                 var groupA = "ccc.dd.ee/branch/published/block/group_a";
                 var groupAText = "ccc.dd.ee/branch/published/block/html_4658c0f4c400";
@@ -23,6 +23,7 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
                 var groupBText = "ccc.dd.ee/branch/published/block/html_b5c18016d991";
                 var groupBProblem = "ccc.dd.ee/branch/published/block/Checkboxes";
 
+                // TODO: switch to using Andy's mock container view files (which uses mock xblocks).
                 mockContainerHTML = readFixtures('mock/mock-container.underscore');
 
                 respondWithMockXBlockFragment = function (requests, response) {
@@ -92,7 +93,6 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
                     verifyNumReorderCalls(requests, 0);
                 });
 
-
                 it('can reorder within a group', function () {
                     var requests = init(this);
                     // Drag the first thing in Group A (text component) after the second thing (video).
@@ -133,20 +133,8 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
                     verifyRequest(requests, 0, splitTestUrl, [groupB, groupA]);
                 });
 
-                it('can nest one group inside another', function () {
-                    var requests = init(this);
-                    // Drag Group A into Group B.
-                    dragHandle(0, 100);
-                    respondToRequest(requests, 0, 200);
-                    // For some reason we are not getting the removal event in the test. :(
-    //                requests[2].respond(200);
-                    // Will get an event to move into Group B and an event to remove from Group A.
-    //                expect(requests.length).toEqual(3);
-    //                verifyRequest(requests[1], groupBUrl, [groupA, groupBText, groupBProblem]);
-                    verifyRequest(requests, 0, splitTestUrl, [groupB]);
-                });
 
-                it('can drag a component to the top level', function () {
+                it('can drag a component to the top level, and nest one group in another', function () {
                     var requests = init(this);
                     // Drag text item in Group A to the top level (in first position).
                     dragHandle(1, -20);
@@ -155,6 +143,14 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
                     verifyNumReorderCalls(requests, 2);
                     verifyRequest(requests, 0, splitTestUrl, [groupAText, groupA, groupB]);
                     verifyRequest(requests, 1, groupAUrl, [groupAVideo]);
+
+                    // Drag Group A (only contains video now) into Group B.
+                    dragHandle(1, 150);
+                    respondToRequest(requests, 2, 200);
+                    respondToRequest(requests, 3, 200);
+                    verifyNumReorderCalls(requests, 4);
+                    verifyRequest(requests, 2, groupBUrl, [groupBText, groupA, groupBProblem]);
+                    verifyRequest(requests, 3, splitTestUrl, [groupAText, groupB]);
                 });
 
                 describe("Shows a saving message", function () {
@@ -179,7 +175,6 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
                         respondToRequest(requests, 0, 200);
                         expect(savingSpies.hide).not.toHaveBeenCalled();
                         respondToRequest(requests, 1, 200);
-
                         expect(savingSpies.hide).toHaveBeenCalled();
                         verifyNumReorderCalls(requests, 2);
                     });
@@ -193,7 +188,6 @@ define([ "jquery", "js/spec/create_sinon", "URI", "js/views/container", "js/mode
                         expect(savingSpies.hide).not.toHaveBeenCalled();
 
                         respondToRequest(requests, 0, 500);
-
                         expect(savingSpies.hide).not.toHaveBeenCalled();
                         // Since the first reorder call failed, the removal will not be called.
                         verifyNumReorderCalls(requests, 1);
