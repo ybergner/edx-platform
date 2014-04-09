@@ -306,9 +306,21 @@ function (HTML5Video, Resizer) {
     // (currentTime) and its duration.
     // It is called at a regular interval when the video is playing.
     function update() {
+        var _this;
+
         this.videoPlayer.currentTime = this.videoPlayer.player.getCurrentTime();
 
         if (isFinite(this.videoPlayer.currentTime)) {
+            _this = this;
+
+            // Executed all attached callbacks to this method, passing the video's current
+            // playing time as a parameter.
+            $.each(this.methodCallbacks.videoPlayer.update, function (index, callback) {
+                window.setTimeout(function () {
+                    callback(_this.videoPlayer.currentTime);
+                }, 0);
+            });
+
             this.videoPlayer.updatePlayTime(this.videoPlayer.currentTime);
 
             // We need to pause the video if current time is smaller (or equal)
