@@ -56,7 +56,7 @@ class LTIModuleTest(LogicTest):
             """)
         self.system.get_real_user = Mock()
         self.system.publish = Mock()
-        self.system.get_user_module_for_noauth = Mock(return_value=self.xmodule)
+        self.system.rebind_noauth_module_to_user = Mock()
         self.xmodule.publish_proxy = self.system.publish
 
         self.user_id = self.xmodule.runtime.anonymous_student_id
@@ -422,7 +422,7 @@ class LTIModuleTest(LogicTest):
         """
         for einput in self.BAD_DISPATCH_INPUTS:
             with self.assertRaisesRegexp(LTIError, "No valid user id found in endpoint URL"):
-                self.xmodule.parse_lti_2_0_handler_dispatch(einput)
+                self.xmodule.parse_lti_2_0_handler_suffix(einput)
 
     GOOD_DISPATCH_INPUTS = [
         (u"user/abcd3", u"abcd3"),
@@ -435,7 +435,7 @@ class LTIModuleTest(LogicTest):
         fit the form user/<anon_id>
         """
         for ginput, expected in self.GOOD_DISPATCH_INPUTS:
-            self.assertEquals(self.xmodule.parse_lti_2_0_handler_dispatch(ginput), expected)
+            self.assertEquals(self.xmodule.parse_lti_2_0_handler_suffix(ginput), expected)
 
     BAD_JSON_INPUTS = [
         # (bad inputs, error message expected)
@@ -546,7 +546,8 @@ class LTIModuleTest(LogicTest):
         mock_request.body = body
         return mock_request
 
-    USER_STANDIN = "IamAStringStandingInForAUser"
+    USER_STANDIN = Mock()
+    USER_STANDIN.id = 999
 
     def setup_system_xmodule_mocks_for_lti20_request_test(self):
         """
@@ -573,9 +574,9 @@ class LTIModuleTest(LogicTest):
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(self.xmodule.module_score)
         self.assertEqual(self.xmodule.score_comment, u"")
-        (_, called_grade_obj), kwargs = self.system.publish.call_args
-        self.assertEqual(called_grade_obj, {'event_name': 'grade_delete'})
-        self.assertEqual(kwargs, {'custom_user': self.USER_STANDIN})
+        (_, evt_type, called_grade_obj), kwargs = self.system.publish.call_args
+        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': None, 'max_value': None,})
+        self.assertEqual(evt_type, 'grade')
 
     def test_lti20_delete_success(self):
         """
@@ -593,9 +594,9 @@ class LTIModuleTest(LogicTest):
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(self.xmodule.module_score)
         self.assertEqual(self.xmodule.score_comment, u"")
-        (_, called_grade_obj), kwargs = self.system.publish.call_args
-        self.assertEqual(called_grade_obj, {'event_name': 'grade_delete'})
-        self.assertEqual(kwargs, {'custom_user': self.USER_STANDIN})
+        (_, evt_type, called_grade_obj), kwargs = self.system.publish.call_args
+        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': None, 'max_value': None,})
+        self.assertEqual(evt_type, 'grade')
 
     def test_lti20_put_set_score_success(self):
         """
@@ -609,9 +610,9 @@ class LTIModuleTest(LogicTest):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.xmodule.module_score, 0.1)
         self.assertEqual(self.xmodule.score_comment, u"ಠ益ಠ")
-        (_, called_grade_obj), kwargs = self.system.publish.call_args
-        self.assertEqual(called_grade_obj, {'event_name': 'grade', 'value': 0.1, 'max_value': 1.0})
-        self.assertEqual(kwargs, {'custom_user': self.USER_STANDIN})
+        (_, evt_type, called_grade_obj), kwargs = self.system.publish.call_args
+        self.assertEqual(evt_type, 'grade')
+        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': 0.1, 'max_value': 1.0})
 
     def test_lti20_get_no_score_success(self):
         """

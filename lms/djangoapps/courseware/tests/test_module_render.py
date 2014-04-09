@@ -81,9 +81,9 @@ class ModuleRenderTestCase(ModuleStoreTestCase, LoginEnrollmentTestCase):
 
         return render.get_module(user, mock_request, self.location, field_data_cache, self.course_id)
 
-    def test_get_user_module_for_noauth_not_anonymous(self):
+    def test_rebind_noauth_module_to_user_not_anonymous(self):
         """
-        Tests that an exception is thrown when get_user_module_for_noauth is run from a
+        Tests that an exception is thrown when rebind_noauth_module_to_user is run from a
         module bound to a real user
         """
         module = self.get_module_for_user(self.mock_user)
@@ -91,11 +91,11 @@ class ModuleRenderTestCase(ModuleStoreTestCase, LoginEnrollmentTestCase):
         user2.id = 2
         with self.assertRaisesRegexp(
             render.LmsModuleRenderError,
-            "get_user_module_for_noauth can only be called from a module bound to an anonymous user"
+            "rebind_noauth_module_to_user can only be called from a module bound to an anonymous user"
         ):
-            self.assertTrue(module.xmodule_runtime.get_user_module_for_noauth(user2))
+            self.assertTrue(module.xmodule_runtime.rebind_noauth_module_to_user(module, user2))
 
-    def test_get_user_module_for_noauth_anonymous(self):
+    def test_rebind_noauth_module_to_user_anonymous(self):
         """
         Tests that get_user_module_for_noauth succeeds when run is run from a
         module bound to AnonymousUser
@@ -103,9 +103,9 @@ class ModuleRenderTestCase(ModuleStoreTestCase, LoginEnrollmentTestCase):
         module = self.get_module_for_user(AnonymousUser())
         user2 = UserFactory()
         user2.id = 2
-        module2 = module.xmodule_runtime.get_user_module_for_noauth(user2)
-        self.assertTrue(module2)
-        self.assertEqual(module2.xmodule_runtime.anonymous_student_id, anonymous_id_for_user(user2, ''))
+        module.xmodule_runtime.rebind_noauth_module_to_user(module, user2)
+        self.assertTrue(module)
+        self.assertEqual(module.xmodule_runtime.anonymous_student_id, anonymous_id_for_user(user2, ''))
 
     def test_module_render_with_jump_to_id(self):
         """
@@ -921,13 +921,12 @@ class TestXmoduleRuntimeEvent(TestSubmittingProblems):
     Inherit from TestSubmittingProblems to get functionality that set up a course and problems structure
     """
 
-    grade_dict = {'event_name': 'grade', 'value': 0.18, 'max_value': 32}
-    delete_dict = {'event_name': 'grade_delete'}
-
     def setUp(self):
         super(TestXmoduleRuntimeEvent, self).setUp()
         self.homework = self.add_graded_section_to_course('homework')
         self.problem = self.add_dropdown_to_section(self.homework.location, 'p1', 1)
+        self.grade_dict = {'value': 0.18, 'max_value': 32, 'user_id': self.student_user.id}
+        self.delete_dict = {'value': None, 'max_value': None, 'user_id': self.student_user.id}
 
     def get_module_for_user(self, user):
         """Helper function to get useful module at self.location in self.course_id for user"""
@@ -941,7 +940,7 @@ class TestXmoduleRuntimeEvent(TestSubmittingProblems):
     def set_module_grade_using_publish(self, grade_dict):
         """Publish the user's grade, takes grade_dict as input"""
         module = self.get_module_for_user(self.student_user)
-        module.xmodule_runtime.publish(module, grade_dict)
+        module.xmodule_runtime.publish(module, 'grade', grade_dict)
         return module
 
     def test_xmodule_runtime_publish(self):
@@ -954,7 +953,7 @@ class TestXmoduleRuntimeEvent(TestSubmittingProblems):
     def test_xmodule_runtime_publish_delete(self):
         """Test deleting the grade using the publish mechanism"""
         module = self.set_module_grade_using_publish(self.grade_dict)
-        module.xmodule_runtime.publish(module, self.delete_dict)
+        module.xmodule_runtime.publish(module, 'grade', self.delete_dict)
         student_module = StudentModule.objects.get(student=self.student_user, module_state_key=self.problem.id)
         self.assertIsNone(student_module.grade)
         self.assertIsNone(student_module.max_grade)

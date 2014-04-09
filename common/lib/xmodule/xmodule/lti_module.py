@@ -76,7 +76,7 @@ from xblock.fields import Boolean, Float
 
 log = logging.getLogger(__name__)
 
-LTI_2_0_REST_DISPATCH_PARSER = re.compile(r"^user/(?P<anon_id>\w+)", re.UNICODE)
+LTI_2_0_REST_SUFFIX_PARSER = re.compile(r"^user/(?P<anon_id>\w+)", re.UNICODE)
 LTI_2_0_JSON_CONTENT_TYPE = 'application/vnd.ims.lis.v2.result+json'
 
 
@@ -274,28 +274,14 @@ class LTIModule(LTIFields, XModule):
         Returns a context.
         """
         # use bleach defaults. see https://github.com/jsocol/bleach/blob/master/bleach/__init__.py
-        # ALLOWED_TAGS = [
-        #     'a',
-        #     'abbr',
-        #     'acronym',
-        #     'b',
-        #     'blockquote',
-        #     'code',
-        #     'em',
-        #     'i',
-        #     'li',
-        #     'ol',
-        #     'strong',
-        #     'ul',
-        # ]
+        # ALLOWED_TAGS are
+        # ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol',  'strong', 'ul']
         #
-        # ALLOWED_ATTRIBUTES = {
+        # ALLOWED_ATTRIBUTES are
         #     'a': ['href', 'title'],
         #     'abbr': ['title'],
         #     'acronym': ['title'],
-        # }
         #
-        # ALLOWED_STYLES = []
         # This lets all plaintext through.
         sanitized_comment = bleach.clean(self.score_comment)
 
@@ -511,7 +497,7 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
         return self.weight if self.has_score else None
 
     @XBlock.handler
-    def grade_handler(self, request, dispatch):
+    def grade_handler(self, request, suffix):
         """
         This is called by courseware.module_render, to handle an AJAX call.
 
@@ -610,9 +596,7 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
             return Response(response_xml_template.format(**failure_values), content_type="application/xml")
 
         if action == 'replaceResultRequest':
-            user_instance = self.system.get_user_module_for_noauth(real_user)
-
-            LTIModule.set_user_module_score(real_user, user_instance, score, self.max_score())
+            self.set_user_module_score(real_user, score, self.max_score())
 
             values = {
                 'imsx_codeMajor': 'success',
@@ -629,7 +613,7 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
 
     #  LTI 2.0 Result Service Support -- but for now only for PUTting the grade back into an LTI xmodule
     @XBlock.handler
-    def lti_2_0_result_rest_handler(self, request, dispatch):
+    def lti_2_0_result_rest_handler(self, request, suffix):
         """
         This will in the future be the handler for the LTI 2.0 Result service REST endpoints.  Right now
         I'm (@jbau) just implementing the PUT interface first.  All other methods get 404'ed.  It really should
@@ -644,10 +628,10 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
          "comment" : "This is exceptional work."
         }
         For PUTs, the content type must be "application/vnd.ims.lis.v2.result+json".
-        Note the "@id" key is optional on PUT and we don't do anything with it.  Instead, we use the "dispatch"
+        Note the "@id" key is optional on PUT and we don't do anything with it.  Instead, we use the "suffix"
         parameter to parse out the user from the end of the URL.  An example endpoint url is
         http://localhost:8000/courses/org/num/run/xblock/i4x:;_;_org;_num;_lti;_GUID/handler_noauth/lti_2_0_result_rest_handler/user/<anon_id>
-        so dispatch is of the form "user/<anon_id>"
+        so suffix is of the form "user/<anon_id>"
         Failures result in 401, 404, or 500s without any body.  Successes result in 200.  Again see
         http://www.imsglobal.org/lti/ltiv2p0/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/Result/service.html
         (Note: this prevents good debug messages for the client.  So I'd advocate the creating
@@ -680,7 +664,7 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
               .format(headers['Authorization']))
         ####### DEBUG SECTION END ########
         try:
-            anon_id = self.parse_lti_2_0_handler_dispatch(dispatch)
+            anon_id = self.parse_lti_2_0_handler_suffix(suffix)
         except LTIError:
             return Response(status=404)  # 404 because a part of the URL (denoting the anon user id) is invalid
         try:
@@ -702,13 +686,13 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
         else:
             return Response(status=404)  # have to do 404 due to spec, but 405 is better, with error msg in body
 
-    def parse_lti_2_0_handler_dispatch(self, dispatch):
+    def parse_lti_2_0_handler_suffix(self, suffix):
         """
-        parses the dispatch argument (the trailing parts of the URL) of the LTI2.0 REST handler.
+        parses the suffix argument (the trailing parts of the URL) of the LTI2.0 REST handler.
         must be of the form "user/<anon_id>".  Returns anon_id if match found, otherwise raises LTIError
         """
-        if dispatch:
-            match_obj = LTI_2_0_REST_DISPATCH_PARSER.match(dispatch)
+        if suffix:
+            match_obj = LTI_2_0_REST_SUFFIX_PARSER.match(suffix)
             if match_obj:
                 return match_obj.group('anon_id')
         # fall-through handles all error cases
@@ -722,21 +706,20 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
         """
         base_json_obj = {"@context": "http://purl.imsglobal.org/ctx/lis/v2/Result",
                          "@type": "Result"}
-        user_instance = self.system.get_user_module_for_noauth(real_user)
-        if user_instance.module_score is None:  # In this case, no score has been ever set
+        self.system.rebind_noauth_module_to_user(self, real_user)
+        if self.module_score is None:  # In this case, no score has been ever set
             return Response(json.dumps(base_json_obj), content_type=LTI_2_0_JSON_CONTENT_TYPE)
 
         # Fall through to returning grade and comment
-        base_json_obj['resultScore'] = round(user_instance.module_score, 2)
-        base_json_obj['comment'] = user_instance.score_comment
+        base_json_obj['resultScore'] = round(self.module_score, 2)
+        base_json_obj['comment'] = self.score_comment
         return Response(json.dumps(base_json_obj), content_type=LTI_2_0_JSON_CONTENT_TYPE)
 
     def _lti_2_0_result_del_handler(self, request, real_user):  # pylint: disable=unused-argument
         """
         DELETE handler for lti_2_0_result.  Assumes all authorization has been checked.
         """
-        user_instance = self.system.get_user_module_for_noauth(real_user)
-        LTIModule.clear_user_module_score(real_user, user_instance)
+        self.clear_user_module_score(real_user)
         return Response(status=200)
 
     def _lti_2_0_result_put_handler(self, request, real_user):
@@ -748,27 +731,25 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
         except LTIError:
             return Response(status=404)  # have to do 404 due to spec, but 400 is better, with error msg in body
 
-        user_instance = self.system.get_user_module_for_noauth(real_user)
         # According to http://www.imsglobal.org/lti/ltiv2p0/ltiIMGv2p0.html#_Toc361225514
         # PUTting a JSON object with no "resultScore" field is equivalent to a DELETE.
         if score is None:
-            LTIModule.clear_user_module_score(real_user, user_instance)
+            self.clear_user_module_score(real_user)
             return Response(status=200)
 
         # Fall-through record the score and the comment in the module
-        LTIModule.set_user_module_score(real_user, user_instance, score, self.max_score(), comment)
+        self.set_user_module_score(real_user, score, self.max_score(), comment)
         return Response(status=200)
 
-    @classmethod
-    def clear_user_module_score(cls, user, user_module):
+    def clear_user_module_score(self, user):
         """
         Clears the module user state, including grades and comments.
-        This is a classmethod with user and module as params because we often invoke this from
-        a module bound to a noauth user.
-        Note that user_module SHOULD be bound to user
+        Note that the publish call has to complete before we rebind and set this module state.
+        The reason is because rebinding "caches" the state, so publishing between rebinding and setting
+        state can cause state inconsistency
         """
-        user_module.publish_proxy(
-            user_module,
+        self.system.publish(
+            self,
             'grade',
             {
                 'value': None,
@@ -776,24 +757,23 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
                 'user_id': user.id
             },
         )
-        user_module.module_score = LTIModule.module_score.default
-        user_module.score_comment = LTIModule.score_comment.default
 
-    @classmethod
-    def set_user_module_score(cls, user, user_module, score, max_score, comment=""):
+        self.system.rebind_noauth_module_to_user(self, user)
+        self.module_score = LTIModule.module_score.default
+        self.score_comment = LTIModule.score_comment.default
+
+    def set_user_module_score(self, user, score, max_score, comment=""):
         """
         Sets the module user state, including grades and comments.
-        This is a classmethod with user and module as params because we often invoke this from
-        a module bound to a noauth user.
-        Note that user_module SHOULD be bound to user
+        Note that the publish call has to complete before we rebind and set this module state.
+        The reason is because rebinding "caches" the state, so publishing between rebinding and setting
+        state can cause state inconsistency
         """
         scaled_score = score * max_score
-        user_module.module_score = scaled_score
-        user_module.score_comment = comment
 
         # have to publish for the progress page...
-        user_module.publish_proxy(
-            user_module,
+        self.system.publish(
+            self,
             'grade',
             {
                 'value': scaled_score,
@@ -801,6 +781,10 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
                 'user_id': user.id,
             },
         )
+        self.system.rebind_noauth_module_to_user(self, user)
+
+        self.module_score = scaled_score
+        self.score_comment = comment
 
     def verify_lti_2_0_result_rest_headers(self, request, verify_content_type=True):
         """
@@ -982,4 +966,3 @@ class LTIDescriptor(LTIFields, MetadataOnlyEditingDescriptor, EmptyDataRawDescri
     lti_2_0_result_rest_handler = module_attr('lti_2_0_result_rest_handler')
     clear_user_module_score = module_attr('clear_user_module_score')
     get_outcome_service_url = module_attr('get_outcome_service_url')
-    publish_proxy = module_runtime_attr('publish')
