@@ -839,6 +839,7 @@ def get_course_lti_endpoints(request, course_id):
         course = get_course(course_id, depth=2)
     except ValueError:  # get_course raises ValueError if course_id is invalid or doesn't refer to a course
         return HttpResponse(status=404)
+
     anonymous_user = AnonymousUser()
     lti_descriptors = modulestore().get_items(Location("i4x", course.org, course.number, "lti", None), course.id)
 
