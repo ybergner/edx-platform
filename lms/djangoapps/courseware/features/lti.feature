@@ -124,7 +124,7 @@ Feature: LMS.LTI component
   | open_in_a_new_page | hide_launch |
   | False              | True        |
   Then I do not see a launch button
-  Then I do see the module title
+  Then I see the module title with text "LTI (External resource)"
 
   #12
   Scenario: LTI component that set to hide_launch and not open_in_a_new_page shows no iframe
@@ -133,4 +133,4 @@ Feature: LMS.LTI component
   | open_in_a_new_page | hide_launch |
   | True               | True        |
   Then I do not see an provider iframe
-  Then I do see the module title
+  Then I see the module title with text "LTI (External resource)"

@@ -4,22 +4,17 @@ import os
 import pytz
 from mock import patch
 from pytz import UTC
-from nose.tools import assert_equal
 from splinter.exceptions import ElementDoesNotExist
+from nose.tools import assert_true, assert_equal, assert_in
 
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.conf import settings
 from lettuce import world, step
-from lettuce.django import django_url
-from terrain.ui_helpers import css_has_text, is_css_not_present, is_css_present
-from common import course_id, visit_scenario_item
 from courseware.tests.factories import InstructorFactory, BetaTesterFactory
 
 from courseware.access import has_access
 from student.tests.factories import UserFactory
 
-from nose.tools import assert_equals
+
 from common import course_id, visit_scenario_item
 
 
@@ -253,29 +248,15 @@ def visit_lti_component(_step):
     visit_scenario_item('LTI')
 
 
-@step('I see progress with text "([^"]*)"$')
-def see_progress_div(_step, text):
-    selector = '.problem-progress'
-    assert css_has_text(selector, text)
-
-
-
-@step('I see feedback with text "([^"]*)"$')
-def see_feedback_div(_step, text):
-    selector = '.problem-feedback'
-    assert css_has_text(selector, text)
-
-
-@step('I do not see feedback$')
-def not_see_feedback_div(_step):
-    selector = '.problem-feedback'
-    assert is_css_not_present(selector)
-
-
-@step('I do not see progress$')
-def not_see_progress_div(_step):
-    selector = '.problem-progress'
-    assert is_css_not_present(selector)
+@step('I see (.*) with text "([^"]*)"$')
+def see_elem_text(_step, elem, text):
+    selector_map = {
+        'progress': '.problem-progress',
+        'feedback': '.problem-feedback',
+        'the module title': '.title'
+    }
+    assert_in(elem, selector_map)
+    assert_true(world.css_has_text(selector_map[elem], text))
 
 
 @step('I see text "([^"]*)"$')
@@ -306,7 +287,7 @@ def see_value_in_the_gradebook(_step, label, text):
             index = i
             break;
 
-    assert world.css_has_text('{0} tbody td'.format(table_selector), text, index=index)
+    assert_true(world.css_has_text('{0} tbody td'.format(table_selector), text, index=index))
 
 
 @step('I submit answer to LTI question$')
@@ -328,10 +309,13 @@ def click_grade_lti20(_step):
 
 @step('LTI provider deletes my grade and feedback$')
 def click_delete_button(_step):
-    location = world.scenario_dict['LTI'].location.html_id()
-    iframe_name = 'ltiFrame-' + location
-    with world.browser.get_iframe(iframe_name) as iframe:
+    with world.browser.get_iframe(get_lti_frame_name()) as iframe:
         iframe.find_by_name('submit-lti2-delete-button').first.click()
+
+
+def get_lti_frame_name():
+    location = world.scenario_dict['LTI'].location.html_id()
+    return 'ltiFrame-' + location
 
 
 @step('I see in iframe that LTI role is (.*)$')
@@ -357,19 +341,13 @@ def switch_view(_step, view):
         world.wait_for_ajax_complete()
 
 
-@step("I do not see a launch button$")
-def check_no_launch_button(_step):
-    selector = '.link_lti_new_window'
-    assert is_css_not_present(selector)
-
-
-@step("I do see the module title$")
-def check_module_title(_step):
-    selector = '.title'
-    assert is_css_present(selector)
-
-
-@step("I do not see an provider iframe$")
-def check_no_provider_iframe(_step):
-    selector = '.ltiLaunchFrame'
-    assert is_css_not_present(selector)
+@step("I do not see (.*)$")
+def check_no_launch_button(_step, text):
+    selector_map = {
+        'a launch button': '.link_lti_new_window',
+        'an provider iframe': '.ltiLaunchFrame',
+        'feedback': '.problem-feedback',
+        'progress': '.problem-progress',
+    }
+    assert_in(text, selector_map)
+    assert_true(world.is_css_not_present(selector_map[text]))

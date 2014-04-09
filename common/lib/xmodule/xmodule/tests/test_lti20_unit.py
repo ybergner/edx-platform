@@ -3,7 +3,8 @@
 import textwrap
 
 from mock import Mock
-from xmodule.lti_module import LTIDescriptor, LTIError
+from xmodule.lti_module import LTIDescriptor
+from xmodule.lti_2_util import LTIError
 
 from . import LogicTest
 
