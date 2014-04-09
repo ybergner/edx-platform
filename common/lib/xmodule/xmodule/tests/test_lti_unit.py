@@ -242,13 +242,14 @@ class LTIModuleTest(LogicTest):
         self.assertEqual(real_user_id, expected_user_id)
 
     def test_outcome_service_url(self):
-        expected_outcome_service_url = '{scheme}://{host}{path}'.format(
-                scheme='http' if self.xmodule.runtime.debug else 'https',
-                host=self.xmodule.runtime.hostname,
-                path=self.xmodule.runtime.handler_url(self.xmodule, 'grade_handler', thirdparty=True).rstrip('/?')
-            )
-        real_outcome_service_url = self.xmodule.get_outcome_service_url()
-        self.assertEqual(real_outcome_service_url, expected_outcome_service_url)
+        mock_url_prefix = 'https://hostname/'
+        test_service_name = "test_service"
+        def mock_handler_url(block, handler_name, **kwargs):  # pylint: disable=unused-arguments
+            return mock_url_prefix + handler_name
+
+        self.xmodule.runtime.handler_url = Mock(side_effect=mock_handler_url)
+        real_outcome_service_url = self.xmodule.get_outcome_service_url(service_name=test_service_name)
+        self.assertEqual(real_outcome_service_url, mock_url_prefix + test_service_name)
 
     def test_resource_link_id(self):
         with patch('xmodule.lti_module.LTIModule.location', new_callable=PropertyMock) as mock_location:

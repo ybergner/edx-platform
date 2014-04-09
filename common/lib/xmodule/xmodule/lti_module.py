@@ -321,14 +321,10 @@ class LTIModule(LTIFields, LTI20ModuleMixin, XModule):
 
         While testing locally and on Jenkins, mock_lti_server use http.referer
         to obtain scheme, so it is ok to have http(s) anyway.
+
+        The scheme logic is handled in lms/lib/xblock/runtime.py
         """
-        scheme = 'http' if 'sandbox' in self.system.hostname or self.system.debug else 'https'
-        uri = '{scheme}://{host}{path}'.format(
-            scheme=scheme,
-            host=self.system.hostname,
-            path=self.runtime.handler_url(self, service_name, thirdparty=True).rstrip('/?')
-        )
-        return uri
+        return self.runtime.handler_url(self, service_name, thirdparty=True).rstrip('/?')
 
     def get_resource_link_id(self):
         """
