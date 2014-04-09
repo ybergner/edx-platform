@@ -107,8 +107,8 @@ Feature: LMS.LTI component
   Then I see feedback with text "This is awesome."
   And the LTI provider deletes my grade and feedback
   And I visit the LTI component (have to reload)
-  Then I do not see progress
-  Then I do not see feedback
+  Then in the LTI component I do not see progress
+  Then in the LTI component I do not see feedback
   And I click on the "Progress" tab
   Then I see text "Problem Scores: 0/10"
   And I see graph with total progress "0%"
@@ -123,7 +123,7 @@ Feature: LMS.LTI component
   And the course has an LTI component with correct fields:
   | open_in_a_new_page | hide_launch |
   | False              | True        |
-  Then I do not see a launch button
+  Then in the LTI component I do not see a launch button
   Then I see the module title with text "LTI (External resource)"
 
   #12
@@ -132,5 +132,5 @@ Feature: LMS.LTI component
   And the course has an LTI component with correct fields:
   | open_in_a_new_page | hide_launch |
   | True               | True        |
-  Then I do not see an provider iframe
+  Then in the LTI component I do not see an provider iframe
   Then I see the module title with text "LTI (External resource)"

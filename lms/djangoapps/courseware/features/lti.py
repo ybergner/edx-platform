@@ -341,8 +341,8 @@ def switch_view(_step, view):
         world.wait_for_ajax_complete()
 
 
-@step("I do not see (.*)$")
-def check_no_launch_button(_step, text):
+@step("in the LTI component I do not see (.*)$")
+def check_lti_component_no_elem(_step, text):
     selector_map = {
         'a launch button': '.link_lti_new_window',
         'an provider iframe': '.ltiLaunchFrame',
