@@ -215,12 +215,11 @@ def get_module_for_descriptor(user, request, descriptor, field_data_cache, cours
                                               static_asset_path)
 
 
-def get_module_system_for_user_internal(user, field_data_cache,
-                                        # Arguments preceding this comment have user binding, those following don't
-                                        descriptor, course_id, track_function, xqueue_callback_url_prefix,
-                                        position=None, wrap_xmodule_display=True, grade_bucket_type=None,
-                                        static_asset_path=''
-                                        ):
+def get_module_system_for_user(user, field_data_cache,
+                               # Arguments preceding this comment have user binding, those following don't
+                               descriptor, course_id, track_function, xqueue_callback_url_prefix,
+                               position=None, wrap_xmodule_display=True, grade_bucket_type=None,
+                               static_asset_path=''):
     """
     The purpose of this function is to factor out everywhere a user is implicitly bound when creating a module,
     to allow an existing module to be re-bound to a user.  Most of the user bindings happen when creating the
@@ -354,7 +353,7 @@ def get_module_system_for_user_internal(user, field_data_cache,
             descriptor
         )
 
-        (inner_system, inner_student_data) = get_module_system_for_user_internal(
+        (inner_system, inner_student_data) = get_module_system_for_user(
             real_user, field_data_cache_real_user,  # These have implicit user bindings, the rest of args are considered not
             descriptor, course_id, track_function, xqueue_callback_url_prefix, position, wrap_xmodule_display,
             grade_bucket_type, static_asset_path
@@ -485,7 +484,8 @@ def get_module_system_for_user_internal(user, field_data_cache,
 
     return system, student_data
 
-def get_module_for_descriptor_internal(user, descriptor, field_data_cache, course_id,
+
+def get_module_for_descriptor_internal(user, descriptor, field_data_cache, course_id,  # pylint: disable=invalid-name
                                        track_function, xqueue_callback_url_prefix,
                                        position=None, wrap_xmodule_display=True, grade_bucket_type=None,
                                        static_asset_path=''):
@@ -501,7 +501,7 @@ def get_module_for_descriptor_internal(user, descriptor, field_data_cache, cours
         if not has_access(user, descriptor, 'load', course_id):
             return None
 
-    (system, student_data) = get_module_system_for_user_internal(
+    (system, student_data) = get_module_system_for_user(
         user, field_data_cache,  # These have implicit user bindings, the rest of args are considered not to
         descriptor, course_id, track_function, xqueue_callback_url_prefix, position, wrap_xmodule_display,
         grade_bucket_type, static_asset_path

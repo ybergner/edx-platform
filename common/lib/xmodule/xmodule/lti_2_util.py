@@ -1,3 +1,4 @@
+# pylint: disable=attribute-defined-outside-init
 """
 A mixin class for LTI 2.0 functionality.  This is really just done to refactor the code to
 keep the LTIModule class from getting too big
@@ -12,6 +13,7 @@ import logging
 
 from webob import Response
 from xblock.core import XBlock
+from oauthlib.oauth1 import Client
 
 import xmodule.lti_module
 
@@ -22,6 +24,7 @@ LTI_2_0_JSON_CONTENT_TYPE = 'application/vnd.ims.lis.v2.result+json'
 
 
 class LTIError(Exception):
+    """Error class for LTIModule and LTI20ModuleMixin"""
     pass
 
 
@@ -56,29 +59,8 @@ class LTI20ModuleMixin(object):
         """
 
         ######## DEBUG SECTION #######
-        sha1 = hashlib.sha1()
-        sha1.update(request.body)
-        oauth_body_hash = unicode(base64.b64encode(sha1.digest()))
-        log.debug("[LTI] oauth_body_hash = {}".format(oauth_body_hash))
-        client_key, client_secret = self.get_client_key_secret()
-        from oauthlib.oauth1 import Client
-        client = Client(client_key, client_secret)
-        params = client.get_oauth_params()
-        params.append((u'oauth_body_hash', oauth_body_hash))
-        mock_request = mock.Mock(
-            uri=unicode(urllib.unquote(request.url)),
-            headers=request.headers,
-            body=u"",
-            decoded_body=u"",
-            oauth_params=params,
-            http_method=unicode(request.method),
-        )
-        sig = client.get_oauth_signature(mock_request)
-        mock_request.oauth_params.append((u'oauth_signature', sig))
-
-        uri, headers, body = client._render(mock_request)
-        print("\n\n#### COPY AND PASTE AUTHORIZATION HEADER ####\n{}\n#############################################\n\n"
-              .format(headers['Authorization']))
+        if self.system.debug:
+            self._log_correct_authorization_header(request)
         ####### DEBUG SECTION END ########
         try:
             anon_id = self.parse_lti_2_0_handler_suffix(suffix)
@@ -102,6 +84,34 @@ class LTI20ModuleMixin(object):
             return self._lti_2_0_result_del_handler(request, real_user)
         else:
             return Response(status=404)  # have to do 404 due to spec, but 405 is better, with error msg in body
+
+    def _log_correct_authorization_header(self, request):
+        """
+        Helper function, used only in debug situations, that logs the correct Authorization header based on
+        the request header and body according to OAuth 1 Body signing
+        """
+        sha1 = hashlib.sha1()
+        sha1.update(request.body)
+        oauth_body_hash = unicode(base64.b64encode(sha1.digest()))  # pylint: disable=too-many-function-args
+        log.debug("[LTI] oauth_body_hash = {}".format(oauth_body_hash))
+        client_key, client_secret = self.get_client_key_secret()
+        client = Client(client_key, client_secret)
+        params = client.get_oauth_params()
+        params.append((u'oauth_body_hash', oauth_body_hash))
+        mock_request = mock.Mock(
+            uri=unicode(urllib.unquote(request.url)),
+            headers=request.headers,
+            body=u"",
+            decoded_body=u"",
+            oauth_params=params,
+            http_method=unicode(request.method),
+        )
+        sig = client.get_oauth_signature(mock_request)
+        mock_request.oauth_params.append((u'oauth_signature', sig))
+
+        _, headers, _ = client._render(mock_request)  # pylint: disable=protected-access
+        log.debug("\n\n#### COPY AND PASTE AUTHORIZATION HEADER ####\n{}\n####################################\n\n"
+                  .format(headers['Authorization']))
 
     def parse_lti_2_0_handler_suffix(self, suffix):
         """
@@ -283,4 +293,3 @@ class LTI20ModuleMixin(object):
             raise LTIError(msg)
 
         return score, json_obj.get('comment', "")
-

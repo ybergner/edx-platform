@@ -244,7 +244,9 @@ class LTIModuleTest(LogicTest):
     def test_outcome_service_url(self):
         mock_url_prefix = 'https://hostname/'
         test_service_name = "test_service"
-        def mock_handler_url(block, handler_name, **kwargs):  # pylint: disable=unused-arguments
+
+        def mock_handler_url(block, handler_name, **kwargs):  # pylint: disable=unused-argument
+            """Mock function for returning fully-qualified handler urls"""
             return mock_url_prefix + handler_name
 
         self.xmodule.runtime.handler_url = Mock(side_effect=mock_handler_url)

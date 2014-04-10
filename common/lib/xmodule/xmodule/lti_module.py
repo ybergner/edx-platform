@@ -115,6 +115,7 @@ class LTIFields(object):
     score_comment = String(help="Comment as returned from grader, LTI2.0 spec", default="", scope=Scope.user_state)
     hide_launch = Boolean(help="Do not show the launch button or iframe", default=False, scope=Scope.settings)
 
+
 class LTIModule(LTIFields, LTI20ModuleMixin, XModule):
     """
     Module provides LTI integration to course.
@@ -485,7 +486,7 @@ oauth_consumer_key="", oauth_signature="frVp4JuvT1mVXlxktiAUjQ7%2F1cw%3D"'}
         return self.weight if self.has_score else None
 
     @XBlock.handler
-    def grade_handler(self, request, suffix):
+    def grade_handler(self, request, suffix):  # pylint: disable=unused-argument
         """
         This is called by courseware.module_render, to handle an AJAX call.
 

@@ -2,18 +2,16 @@
 import datetime
 import os
 import pytz
+from django.conf import settings
 from mock import patch
 from pytz import UTC
 from splinter.exceptions import ElementDoesNotExist
 from nose.tools import assert_true, assert_equal, assert_in
-
-from django.conf import settings
 from lettuce import world, step
-from courseware.tests.factories import InstructorFactory, BetaTesterFactory
 
+from courseware.tests.factories import InstructorFactory, BetaTesterFactory
 from courseware.access import has_access
 from student.tests.factories import UserFactory
-
 
 from common import course_id, visit_scenario_item
 

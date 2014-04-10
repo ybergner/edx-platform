@@ -25,7 +25,7 @@ class LTI20RESTResultServiceTest(LogicTest):
     def test_sanitize_get_context(self):
         """Tests that the get_context function does basic sanitization"""
         # get_context, unfortunately, requires a lot of mocking machinery
-        mocked_course = Mock(lti_passports = ['lti_id:test_client:test_secret'])
+        mocked_course = Mock(lti_passports=['lti_id:test_client:test_secret'])
         modulestore = Mock()
         modulestore.get_item.return_value = mocked_course
         runtime = Mock(modulestore=modulestore)
@@ -204,12 +204,14 @@ class LTI20RESTResultServiceTest(LogicTest):
         mock_request = Mock()
         mock_request.headers = {
             'Content-Type': 'application/vnd.ims.lis.v2.result+json',
-            'Authorization': u'OAuth oauth_nonce="135685044251684026041377608307", \
-                oauth_timestamp="1234567890", oauth_version="1.0", \
-                oauth_signature_method="HMAC-SHA1", \
-                oauth_consumer_key="test_client_key", \
-                oauth_signature="my_signature%3D", \
-                oauth_body_hash="gz+PeJZuF2//n9hNUnDj2v5kN70="'
+            'Authorization': (
+                u'OAuth oauth_nonce="135685044251684026041377608307", '
+                u'oauth_timestamp="1234567890", oauth_version="1.0", '
+                u'oauth_signature_method="HMAC-SHA1", '
+                u'oauth_consumer_key="test_client_key", '
+                u'oauth_signature="my_signature%3D", '
+                u'oauth_body_hash="gz+PeJZuF2//n9hNUnDj2v5kN70="'
+            )
         }
         mock_request.url = u'http://testurl'
         mock_request.http_method = method
@@ -245,8 +247,8 @@ class LTI20RESTResultServiceTest(LogicTest):
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(self.xmodule.module_score)
         self.assertEqual(self.xmodule.score_comment, u"")
-        (_, evt_type, called_grade_obj), kwargs = self.system.publish.call_args
-        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': None, 'max_value': None,})
+        (_, evt_type, called_grade_obj), _ = self.system.publish.call_args
+        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': None, 'max_value': None})
         self.assertEqual(evt_type, 'grade')
 
     def test_lti20_delete_success(self):
@@ -265,8 +267,8 @@ class LTI20RESTResultServiceTest(LogicTest):
         self.assertEqual(response.status_code, 200)
         self.assertIsNone(self.xmodule.module_score)
         self.assertEqual(self.xmodule.score_comment, u"")
-        (_, evt_type, called_grade_obj), kwargs = self.system.publish.call_args
-        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': None, 'max_value': None,})
+        (_, evt_type, called_grade_obj), _ = self.system.publish.call_args
+        self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': None, 'max_value': None})
         self.assertEqual(evt_type, 'grade')
 
     def test_lti20_put_set_score_success(self):
@@ -281,7 +283,7 @@ class LTI20RESTResultServiceTest(LogicTest):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.xmodule.module_score, 0.1)
         self.assertEqual(self.xmodule.score_comment, u"ಠ益ಠ")
-        (_, evt_type, called_grade_obj), kwargs = self.system.publish.call_args
+        (_, evt_type, called_grade_obj), _ = self.system.publish.call_args
         self.assertEqual(evt_type, 'grade')
         self.assertEqual(called_grade_obj, {'user_id': self.USER_STANDIN.id, 'value': 0.1, 'max_value': 1.0})
 
@@ -368,4 +370,3 @@ class LTI20RESTResultServiceTest(LogicTest):
         mock_request = self.get_signed_lti20_mock_request(self.GOOD_JSON_PUT)
         response = self.xmodule.lti_2_0_result_rest_handler(mock_request, "user/abcd")
         self.assertEqual(response.status_code, 404)
-
