@@ -15,7 +15,6 @@ from xmodule.modulestore.locations import SlashSeparatedCourseKey, Location
 from django_comment_common.utils import unseed_permissions_roles
 from xmodule.modulestore.store_utilities import delete_course
 from xmodule.modulestore.draft import DIRECT_ONLY_CATEGORIES
-from xmodule.modulestore.keys import CourseKey
 from student.roles import CourseInstructorRole, CourseStaffRole
 
 
@@ -69,7 +68,6 @@ def get_lms_link_for_item(location, preview=False):
     Returns an LMS link to the course with a jump_to to the provided location.
 
     :param location: the location to jump to
-    :param course_id: the course_id within which the location lives.
     :param preview: True if the preview version of LMS should be returned. Default value is false.
     """
     assert(isinstance(location, Location))

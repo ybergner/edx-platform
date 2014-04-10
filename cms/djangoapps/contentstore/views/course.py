@@ -21,7 +21,6 @@ from xmodule.error_module import ErrorDescriptor
 from xmodule.modulestore.django import modulestore
 from xmodule.contentstore.content import StaticContent
 from xmodule.tabs import PDFTextbookTabs
-from xmodule.modulestore.keys import CourseKey
 
 from xmodule.modulestore.exceptions import ItemNotFoundError, InvalidLocationError
 from xmodule.modulestore.locations import Location, SlashSeparatedCourseKey
@@ -84,7 +83,7 @@ def _get_course_module(course_key, user, depth=0):
 # pylint: disable=unused-argument
 @login_required
 def course_handler(request, course_key_string=None):
-   """
+    """
     The restful handler for course specific requests.
     It provides the course tree with the necessary information for identifying and labeling the parts. The root
     will typically be a 'course' object but may not be especially as we support modules.

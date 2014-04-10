@@ -249,6 +249,7 @@ class LocationBase(object):
         )
         if self.revision:
             output += u'@{}'.format(self.revision)
+        return output.replace("/", "+")
 
     @classmethod
     def _from_string(cls, serialized):

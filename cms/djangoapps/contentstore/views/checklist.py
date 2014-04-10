@@ -16,7 +16,6 @@ from contentstore.utils import get_modulestore
 
 from .access import has_course_access
 from xmodule.course_module import CourseDescriptor
-from xmodule.modulestore.locator import BlockUsageLocator, CourseLocator
 
 __all__ = ['checklists_handler']
 
