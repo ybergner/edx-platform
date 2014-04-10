@@ -72,7 +72,8 @@ define(["jquery", "underscore", "js/views/xblock", "js/utils/module", "gettext",
                     forcePlaceholderSize: true,
                     axis: 'y',
                     items: '> .vertical-element',
-                    connectWith: ".vertical-container"
+                    connectWith: ".vertical-container",
+                    tolerance: "pointer"
 
                 });
             },
