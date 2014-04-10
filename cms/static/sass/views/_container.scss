@@ -100,9 +100,14 @@ body.view-container {
 body.view-container  .content-primary {
 
   .ui-sortable-helper {
+
+    article {
+      display: none;
+    }
   }
 
   .component-placeholder {
+    height: ($baseline*3);
     opacity: .5;
     margin: $baseline;
     background-color: $gray-l5;
