@@ -632,12 +632,12 @@ def instructor_dashboard(request, course_id):
 
     elif 'Download CSV of all student anonymized IDs' in action:
         students = User.objects.filter(
-            courseenrollment__course_id=course_key.to_deprecated_string(),
+            courseenrollment__course_id=course_key,
         ).order_by('id')
 
         datatable = {'header': ['User ID', 'Anonymized user ID']}
         datatable['data'] = [[s.id, unique_id_for_user(s)] for s in students]
-        return return_csv(course_id.to_deprecated_string().replace('/', '-') + '-anon-ids.csv', datatable)
+        return return_csv(course_key.to_deprecated_string().replace('/', '-') + '-anon-ids.csv', datatable)
 
     #----------------------------------------
     # Group management
