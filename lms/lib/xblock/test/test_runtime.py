@@ -89,13 +89,13 @@ class TestHandlerUrl(TestCase):
         self.assertIn('handler_a', self._parsed_path('handler_a'))
 
     def test_thirdparty_fq(self):
-        """Testing the Fully-Qualified URL returned by thirdparty=true"""
+        """Testing the Fully-Qualified URL returned by thirdparty=True"""
         parsed_fq_url = urlparse(self.runtime.handler_url(self.block, 'handler', thirdparty=True))
         self.assertEqual(parsed_fq_url.scheme, 'https')
         self.assertEqual(parsed_fq_url.hostname, settings.SITE_NAME)
 
     def test_not_thirdparty_rel(self):
-        """Testing the Fully-Qualified URL returned by thirdparty=true"""
+        """Testing the Fully-Qualified URL returned by thirdparty=False"""
         parsed_fq_url = urlparse(self.runtime.handler_url(self.block, 'handler', thirdparty=False))
         self.assertEqual(parsed_fq_url.scheme, '')
         self.assertIsNone(parsed_fq_url.hostname)
