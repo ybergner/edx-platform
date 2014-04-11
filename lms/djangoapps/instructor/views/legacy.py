@@ -1470,7 +1470,7 @@ def _do_enroll_students(course, course_key, students, overload=False, auto_enrol
         except User.DoesNotExist:
 
             #Student not signed up yet, put in pending enrollment allowed table
-            cea = CourseEnrollmentAllowed.objects.filter(email=student, course_id=course_key.to_deprecated_string())
+            cea = CourseEnrollmentAllowed.objects.filter(email=student, course_id=course_key)
 
             #If enrollmentallowed already exists, update auto_enroll flag to however it was set in UI
             #Will be 0 or 1 records as there is a unique key on email + course_id
@@ -1556,7 +1556,7 @@ def _do_unenroll_students(course_key, students, email_students=False):
     for student in old_students:
 
         isok = False
-        cea = CourseEnrollmentAllowed.objects.filter(course_id=course_key.to_deprecated_string(), email=student)
+        cea = CourseEnrollmentAllowed.objects.filter(course_id=course_key, email=student)
         #Will be 0 or 1 records as there is a unique key on email + course_id
         if cea:
             cea[0].delete()
