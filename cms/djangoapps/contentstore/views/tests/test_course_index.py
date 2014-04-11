@@ -39,7 +39,7 @@ class TestCourseIndex(CourseTestCase):
         for link in course_link_eles:
             self.assertRegexpMatches(
                 link.get("href"),
-                r'course/{0}+/branch/{0}+/block/{0}+'.format(parsers.ALLOWED_ID_CHARS)
+                'course/slashes:{0}'.format(parsers.ALLOWED_ID_CHARS)
             )
             # now test that url
             outline_response = authed_client.get(link.get("href"), {}, HTTP_ACCEPT='text/html')

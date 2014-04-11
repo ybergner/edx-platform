@@ -104,9 +104,9 @@ def course_handler(request, course_key_string=None):
     DELETE
         json: delete this branch from this course (leaving off /branch/draft would imply delete the course)
     """
+    course_key = CourseKey.from_string(course_key_string) if course_key_string else None
     response_format = request.REQUEST.get('format', 'html')
     if response_format == 'json' or 'application/json' in request.META.get('HTTP_ACCEPT', 'application/json'):
-        course_key = CourseKey.from_string(course_key_string)
         if request.method == 'GET':
             return JsonResponse(_course_json(request, course_key))
         elif request.method == 'POST':  # not sure if this is only post. If one will have ids, it goes after access
@@ -120,10 +120,9 @@ def course_handler(request, course_key_string=None):
         else:
             return HttpResponseBadRequest()
     elif request.method == 'GET':  # assume html
-        if course_key_string is None:
+        if course_key is None:
             return course_listing(request)
         else:
-            course_key = CourseKey.from_string(course_key_string)
             return course_index(request, course_key)
     else:
         return HttpResponseNotFound()
@@ -263,26 +262,25 @@ def course_listing(request):
 
 @login_required
 @ensure_csrf_cookie
-def course_index(request, org, offering, branch, version_guid, block):
+def course_index(request, course_key):
     """
     Display an editable course overview.
 
     org, course, name: Attributes of the Location for the item to edit
     """
-    locator, course = _get_course_module(
-        org, offering, branch, version_guid, block, request.user, depth=3
-    )
-    lms_link = get_lms_link_for_item(course.location, course.id)
-    sections = course.get_children()
+    course_module = _get_course_module(course_key, request.user, depth=3)
+    lms_link = get_lms_link_for_item(course_module.location, course_module.id)
+    sections = course_module.get_children()
+
 
     return render_to_response('overview.html', {
-        'context_course': course,
+        'context_course': course_module,
         'lms_link': lms_link,
         'sections': sections,
         'course_graders': json.dumps(
-            CourseGradingModel.fetch(locator).graders
+            CourseGradingModel.fetch(course_key).graders
         ),
-        'parent_locator': locator,
+        'parent_locator': course_key,
         'new_section_category': 'chapter',
         'new_subsection_category': 'sequential',
         'new_unit_category': 'vertical',
@@ -433,27 +431,25 @@ def _users_assign_default_role(course_id):
 @login_required
 @ensure_csrf_cookie
 @require_http_methods(["GET"])
-def course_info_handler(request, tag=None, org=None, offering=None, branch=None, version_guid=None, block=None):
+def course_info_handler(request, course_key_string):
     """
     GET
         html: return html for editing the course info handouts and updates.
     """
-    __, course_module = _get_course_module(
-        org, offering, branch, version_guid, block, request.user
-    )
+    course_key = CourseKey.from_string(course_key_string)
+    course_module = _get_course_module(course_key, request.user)
     if 'text/html' in request.META.get('HTTP_ACCEPT', 'text/html'):
-        handouts_old_location = course_module.location.replace(category='course_info', name='handouts')
-        handouts_locator = loc_mapper().translate_location(handouts_old_location, False, True)
-
-        update_location = course_module.location.replace(category='course_info', name='updates')
-        update_locator = loc_mapper().translate_location(update_location, False, True)
+        update_locator = course_key.make_usage_key(category='course_info', name='updates')
 
         return render_to_response(
             'course_info.html',
             {
                 'context_course': course_module,
-                'updates_url': update_locator.url_reverse('course_info_update/'),
-                'handouts_locator': handouts_locator,
+                'updates_url': reverse(
+                    'course_info_update_handler',
+                    kwargs={'usage_key_string': unicode(update_locator)}
+                ),
+                'handouts_locator': course_key.make_usage_key('course_info', 'handouts'),
                 'base_asset_url': StaticContent.get_base_url_path_for_course_assets(course_module.id)
             }
         )
@@ -466,8 +462,7 @@ def course_info_handler(request, tag=None, org=None, offering=None, branch=None,
 @ensure_csrf_cookie
 @require_http_methods(("GET", "POST", "PUT", "DELETE"))
 @expect_json
-def course_info_update_handler(request, tag=None, org=None, offering=None, branch=None, version_guid=None, block=None,
-                               provided_id=None):
+def course_info_update_handler(request, course_key_string, provided_id=None):
     """
     restful CRUD operations on course_info updates.
     provided_id should be none if it's new (create) and index otherwise.
@@ -481,15 +476,13 @@ def course_info_update_handler(request, tag=None, org=None, offering=None, branc
     if 'application/json' not in request.META.get('HTTP_ACCEPT', 'application/json'):
         return HttpResponseBadRequest("Only supports json requests")
 
-    course_location = loc_mapper().translate_locator_to_location(
-        CourseLocator(org=org, offering=offering), get_course=True
-    )
-    updates_location = course_location.replace(category='course_info', name=block)
+    course_key = CourseKey.from_string(course_key_string)
+    updates_location = course_key.make_usage_key(category='course_info', name=course_key.block)
     if provided_id == '':
         provided_id = None
 
     # check that logged in user has permissions to this item (GET shouldn't require this level?)
-    if not has_course_access(request.user, course_location):
+    if not has_course_access(request.user, course_key):
         raise PermissionDenied()
 
     if request.method == 'GET':
@@ -521,7 +514,7 @@ def course_info_update_handler(request, tag=None, org=None, offering=None, branc
 @ensure_csrf_cookie
 @require_http_methods(("GET", "PUT", "POST"))
 @expect_json
-def settings_handler(request, tag=None, org=None, offering=None, branch=None, version_guid=None, block=None):
+def settings_handler(request, course_key_string):
     """
     Course settings for dates and about pages
     GET
@@ -530,11 +523,10 @@ def settings_handler(request, tag=None, org=None, offering=None, branch=None, ve
     PUT
         json: update the Course and About xblocks through the CourseDetails model
     """
-    locator, course_module = _get_course_module(
-        org, offering, branch, version_guid, block, request.user
-    )
+    course_key = CourseKey.from_string(course_key_string)
+    course_module = _get_course_module(course_key, request.user)
     if 'text/html' in request.META.get('HTTP_ACCEPT', '') and request.method == 'GET':
-        upload_asset_url = locator.url_reverse('assets/')
+        upload_asset_url = reverse('assets_handler', kwargs={'course_key': unicode(course_key)})
 
         # see if the ORG of this course can be attributed to a 'Microsite'. In that case, the
         # course about page should be editable in Studio
@@ -548,10 +540,10 @@ def settings_handler(request, tag=None, org=None, offering=None, branch=None, ve
 
         return render_to_response('settings.html', {
             'context_course': course_module,
-            'course_locator': locator,
+            'course_locator': course_key,
             'lms_link_for_about_page': utils.get_lms_link_for_about_page(course_module.location),
             'course_image_url': utils.course_image_url(course_module),
-            'details_url': locator.url_reverse('/settings/details/'),
+            'details_url': reverse('settings_handler', kwargs={'course_key_string': course_key_string}),
             'about_page_editable': about_page_editable,
             'short_description_editable': short_description_editable,
             'upload_asset_url': upload_asset_url
@@ -559,13 +551,13 @@ def settings_handler(request, tag=None, org=None, offering=None, branch=None, ve
     elif 'application/json' in request.META.get('HTTP_ACCEPT', ''):
         if request.method == 'GET':
             return JsonResponse(
-                CourseDetails.fetch(locator),
+                CourseDetails.fetch(course_key),
                 # encoder serializes dates, old locations, and instances
                 encoder=CourseSettingsEncoder
             )
         else:  # post or put, doesn't matter.
             return JsonResponse(
-                CourseDetails.update_from_json(locator, request.json, request.user),
+                CourseDetails.update_from_json(course_key, request.json, request.user),
                 encoder=CourseSettingsEncoder
             )
 
@@ -574,7 +566,7 @@ def settings_handler(request, tag=None, org=None, offering=None, branch=None, ve
 @ensure_csrf_cookie
 @require_http_methods(("GET", "POST", "PUT", "DELETE"))
 @expect_json
-def grading_handler(request, tag=None, org=None, offering=None, branch=None, version_guid=None, block=None, grader_index=None):
+def grading_handler(request, course_key_string, grader_index=None):
     """
     Course Grading policy configuration
     GET
@@ -585,42 +577,41 @@ def grading_handler(request, tag=None, org=None, offering=None, branch=None, ver
         json no grader_index: update the Course through the CourseGrading model
         json w/ grader_index: create or update the specific grader (create if index out of range)
     """
-    locator, course_module = _get_course_module(
-        org, offering, branch, version_guid, block, request.user
-    )
+    course_key = CourseKey.from_string(course_key_string)
+    course_module = _get_course_module(course_key, request.user)
 
     if 'text/html' in request.META.get('HTTP_ACCEPT', '') and request.method == 'GET':
-        course_details = CourseGradingModel.fetch(locator)
+        course_details = CourseGradingModel.fetch(course_key)
 
         return render_to_response('settings_graders.html', {
             'context_course': course_module,
-            'course_locator': locator,
+            'course_locator': course_key,
             'course_details': json.dumps(course_details, cls=CourseSettingsEncoder),
-            'grading_url': locator.url_reverse('/settings/grading/'),
+            'grading_url': reverse('grading_handler', kwargs={'course_key_string': course_key_string}),
         })
     elif 'application/json' in request.META.get('HTTP_ACCEPT', ''):
         if request.method == 'GET':
             if grader_index is None:
                 return JsonResponse(
-                    CourseGradingModel.fetch(locator),
+                    CourseGradingModel.fetch(course_key),
                     # encoder serializes dates, old locations, and instances
                     encoder=CourseSettingsEncoder
                 )
             else:
-                return JsonResponse(CourseGradingModel.fetch_grader(locator, grader_index))
+                return JsonResponse(CourseGradingModel.fetch_grader(course_key, grader_index))
         elif request.method in ('POST', 'PUT'):  # post or put, doesn't matter.
             # None implies update the whole model (cutoffs, graceperiod, and graders) not a specific grader
             if grader_index is None:
                 return JsonResponse(
-                    CourseGradingModel.update_from_json(locator, request.json, request.user),
+                    CourseGradingModel.update_from_json(course_key, request.json, request.user),
                     encoder=CourseSettingsEncoder
                 )
             else:
                 return JsonResponse(
-                    CourseGradingModel.update_grader_from_json(locator, request.json, request.user)
+                    CourseGradingModel.update_grader_from_json(course_key, request.json, request.user)
                 )
         elif request.method == "DELETE" and grader_index is not None:
-            CourseGradingModel.delete_grader(locator, grader_index, request.user)
+            CourseGradingModel.delete_grader(course_key, grader_index, request.user)
             return JsonResponse()
 
 
@@ -679,7 +670,7 @@ def _config_course_advanced_components(request, course_module):
 @ensure_csrf_cookie
 @require_http_methods(("GET", "POST", "PUT"))
 @expect_json
-def advanced_settings_handler(request, org=None, offering=None, branch=None, version_guid=None, block=None, tag=None):
+def advanced_settings_handler(request, course_key_string):
     """
     Course settings configuration
     GET
@@ -690,15 +681,17 @@ def advanced_settings_handler(request, org=None, offering=None, branch=None, ver
             metadata dicts. The dict can include a "unsetKeys" entry which is a list
             of keys whose values to unset: i.e., revert to default
     """
-    locator, course_module = _get_course_module(
-        org, offering, branch, version_guid, block, request.user
-    )
+    course_key = CourseKey.from_string(course_key_string)
+    course_module = _get_course_module(course_key, request.user)
     if 'text/html' in request.META.get('HTTP_ACCEPT', '') and request.method == 'GET':
 
         return render_to_response('settings_advanced.html', {
             'context_course': course_module,
             'advanced_dict': json.dumps(CourseMetadata.fetch(course_module)),
-            'advanced_settings_url': locator.url_reverse('settings/advanced')
+            'advanced_settings_url': reverse(
+                'advanced_settings_handler',
+                kwargs={'course_key_string': course_key_string}
+            )
         })
     elif 'application/json' in request.META.get('HTTP_ACCEPT', ''):
         if request.method == 'GET':
@@ -782,7 +775,7 @@ def assign_textbook_id(textbook, used_ids=()):
 @require_http_methods(("GET", "POST", "PUT"))
 @login_required
 @ensure_csrf_cookie
-def textbooks_list_handler(request, tag=None, org=None, offering=None, branch=None, version_guid=None, block=None):
+def textbooks_list_handler(request, course_key_string):
     """
     A RESTful handler for textbook collections.
 
@@ -794,15 +787,14 @@ def textbooks_list_handler(request, tag=None, org=None, offering=None, branch=No
     PUT
         json: overwrite all textbooks in the course with the given list
     """
-    locator, course = _get_course_module(
-        org, offering, branch, version_guid, block, request.user
-    )
+    course_key = CourseKey.from_string(course_key_string)
+    course = _get_course_module(course_key, request.user)
     store = get_modulestore(course.location)
 
     if not "application/json" in request.META.get('HTTP_ACCEPT', 'text/html'):
         # return HTML page
-        upload_asset_url = locator.url_reverse('assets/', '')
-        textbook_url = locator.url_reverse('/textbooks')
+        upload_asset_url = reverse('assets_handler', kwargs={'course_key_string': course_key_string})
+        textbook_url = reverse('textbooks_list_handler', kwargs={'course_key_string': course_key_string})
         return render_to_response('textbooks.html', {
             'context_course': course,
             'textbooks': course.pdf_textbooks,
