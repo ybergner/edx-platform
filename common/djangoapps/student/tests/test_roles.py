@@ -4,13 +4,12 @@ Tests of student.roles
 
 from django.test import TestCase
 
-from xmodule.modulestore import Location
 from courseware.tests.factories import UserFactory, StaffFactory, InstructorFactory
 from student.tests.factories import AnonymousUserFactory
 
 from student.roles import GlobalStaff, CourseRole, CourseStaffRole
 from xmodule.modulestore.django import loc_mapper
-from xmodule.modulestore.locations import SlashSeparatedCourseKey
+from xmodule.modulestore.locations import Location, SlashSeparatedCourseKey
 
 
 class RolesTestCase(TestCase):
@@ -36,6 +35,8 @@ class RolesTestCase(TestCase):
     def test_group_name_case_insensitive(self):
         uppercase_course_id = "ORG/COURSE/NAME"
         lowercase_course_id = uppercase_course_id.lower()
+        uppercase_course_key = SlashSeparatedCourseKey.from_string(uppercase_course_id)
+        lowercase_course_key = SlashSeparatedCourseKey.from_string(lowercase_course_id)
 
         lowercase_group = "role_org/course/name"
         uppercase_group = lowercase_group.upper()
@@ -43,10 +44,10 @@ class RolesTestCase(TestCase):
         lowercase_user = UserFactory(groups=lowercase_group)
         uppercase_user = UserFactory(groups=uppercase_group)
 
-        self.assertTrue(CourseRole("role", lowercase_course_id).has_user(lowercase_user))
-        self.assertTrue(CourseRole("role", uppercase_course_id).has_user(lowercase_user))
-        self.assertTrue(CourseRole("role", lowercase_course_id).has_user(uppercase_user))
-        self.assertTrue(CourseRole("role", uppercase_course_id).has_user(uppercase_user))
+        self.assertTrue(CourseRole("role", lowercase_course_key).has_user(lowercase_user))
+        self.assertTrue(CourseRole("role", uppercase_course_key).has_user(lowercase_user))
+        self.assertTrue(CourseRole("role", lowercase_course_key).has_user(uppercase_user))
+        self.assertTrue(CourseRole("role", uppercase_course_key).has_user(uppercase_user))
 
     def test_course_role(self):
         """

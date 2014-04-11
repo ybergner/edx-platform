@@ -149,7 +149,7 @@ class CourseRole(GroupBasedRole):
         # direct copy from auth.authz.get_all_course_role_groupnames will refactor to one impl asap
         groupnames = []
 
-        groupnames.append(u'{0}_{1}'.format(role, self.course_id))
+        groupnames.append(u'{0}_{1}'.format(role, self.course_id.to_deprecated_string().lower()))
         super(CourseRole, self).__init__(groupnames)
 
     @classmethod

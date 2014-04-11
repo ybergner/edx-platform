@@ -24,7 +24,7 @@ class TestRawGradeCSV(TestSubmittingProblems):
         self.instructor = 'view2@test.com'
         self.create_account('u2', self.instructor, self.password)
         self.activate_user(self.instructor)
-        CourseStaffRole(self.course.location).add_users(User.objects.get(email=self.instructor))
+        CourseStaffRole(self.course.id).add_users(User.objects.get(email=self.instructor))
         self.logout()
         self.login(self.instructor, self.password)
         self.enroll(self.course)
