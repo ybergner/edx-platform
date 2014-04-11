@@ -82,7 +82,7 @@ class Middleware(object):
                 if not (is_enrolled or is_staff):
                     # if a user is logged in, but not authorized to see a page,
                     # we'll redirect them to the course about page
-                    return redirect(reverse('about_course', args=[course_id]))
+                    return redirect(reverse('about_course', args=[course_id.to_deprecated_string()]))
 
             prepend_string = '/courses/' + course_id.to_deprecated_string()
             wiki_reverse._transform_url = lambda url: prepend_string + url

@@ -148,7 +148,7 @@ class WikiRedirectTestCase(LoginEnrollmentTestCase):
         resp = self.client.get(course_wiki_page, follow=True, HTTP_REFERER=referer)
         target_url, __ = resp.redirect_chain[-1]
         self.assertTrue(
-            target_url.endswith(reverse('about_course', args=[self.toy.id]))
+            target_url.endswith(reverse('about_course', args=[self.toy.id.to_deprecated_string()]))
         )
 
     @patch.dict("django.conf.settings.FEATURES", {'ALLOW_WIKI_ROOT_ACCESS': True})
