@@ -316,6 +316,13 @@ function (HTML5Video, Resizer) {
             // Executed all attached callbacks to this method, passing the video's current
             // playing time as a parameter.
             $.each(this.methodCallbacks.videoPlayer.update, function (index, callback) {
+                // We execute callbacks using `window.setTimeout` to make sure
+                // that the `update()` function does not get interrupted in case
+                // if `callback` function contains an error, or if it contain
+                // blocking code.
+                // By setting the timeout value to 0, we make sure that the `callback`
+                // functions execute straight after `update()` finishes, and the JS
+                // runtime is able to execute other queued code.
                 window.setTimeout(function () {
                     callback(_this.videoPlayer.currentTime);
                 }, 0);
