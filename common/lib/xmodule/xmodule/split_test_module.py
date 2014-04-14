@@ -186,7 +186,7 @@ class SplitTestModule(SplitTestFields, XModule):
                 'content': rendered_child.content
             })
 
-        fragment.add_content(self.system.render_template('vert_module.html', {
+        fragment.add_content(self.system.render_template('split_test_studio_view.html', {
             'items': contents
         }))
 
