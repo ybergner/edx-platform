@@ -70,7 +70,7 @@ urlpatterns += patterns(
     url(r'^course_team/(?P<course_key_string>[^/]+)/(?P<email>.+)?$', 'course_team_handler'),
     url(r'^course_info/(?P<course_key_string>[^/]+)$', 'course_info_handler'),
     url(
-        r'^course_info_update/(?P<usage_key_string>[^/]+)(/)?(?P<provided_id>\d+)?$',
+        r'^course_info_update/(?P<usage_key_string>[^/]+)/(?P<provided_id>\d+)?$',
         'course_info_update_handler'
     ),
     url(r'^course/(?P<course_key_string>[^/]+)?$', 'course_handler'),
@@ -84,7 +84,7 @@ urlpatterns += patterns(
     url(r'^import_status/(?P<course_key_string>[^/]+)/(?P<filename>.+)$', 'import_status_handler'),
     url(r'^export/(?P<course_key_string>[^/]+)$', 'export_handler'),
     url(r'^xblock/(?P<usage_key_string>[^/]+)/(?P<view_name>[^/]+)$', 'xblock_view_handler'),
-    url(r'^xblock($|/)(?P<usage_key_string>[^/]+)$', 'xblock_handler'),
+    url(r'^xblock/(?P<usage_key_string>[^/]+)$', 'xblock_handler'),
     url(r'^tabs/(?P<course_key_string>[^/]+)$', 'tabs_handler'),
     url(r'^settings/details/(?P<course_key_string>[^/]+)$', 'settings_handler'),
     url(r'^settings/grading/(?P<course_key_string>[^/]+)(/)?(?P<grader_index>\d+)?$', 'grading_handler'),

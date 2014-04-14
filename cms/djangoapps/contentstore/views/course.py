@@ -53,8 +53,7 @@ from student.models import CourseEnrollment
 from student.roles import CourseRole
 
 from xmodule.html_module import AboutDescriptor
-from xmodule.modulestore.locator import CourseLocator
-from xmodule.modulestore.keys import CourseKey
+from xmodule.modulestore.keys import CourseKey, UsageKey
 from course_creators.views import get_course_creator_status, add_user_with_status_unrequested
 from contentstore import utils
 from student.roles import CourseInstructorRole, CourseStaffRole, CourseCreatorRole, GlobalStaff
@@ -433,7 +432,7 @@ def course_info_handler(request, course_key_string):
     course_key = CourseKey.from_string(course_key_string)
     course_module = _get_course_module(course_key, request.user)
     if 'text/html' in request.META.get('HTTP_ACCEPT', 'text/html'):
-        update_locator = course_key.make_usage_key(category='course_info', name='updates')
+        update_locator = course_key.make_usage_key('course_info', 'updates')
 
         return render_to_response(
             'course_info.html',
@@ -456,7 +455,7 @@ def course_info_handler(request, course_key_string):
 @ensure_csrf_cookie
 @require_http_methods(("GET", "POST", "PUT", "DELETE"))
 @expect_json
-def course_info_update_handler(request, course_key_string, provided_id=None):
+def course_info_update_handler(request, usage_key_string, provided_id=None):
     """
     restful CRUD operations on course_info updates.
     provided_id should be none if it's new (create) and index otherwise.
@@ -470,24 +469,23 @@ def course_info_update_handler(request, course_key_string, provided_id=None):
     if 'application/json' not in request.META.get('HTTP_ACCEPT', 'application/json'):
         return HttpResponseBadRequest("Only supports json requests")
 
-    course_key = CourseKey.from_string(course_key_string)
-    updates_location = course_key.make_usage_key(category='course_info', name=course_key.block)
+    usage_key = UsageKey.from_string(usage_key_string)
     if provided_id == '':
         provided_id = None
 
     # check that logged in user has permissions to this item (GET shouldn't require this level?)
-    if not has_course_access(request.user, course_key):
+    if not has_course_access(request.user, usage_key.course_key):
         raise PermissionDenied()
 
     if request.method == 'GET':
-        course_updates = get_course_updates(updates_location, provided_id)
+        course_updates = get_course_updates(usage_key, provided_id)
         if isinstance(course_updates, dict) and course_updates.get('error'):
-            return JsonResponse(get_course_updates(updates_location, provided_id), course_updates.get('status', 400))
+            return JsonResponse(course_updates, course_updates.get('status', 400))
         else:
-            return JsonResponse(get_course_updates(updates_location, provided_id))
+            return JsonResponse(course_updates)
     elif request.method == 'DELETE':
         try:
-            return JsonResponse(delete_course_update(updates_location, request.json, provided_id, request.user))
+            return JsonResponse(delete_course_update(usage_key, request.json, provided_id, request.user))
         except:
             return HttpResponseBadRequest(
                 "Failed to delete",
@@ -496,7 +494,7 @@ def course_info_update_handler(request, course_key_string, provided_id=None):
     # can be either and sometimes django is rewriting one to the other:
     elif request.method in ('POST', 'PUT'):
         try:
-            return JsonResponse(update_course_updates(updates_location, request.json, provided_id, request.user))
+            return JsonResponse(update_course_updates(usage_key, request.json, provided_id, request.user))
         except:
             return HttpResponseBadRequest(
                 "Failed to save",
