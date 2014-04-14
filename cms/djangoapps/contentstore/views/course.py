@@ -242,9 +242,9 @@ def course_listing(request):
         """
         return (
             course.display_name,
-            reverse('course_detail', kwargs={
+            reverse('course_detail_handler', kwargs={
                 'course_key_string': unicode(course.id),
-                }),
+            }),
             get_lms_link_for_item(course.location, course.id),
             course.display_org_with_default,
             course.display_number_with_default,
@@ -280,7 +280,6 @@ def course_index(request, course_key):
         'course_graders': json.dumps(
             CourseGradingModel.fetch(course_key).graders
         ),
-        'parent_locator': course_key,
         'new_section_category': 'chapter',
         'new_subsection_category': 'sequential',
         'new_unit_category': 'vertical',
@@ -446,7 +445,7 @@ def course_info_handler(request, course_key_string):
             {
                 'context_course': course_module,
                 'updates_url': reverse(
-                    'course_info_update_handler',
+                    'contentstore.views.course_info_update_handler',
                     kwargs={'usage_key_string': unicode(update_locator)}
                 ),
                 'handouts_locator': course_key.make_usage_key('course_info', 'handouts'),
@@ -526,7 +525,7 @@ def settings_handler(request, course_key_string):
     course_key = CourseKey.from_string(course_key_string)
     course_module = _get_course_module(course_key, request.user)
     if 'text/html' in request.META.get('HTTP_ACCEPT', '') and request.method == 'GET':
-        upload_asset_url = reverse('assets_handler', kwargs={'course_key': unicode(course_key)})
+        upload_asset_url = reverse('contentstore.views.assets_handler', kwargs={'course_key': unicode(course_key)})
 
         # see if the ORG of this course can be attributed to a 'Microsite'. In that case, the
         # course about page should be editable in Studio
@@ -543,7 +542,7 @@ def settings_handler(request, course_key_string):
             'course_locator': course_key,
             'lms_link_for_about_page': utils.get_lms_link_for_about_page(course_module.location),
             'course_image_url': utils.course_image_url(course_module),
-            'details_url': reverse('settings_handler', kwargs={'course_key_string': course_key_string}),
+            'details_url': reverse('contentstore.views.settings_handler', kwargs={'course_key_string': course_key_string}),
             'about_page_editable': about_page_editable,
             'short_description_editable': short_description_editable,
             'upload_asset_url': upload_asset_url
@@ -587,7 +586,7 @@ def grading_handler(request, course_key_string, grader_index=None):
             'context_course': course_module,
             'course_locator': course_key,
             'course_details': json.dumps(course_details, cls=CourseSettingsEncoder),
-            'grading_url': reverse('grading_handler', kwargs={'course_key_string': course_key_string}),
+            'grading_url': reverse('contentstore.views.grading_handler', kwargs={'course_key_string': course_key_string}),
         })
     elif 'application/json' in request.META.get('HTTP_ACCEPT', ''):
         if request.method == 'GET':
@@ -689,7 +688,7 @@ def advanced_settings_handler(request, course_key_string):
             'context_course': course_module,
             'advanced_dict': json.dumps(CourseMetadata.fetch(course_module)),
             'advanced_settings_url': reverse(
-                'advanced_settings_handler',
+                'contentstore.views.advanced_settings_handler',
                 kwargs={'course_key_string': course_key_string}
             )
         })
@@ -793,8 +792,8 @@ def textbooks_list_handler(request, course_key_string):
 
     if not "application/json" in request.META.get('HTTP_ACCEPT', 'text/html'):
         # return HTML page
-        upload_asset_url = reverse('assets_handler', kwargs={'course_key_string': course_key_string})
-        textbook_url = reverse('textbooks_list_handler', kwargs={'course_key_string': course_key_string})
+        upload_asset_url = reverse('contentstore.views.assets_handler', kwargs={'course_key_string': course_key_string})
+        textbook_url = reverse('contentstore.views.textbooks_list_handler', kwargs={'course_key_string': course_key_string})
         return render_to_response('textbooks.html', {
             'context_course': course,
             'textbooks': course.pdf_textbooks,

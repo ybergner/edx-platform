@@ -67,15 +67,14 @@ urlpatterns += patterns(
     url(r'^signin$', 'login_page', name='login'),
     url(r'^request_course_creator$', 'request_course_creator'),
 
-    # (?ix) == ignore case and verbose (multiline regex)
-    url(r'^course_team/(?P<course_key_string>[^/]+)/(?P<email>.+)$', 'course_team_handler', name='course_team'),
-    url(r'(?ix)^course_info/{}$'.format(parsers.URL_RE_SOURCE), 'course_info_handler'),
+    url(r'^course_team/(?P<course_key_string>[^/]+)/(?P<email>.+)?$', 'course_team_handler'),
+    url(r'^course_info/(?P<course_key_string>[^/]+)$', 'course_info_handler'),
     url(
         r'^course_info_update/(?P<usage_key_string>[^/]+)(/)?(?P<provided_id>\d+)?$',
         'course_info_update_handler'
     ),
     url(r'^course$', 'course_handler'),
-    url(r'^course/(?P<course_key_string>[^/]+)$', 'course_handler', name='course_detail'),
+    url(r'^course/(?P<course_key_string>[^/]+)$', 'course_handler', name='course_detail_handler'),
     url(r'^subsection($|/)(?P<usage_key_string>[^/]+)$', 'subsection_handler'),
     url(r'^unit($|/)(?P<usage_key_string>[^/]+)$', 'unit_handler'),
     url(r'^container($|/)(?P<usage_key_string>[^/]+)$', 'container_handler'),

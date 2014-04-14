@@ -72,7 +72,7 @@ class TestCourseIndex(CourseTestCase):
         """
         course_staff_client, course_staff = self.create_non_staff_authed_user_client()
         for course in [self.course, self.odd_course]:
-            permission_url = reverse('course_team', kwargs={
+            permission_url = reverse('contentstore.views.course_team_handler', kwargs={
                 'course_key_string': unicode(course.id),
                 'email': course_staff.email
             })
