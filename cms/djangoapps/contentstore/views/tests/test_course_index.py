@@ -31,7 +31,7 @@ class TestCourseIndex(CourseTestCase):
         """
         Test getting the list of courses and then pulling up their outlines
         """
-        index_url = '/course'
+        index_url = '/course/'
         index_response = authed_client.get(index_url, {}, HTTP_ACCEPT='text/html')
         parsed_html = lxml.html.fromstring(index_response.content)
         course_link_eles = parsed_html.find_class('course-link')
@@ -60,7 +60,7 @@ class TestCourseIndex(CourseTestCase):
         """
         Test the error conditions for the access
         """
-        outline_url = reverse('course_detail_handler', kwargs={'course_key_string': unicode(self.course.id)})
+        outline_url = reverse('contentstore.views.course_handler', kwargs={'course_key_string': unicode(self.course.id)})
         # register a non-staff member and try to delete the course branch
         non_staff_client, _ = self.create_non_staff_authed_user_client()
         response = non_staff_client.delete(outline_url, {}, HTTP_ACCEPT='application/json')
@@ -88,7 +88,7 @@ class TestCourseIndex(CourseTestCase):
         self.check_index_and_outline(course_staff_client)
 
     def test_json_responses(self):
-        outline_url = reverse('course_detail_handler', kwargs={'course_key_string': unicode(self.course.id)})
+        outline_url = reverse('contentstore.views.course_handler', kwargs={'course_key_string': unicode(self.course.id)})
         chapter = ItemFactory.create(parent_location=self.course.location, category='chapter', display_name="Week 1")
         lesson = ItemFactory.create(parent_location=chapter.location, category='sequential', display_name="Lesson 1")
         subsection = ItemFactory.create(parent_location=lesson.location, category='vertical', display_name='Subsection 1')
@@ -99,7 +99,7 @@ class TestCourseIndex(CourseTestCase):
 
         # First spot check some values in the root response
         self.assertEqual(json_response['category'], 'course')
-        self.assertEqual(json_response['id'], 'edx:MITx+999.Robot_Super_Course/branch/draft/block/Robot_Super_Course')
+        self.assertEqual(json_response['id'], 'location:MITx+999+Robot_Super_Course+course+Robot_Super_Course')
         self.assertEqual(json_response['display_name'], 'Robot Super Course')
         self.assertTrue(json_response['is_container'])
         self.assertFalse(json_response['is_draft'])
@@ -109,7 +109,7 @@ class TestCourseIndex(CourseTestCase):
         self.assertTrue(len(children) > 0)
         first_child_response = children[0]
         self.assertEqual(first_child_response['category'], 'chapter')
-        self.assertEqual(first_child_response['id'], 'edx:MITx+999.Robot_Super_Course/branch/draft/block/Week_1')
+        self.assertEqual(first_child_response['id'], 'location:MITx+999+Robot_Super_Course+chapter+Week_1')
         self.assertEqual(first_child_response['display_name'], 'Week 1')
         self.assertTrue(first_child_response['is_container'])
         self.assertFalse(first_child_response['is_draft'])

@@ -5,8 +5,7 @@ import json
 
 from contentstore.tests.test_course_settings import CourseTestCase
 from xmodule.modulestore import Location
-from xmodule.modulestore.django import modulestore, loc_mapper
-from xmodule.modulestore.locator import BlockUsageLocator
+from xmodule.modulestore.django import modulestore
 
 
 class CourseUpdateTest(CourseTestCase):
@@ -27,9 +26,6 @@ class CourseUpdateTest(CourseTestCase):
 
             return json.loads(resp.content)
 
-        course_locator = loc_mapper().translate_location(
-            self.course.location, False, True
-        )
         resp = self.client.get_html(course_locator.url_reverse('course_info/'))
         self.assertContains(resp, 'Course Updates', status_code=200)
         update_locator = loc_mapper().translate_location(
@@ -231,20 +227,13 @@ class CourseUpdateTest(CourseTestCase):
         """
         # create a course via the view handler
         course_location = Location(['i4x', 'Org_1', 'Course_1', 'course', 'Run_1'])
-        course_locator = loc_mapper().translate_location(course_location, False, True)
+        course_key = CourseKey.from_string('slashes:Org1/Course_1/Run_1')
         self.client.ajax_post(
-            course_locator.url_reverse('course'),
-            {
-                'org': course_location.org,
-                'number': course_location.course,
-                'display_name': 'test course',
-                'run': course_location.name,
-            }
+            reverse('contentstore.views.course_handler', {'course_key_string': unicode(course_key)})
         )
 
-        draft_branch = course_location.course_key.for_branch(u'draft')
         block = u'updates'
-        updates_locator = BlockUsageLocator(course_key=draft_branch, block_id=block)
+        updates_locator = course_key.make_usage_key('course_info', block)
 
         content = u"Sample update"
         payload = {'content': content, 'date': 'January 8, 2013'}

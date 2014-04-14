@@ -75,7 +75,7 @@ def tabs_handler(request, course_key_string):
         return render_to_response('edit-tabs.html', {
             'context_course': course_item,
             'tabs_to_render': tabs_to_render,
-            'lms_link': get_lms_link_for_item(course_item.location, course_item.id),
+            'lms_link': get_lms_link_for_item(course_item.location),
         })
     else:
         return HttpResponseNotFound()

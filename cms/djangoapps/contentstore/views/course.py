@@ -18,7 +18,7 @@ from util.json_request import JsonResponse
 from edxmako.shortcuts import render_to_response
 
 from xmodule.error_module import ErrorDescriptor
-from xmodule.modulestore.django import modulestore, loc_mapper
+from xmodule.modulestore.django import modulestore
 from xmodule.contentstore.content import StaticContent
 from xmodule.tabs import PDFTextbookTabs
 
@@ -141,15 +141,10 @@ def _xmodule_json(xmodule, course_id):
     """
     Returns a JSON overview of an XModule
     """
-    locator = loc_mapper().translate_location(
-        xmodule.location,
-        published=False,
-        add_entry_if_missing=True,
-    )
     is_container = xmodule.has_children
     result = {
         'display_name': xmodule.display_name,
-        'id': unicode(locator),
+        'id': unicode(xmodule.location),
         'category': xmodule.category,
         'is_draft': getattr(xmodule, 'is_draft', False),
         'is_container': is_container,
@@ -242,7 +237,7 @@ def course_listing(request):
         """
         return (
             course.display_name,
-            reverse('course_detail_handler', kwargs={
+            reverse('contentstore.views.course_handler', kwargs={
                 'course_key_string': unicode(course.id),
             }),
             get_lms_link_for_item(course.location, course.id),
