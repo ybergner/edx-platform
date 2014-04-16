@@ -884,7 +884,6 @@ function (HTML5Video, Resizer) {
 
     function onVolumeChange(volume) {
         this.videoPlayer.player.setVolume(volume);
-        this.el.trigger('volumechange', arguments);
     }
 });
 
