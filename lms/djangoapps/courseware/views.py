@@ -841,6 +841,7 @@ def get_course_lti_endpoints(request, course_id):
         return HttpResponse(status=404)
 
     anonymous_user = AnonymousUser()
+    anonymous_user.known = False  # make these "noauth" requests like module_render.handle_xblock_callback_noauth
     lti_descriptors = modulestore().get_items(Location("i4x", course.org, course.number, "lti", None), course.id)
 
     lti_noauth_modules = [

@@ -73,7 +73,7 @@ class LTI20ModuleMixin(object):
         real_user = self.system.get_real_user(anon_id)
         if not real_user:  # that means we can't save to database, as we do not have real user id.
             msg = "[LTI]: Real user not found against anon_id: {}".format(anon_id)
-            log.debug(msg)
+            log.info(msg)
             return Response(status=404)  # have to do 404 due to spec, but 400 is better, with error msg in body
         if request.method == "PUT":
             return self._lti_2_0_result_put_handler(request, real_user)
@@ -123,7 +123,7 @@ class LTI20ModuleMixin(object):
                 return match_obj.group('anon_id')
         # fall-through handles all error cases
         msg = "No valid user id found in endpoint URL"
-        log.debug("[LTI]: {}".format(msg))
+        log.info("[LTI]: {}".format(msg))
         raise LTIError(msg)
 
     def _lti_2_0_result_get_handler(self, request, real_user):  # pylint: disable=unused-argument
@@ -218,14 +218,14 @@ class LTI20ModuleMixin(object):
         """
         content_type = request.headers.get('Content-Type')
         if verify_content_type and content_type != LTI_2_0_JSON_CONTENT_TYPE:
-            log.debug("[LTI]: v2.0 result service -- bad Content-Type: {}".format(content_type))
+            log.info("[LTI]: v2.0 result service -- bad Content-Type: {}".format(content_type))
             raise LTIError(
                 "For LTI 2.0 result service, Content-Type must be {}.  Got {}".format(LTI_2_0_JSON_CONTENT_TYPE,
                                                                                       content_type))
         try:
             self.verify_oauth_body_sign(request, content_type=LTI_2_0_JSON_CONTENT_TYPE)
         except (ValueError, LTIError) as err:
-            log.debug("[LTI]: v2.0 result service -- OAuth body verification failed:  {}".format(err.message))
+            log.info("[LTI]: v2.0 result service -- OAuth body verification failed:  {}".format(err.message))
             raise LTIError(err.message)
 
     def parse_lti_2_0_result_json(self, json_str):
@@ -244,7 +244,7 @@ class LTI20ModuleMixin(object):
             json_obj = json.loads(json_str)
         except (ValueError, TypeError):
             msg = "Supplied JSON string in request body could not be decoded: {}".format(json_str)
-            log.debug("[LTI] {}".format(msg))
+            log.info("[LTI] {}".format(msg))
             raise LTIError(msg)
 
         # the standard supports a list of objects, who knows why. It must contain at least 1 element, and the
@@ -255,14 +255,14 @@ class LTI20ModuleMixin(object):
             else:
                 msg = ("Supplied JSON string is a list that does not contain an object as the first element. {}"
                        .format(json_str))
-                log.debug("[LTI] {}".format(msg))
+                log.info("[LTI] {}".format(msg))
                 raise LTIError(msg)
 
         # '@type' must be "Result"
         result_type = json_obj.get("@type")
         if result_type != "Result":
             msg = "JSON object does not contain correct @type attribute (should be 'Result', is {})".format(result_type)
-            log.debug("[LTI] {}".format(msg))
+            log.info("[LTI] {}".format(msg))
             raise LTIError(msg)
 
         # '@context' must be present as a key
@@ -270,7 +270,7 @@ class LTI20ModuleMixin(object):
         for key in REQUIRED_KEYS:
             if key not in json_obj:
                 msg = "JSON object does not contain required key {}".format(key)
-                log.debug("[LTI] {}".format(msg))
+                log.info("[LTI] {}".format(msg))
                 raise LTIError(msg)
 
         # 'resultScore' is not present.  If this was a PUT this means it's actually a DELETE according
@@ -284,11 +284,11 @@ class LTI20ModuleMixin(object):
             score = float(json_obj.get('resultScore', "unconvertable"))  # Check if float is present and the right type
             if not 0 <= score <= 1:
                 msg = 'score value outside the permitted range of 0-1.'
-                log.debug("[LTI] {}".format(msg))
+                log.info("[LTI] {}".format(msg))
                 raise LTIError(msg)
         except (TypeError, ValueError) as err:
             msg = "Could not convert resultScore to float: {}".format(err.message)
-            log.debug("[LTI] {}".format(msg))
+            log.info("[LTI] {}".format(msg))
             raise LTIError(msg)
 
         return score, json_obj.get('comment', "")
