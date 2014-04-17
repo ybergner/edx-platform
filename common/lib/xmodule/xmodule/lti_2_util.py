@@ -58,10 +58,9 @@ class LTI20ModuleMixin(object):
         another endpoint that doesn't conform to spec, but is nicer)
         """
 
-        ######## DEBUG SECTION #######
         if self.system.debug:
             self._log_correct_authorization_header(request)
-        ####### DEBUG SECTION END ########
+
         try:
             anon_id = self.parse_lti_2_0_handler_suffix(suffix)
         except LTIError:

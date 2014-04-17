@@ -47,11 +47,13 @@ class StubLtiHandler(StubHttpRequestHandler):
             content = self._create_content(status_message)
             self.send_response(200, content)
         elif 'lti2_outcome' in self.path and self._send_lti2_outcome().status_code == 200:
-            status_message = 'LTI consumer (edX) responded with XML content:<br>' + self.server.grade_data['TC answer']
+            status_message = 'LTI consumer (edX) responded with HTTP {}<br>'.format(
+                self.server.grade_data['status_code'])
             content = self._create_content(status_message)
             self.send_response(200, content)
         elif 'lti2_delete' in self.path and self._send_lti2_delete().status_code == 200:
-            status_message = 'LTI consumer (edX) responded with XML content:<br>' + self.server.grade_data['TC answer']
+            status_message = 'LTI consumer (edX) responded with HTTP {}<br>'.format(
+                self.server.grade_data['status_code'])
             content = self._create_content(status_message)
             self.send_response(200, content)
         # Respond to request with correct lti endpoint
@@ -179,6 +181,7 @@ class StubLtiHandler(StubHttpRequestHandler):
 
         # Send request ignoring verifirecation of SSL certificate
         response = requests.put(new_url, data=data, headers=headers, verify=False)
+        self.server.grade_data['status_code'] = response.status_code
         self.server.grade_data['TC answer'] = response.content
         return response
 

@@ -46,7 +46,7 @@ Feature: LMS.LTI component
   And the course has an LTI component with correct fields:
   | open_in_a_new_page | weight | is_graded | has_score |
   | False              | 10     | True      | True      |
-  And I submit answer to LTI question
+  And I submit answer to LTI 1 question
   And I click on the "Progress" tab
   Then I see text "Problem Scores: 5/10"
   And I see graph with total progress "5%"
@@ -72,7 +72,7 @@ Feature: LMS.LTI component
   And the course has an LTI component with correct fields:
   | open_in_a_new_page | weight | is_graded | has_score |
   | False              | 10     | True      | True      |
-  And I submit answer to LTI question
+  And I submit answer to LTI 1 question
   And I click on the "Progress" tab
   Then I see text "Problem Scores: 5/10"
   And I see graph with total progress "5%"
@@ -83,7 +83,7 @@ Feature: LMS.LTI component
   And the course has an LTI component with correct fields:
   | open_in_a_new_page | weight | is_graded | has_score |
   | False              | 10     | True      | True      |
-  And I submit answer to question with LTI 2.0 PUT callback
+  And I submit answer to LTI 2 question
   And I click on the "Progress" tab
   Then I see text "Problem Scores: 8/10"
   And I see graph with total progress "8%"
@@ -92,8 +92,8 @@ Feature: LMS.LTI component
   And I see in the gradebook table that "HW" is "80"
   And I see in the gradebook table that "Total" is "8"
   And I visit the LTI component
-  Then I see progress with text "Score: 8.00 / 10.0"
-  Then I see feedback with text "This is awesome."
+  Then I see LTI component progress with text "Score: 8.00 / 10.0"
+  Then I see LTI component feedback with text "This is awesome."
 
   #10
   Scenario: Graded LTI component in LMS is correctly works with LTI2.0 PUT delete callback
@@ -101,10 +101,10 @@ Feature: LMS.LTI component
   And the course has an LTI component with correct fields:
   | open_in_a_new_page | weight | is_graded | has_score |
   | False              | 10     | True      | True      |
-  And I submit answer to question with LTI 2.0 PUT callback
+  And I submit answer to LTI 2 question
   And I visit the LTI component
-  Then I see progress with text "Score: 8.00 / 10.0"
-  Then I see feedback with text "This is awesome."
+  Then I see LTI component progress with text "Score: 8.00 / 10.0"
+  Then I see LTI component feedback with text "This is awesome."
   And the LTI provider deletes my grade and feedback
   And I visit the LTI component (have to reload)
   Then in the LTI component I do not see progress
@@ -124,7 +124,7 @@ Feature: LMS.LTI component
   | open_in_a_new_page | hide_launch |
   | False              | True        |
   Then in the LTI component I do not see a launch button
-  Then I see the module title with text "LTI (External resource)"
+  Then I see LTI component module title with text "LTI (External resource)"
 
   #12
   Scenario: LTI component that set to hide_launch and not open_in_a_new_page shows no iframe
@@ -133,4 +133,4 @@ Feature: LMS.LTI component
   | open_in_a_new_page | hide_launch |
   | True               | True        |
   Then in the LTI component I do not see an provider iframe
-  Then I see the module title with text "LTI (External resource)"
+  Then I see LTI component module title with text "LTI (External resource)"

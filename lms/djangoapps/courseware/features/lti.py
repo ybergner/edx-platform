@@ -246,12 +246,12 @@ def visit_lti_component(_step):
     visit_scenario_item('LTI')
 
 
-@step('I see (.*) with text "([^"]*)"$')
+@step('I see LTI component (.*) with text "([^"]*)"$')
 def see_elem_text(_step, elem, text):
     selector_map = {
         'progress': '.problem-progress',
         'feedback': '.problem-feedback',
-        'the module title': '.title'
+        'module title': '.title'
     }
     assert_in(elem, selector_map)
     assert_true(world.css_has_text(selector_map[elem], text))
@@ -288,21 +288,18 @@ def see_value_in_the_gradebook(_step, label, text):
     assert_true(world.css_has_text('{0} tbody td'.format(table_selector), text, index=index))
 
 
-@step('I submit answer to LTI question$')
-def click_grade(_step):
+@step('I submit answer to LTI (.*) question$')
+def click_grade(_step, version):
+    version_map = {
+        '1': {'selector': 'submit-button', 'expected_text': 'LTI consumer (edX) responded with XML content'},
+        '2': {'selector': 'submit-lti2-button', 'expected_text': 'LTI consumer (edX) responded with HTTP 200'},
+    }
+    assert_in(version, version_map)
     location = world.scenario_dict['LTI'].location.html_id()
     iframe_name = 'ltiFrame-' + location
     with world.browser.get_iframe(iframe_name) as iframe:
-        iframe.find_by_name('submit-button').first.click()
-        assert iframe.is_text_present('LTI consumer (edX) responded with XML content')
-
-
-@step('I submit answer to question with LTI 2.0 PUT callback$')
-def click_grade_lti20(_step):
-    location = world.scenario_dict['LTI'].location.html_id()
-    iframe_name = 'ltiFrame-' + location
-    with world.browser.get_iframe(iframe_name) as iframe:
-        iframe.find_by_name('submit-lti2-button').first.click()
+        iframe.find_by_name(version_map[version]['selector']).first.click()
+        assert iframe.is_text_present(version_map[version]['expected_text'])
 
 
 @step('LTI provider deletes my grade and feedback$')
