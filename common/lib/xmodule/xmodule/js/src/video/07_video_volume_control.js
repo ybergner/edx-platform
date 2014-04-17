@@ -26,7 +26,7 @@ define(
         VolumeControl.prototype = {
             min: 0,
             max: 100,
-            step: 5,
+            step: 20,
 
             initialize: function() {
                 this.el = this.state.el.find('div.volume');
@@ -39,18 +39,15 @@ define(
 
                 this.state.el.find('iframe').attr('tabindex', -1);
                 this.button = this.el.children('a');
+                this.a11y = new VolumeA11y(this.button, this.min, this.max);
                 this.setVolume(Cookie.getVolume(), true, true);
-                this.mute(Cookie.getMute());
                 this.render();
+                this.mute(Cookie.getMute(), true);
                 this.bindHandlers();
             },
 
             render: function() {
-                var container = this.el.find('.volume-slider'),
-                    button = this.button,
-                    min = this.min,
-                    max = this.max,
-                    sliderElement;
+                var container = this.el.find('.volume-slider');
 
                 this.volumeSlider = container.slider({
                     orientation: 'vertical',
@@ -62,13 +59,7 @@ define(
                     slide: this.onSlideHandler.bind(this)
                 });
 
-                // Let screen readers know that this anchor, representing the slider
-                // handle, behaves as a slider named 'volume'.
-                sliderElement = container.find('.ui-slider-handle');
                 container.find('a').attr('tabindex', -1);
-
-                this.a11y = new VolumeA11y(sliderElement, button, min, max);
-                this.a11y.update(this.getVolume());
             },
 
             /** Bind any necessary function callbacks to DOM events. */
@@ -83,6 +74,7 @@ define(
                     'mouseleave': this.closeMenu.bind(this)
                 });
                 this.button.on({
+                    'click': false,
                     'mousedown': this.toggleMuteHandler.bind(this),
                     'keydown': this.keyDownButtonHandler.bind(this),
                     'focus': this.openMenu.bind(this),
@@ -142,6 +134,7 @@ define(
                 Cookie.setMute(enable);
                 this.isMuted = enable;
                 this.updateButtonView(enable);
+                this.a11y.update(enable ? 0 : this.getVolume());
                 this.state.el.trigger('mute', [enable]);
             },
 
@@ -244,64 +237,66 @@ define(
             },
         };
 
-        var VolumeA11y = function (slider, button, min, max) {
+        var VolumeA11y = function (button, min, max) {
             this.min = min;
             this.max = max;
-            this.slider = slider;
             this.button = button;
+            this.i18n = {
+                'Volume.': gettext('Volume'),
+                // Translators: Volume level equals 0%.
+                'Muted': gettext('Muted'),
+                // Translators: Volume level in range (0,20]%
+                'Very low': gettext('Very low'),
+                // Translators: Volume level in range (20,40]%
+                'Low': gettext('Low'),
+                // Translators: Volume level in range (40,60]%
+                'Average': gettext('Average'),
+                // Translators: Volume level in range (60,80]%
+                'Loud': gettext('Loud'),
+                // Translators: Volume level in range (80,100)%
+                'Very loud': gettext('Very loud'),
+                // Translators: Volume level equals 100%.
+                'Maximum': gettext('Maximum'),
+            }
+
             this.initialize();
         };
 
 
         VolumeA11y.prototype = {
             initialize: function() {
-                this.slider.attr({
-                    'role': 'slider',
-                    'title': gettext('Volume'),
-                    'aria-disabled': false,
-                    'aria-valuemin': this.min,
-                    'aria-valuemax': this.max
+                this.liveRegion = $('<div />', {
+                    'class':  'sr video-live-region',
+                    'role': 'status',
+                    'aria-live': 'polite'
                 });
+
+                this.button.after(this.liveRegion);
             },
 
             update: function(volume) {
-                this.slider.attr({
-                    'aria-valuenow': volume,
-                    'aria-valuetext': this.getDescription(volume)
-                });
-
-                // We add the aria-label attribute because the title attribute
-                // cannot be read.
-                this.button.attr(
-                    'aria-label',
-                    gettext((volume > 0) ? 'Volume' : 'Volume muted')
-                );
+                this.liveRegion.html([
+                    this.getVolumeDescription(volume), this.i18n['Volume.']
+                ].join(' '));
             },
 
             // Returns a string describing the level of volume.
-            getDescription: function(volume) {
+            getVolumeDescription: function(volume) {
                 if (volume === 0) {
-                    // Translators: Volume level equals 0%.
-                    return gettext('Muted');
+                    return this.i18n['Muted'];
                 } else if (volume <= 20) {
-                    // Translators: Volume level in range (0,20]%
-                    return gettext('Very low');
+                    return this.i18n['Very low'];
                 } else if (volume <= 40) {
-                    // Translators: Volume level in range (20,40]%
-                    return gettext('Low');
+                    return this.i18n['Low'];
                 } else if (volume <= 60) {
-                    // Translators: Volume level in range (40,60]%
-                    return gettext('Average');
+                    return this.i18n['Average'];
                 } else if (volume <= 80) {
-                    // Translators: Volume level in range (60,80]%
-                    return gettext('Loud');
+                    return this.i18n['Loud'];
                 } else if (volume <= 99) {
-                    // Translators: Volume level in range (80,100)%
-                    return gettext('Very loud');
+                    return this.i18n['Very loud'];
                 }
 
-                // Translators: Volume level equals 100%.
-                return gettext('Maximum');
+                return this.i18n['Maximum'];
             }
         };
 
