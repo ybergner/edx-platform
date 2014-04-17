@@ -22,6 +22,7 @@ function (HTML5Video, Resizer) {
             log: log,
             onCaptionSeek: onSeek,
             onEnded: onEnded,
+            onMuteChange: onMuteChange,
             onPause: onPause,
             onPlay: onPlay,
             onPlaybackQualityChange: onPlaybackQualityChange,
@@ -76,7 +77,6 @@ function (HTML5Video, Resizer) {
             if (!state.isFlashMode()) {
                 state.videoPlayer.setPlaybackRate(state.speed);
             }
-            state.videoPlayer.player.setVolume(state.currentVolume);
         });
 
         if (state.videoType === 'youtube') {
@@ -525,6 +525,14 @@ function (HTML5Video, Resizer) {
             _this.videoPlayer.onSpeedChange(speed);
         });
 
+        this.el.on('volumechange', function (event, volume) {
+            _this.videoPlayer.onVolumeChange(volume);
+        });
+
+        this.el.on('mute', function (event, enable) {
+            _this.videoPlayer.onMuteChange(enable);
+        });
+
         this.videoPlayer.log('load_video');
 
         availablePlaybackRates = this.videoPlayer.player
@@ -884,6 +892,12 @@ function (HTML5Video, Resizer) {
 
     function onVolumeChange(volume) {
         this.videoPlayer.player.setVolume(volume);
+    }
+
+    function onMuteChange(enable) {
+        var action = enable ? 'mute' : 'unMute';
+
+        this.videoPlayer.player[action]();
     }
 });
 
