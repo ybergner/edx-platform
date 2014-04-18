@@ -19,6 +19,7 @@ function (HTML5Video, Resizer) {
             handlePlaybackQualityChange: handlePlaybackQualityChange,
             isEnded: isEnded,
             isPlaying: isPlaying,
+            getPlayerState: getPlayerState,
             log: log,
             onCaptionSeek: onSeek,
             onEnded: onEnded,
@@ -495,7 +496,7 @@ function (HTML5Video, Resizer) {
             end: false
         });
         this.videoPlayer.ready();
-        this.el.trigger('play', arguments);
+        this.el.trigger('play', [this.videoPlayer.getPlayerState()]);
     }
 
     function onUnstarted() { }
@@ -898,6 +899,18 @@ function (HTML5Video, Resizer) {
         var action = enable ? 'mute' : 'unMute';
 
         this.videoPlayer.player[action]();
+    }
+
+    function getPlayerState() {
+        var player = this.videoPlayer.player;
+
+        return {
+            'position': player.getCurrentTime(),
+            'quality': player.getPlaybackQuality(),
+            'duration': player.getDuration(),
+            'isMuted': player.isMuted(),
+            'volume': player.getVolume(),
+        };
     }
 });
 

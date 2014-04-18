@@ -29,21 +29,22 @@ define(
             step: 20,
 
             initialize: function() {
-                this.el = this.state.el.find('div.volume');
+                this.el = this.state.el.find('.volume');
 
                 if (this.state.isTouch) {
                     // iOS doesn't support volume change
                     this.el.remove();
                     return false;
                 }
-
+                // Youtube iframe react on key buttons and has his own handlers.
+                // So, we disallow focusing on iframe.
                 this.state.el.find('iframe').attr('tabindex', -1);
                 this.button = this.el.children('a');
                 this.a11y = new VolumeA11y(this.button, this.min, this.max);
-                this.setVolume(Cookie.getVolume(), true, true);
                 this.render();
-                this.mute(Cookie.getMute(), true);
                 this.bindHandlers();
+                this.setVolume(Cookie.getVolume(), true);
+                this.mute(Cookie.getMute(), true);
             },
 
             render: function() {
@@ -54,11 +55,11 @@ define(
                     range: 'min',
                     min: this.min,
                     max: this.max,
-                    value: this.getVolume(),
-                    change: this.onChangeHandler.bind(this),
                     slide: this.onSlideHandler.bind(this)
                 });
 
+                // We provide an independent behavior to adjust volume level.
+                // Therefore, we no need redundant focusing on slider in TAB order.
                 container.find('a').attr('tabindex', -1);
             },
 
@@ -66,8 +67,9 @@ define(
             bindHandlers: function() {
                 this.state.el.on({
                     'keydown': this.keyDownHandler.bind(this),
-                    'initialize': this.updateState.bind(this),
-                    'play': _.once(this.updateState.bind(this))
+                    'play': _.once(this.updateState.bind(this)),
+                    'volumechange': this.volumeChangeHandler.bind(this),
+                    'mute': this.volumeMuteHandler.bind(this),
                 });
                 this.el.on({
                     'mouseenter': this.openMenu.bind(this),
@@ -82,33 +84,32 @@ define(
                 });
             },
 
-            updateState: function() {
-                this.setVolume(this.getVolume());
-                this.mute(this.isMuted);
+            updateState: function(event, state) {
+                this.setVolume(state.volume);
+                this.mute(state.isMuted);
             },
 
             getVolume: function() {
                 return this.volume;
             },
 
-            setVolume: function(volume, withoutSlider, withoutCookie) {
+            setVolume: function(volume, silent, withoutSlider) {
                 this.volume = volume;
+                this.a11y.update(this.getVolume());
 
                 if (this.getVolume() <= this.min) {
                     this.updateButtonView(true);
-                } else if (this.isMuted) {
-                    this.mute(false)
                 } else {
                     this.updateButtonView(false);
                 }
 
                 if (!withoutSlider) {
-                    this.volumeSlider.slider('value', volume);
-                    this.a11y.update(this.getVolume());
+                    this.updateSliderView(this.getVolume());
                 }
 
-                if (!withoutCookie) {
+                if (!silent) {
                     Cookie.setVolume(this.getVolume());
+                    this.state.el.trigger('volumechange', [this.getVolume()]);
                 }
             },
 
@@ -130,12 +131,20 @@ define(
                 this.setVolume(volume);
             },
 
-            mute: function(enable) {
-                Cookie.setMute(enable);
+            mute: function(enable, silent) {
                 this.isMuted = enable;
-                this.updateButtonView(enable);
-                this.a11y.update(enable ? 0 : this.getVolume());
-                this.state.el.trigger('mute', [enable]);
+                this.updateButtonView(this.isMuted);
+                this.a11y.update(this.isMuted ? 0 : this.getVolume());
+
+                if (!silent) {
+                    Cookie.setMute(enable);
+                    this.state.el.trigger('mute', [this.isMuted]);
+                }
+            },
+
+            updateSliderView: function (volume) {
+                console.log('updateSliderView', volume)
+                this.volumeSlider.slider('value', volume);
             },
 
             updateButtonView: function(isMuted) {
@@ -222,20 +231,27 @@ define(
             },
 
             onSlideHandler: function(event, ui) {
-                this.setVolume(ui.value, true, true);
-                this.state.el.trigger('volumechange', [this.getVolume()]);
-            },
-
-            onChangeHandler: function(event, ui) {
-                this.setVolume(ui.value, true);
-                this.state.el.trigger('volumechange', [this.getVolume()]);
+                this.setVolume(ui.value, false, true);
             },
 
             toggleMuteHandler: function(event) {
                 this.toggleMute()
                 event.preventDefault();
             },
+
+            volumeChangeHandler: function (event, value) {
+                if (this.isMuted) {
+                    this.mute(false);
+                }
+            },
+
+            volumeMuteHandler: function (event, value) {
+                if (this.isMuted && this.getVolume() <= this.min) {
+                    this.setVolume(this.max);
+                }
+            }
         };
+
 
         var VolumeA11y = function (button, min, max) {
             this.min = min;
@@ -261,7 +277,6 @@ define(
 
             this.initialize();
         };
-
 
         VolumeA11y.prototype = {
             initialize: function() {
@@ -302,6 +317,9 @@ define(
 
 
         var Cookie = {
+            min: 0,
+            max: 100,
+
             cookies: {
                 volume: 'video_player_volume_level',
                 mute: 'video_player_is_muted'
@@ -311,7 +329,14 @@ define(
                 var cookies = Cookie.cookies,
                     volume = parseInt($.cookie(cookies['volume']), 10);
 
-                return isFinite(volume) ? volume : 100;
+                if (isFinite(volume)) {
+                    volume = Math.max(volume, this.min);
+                    volume = Math.min(volume, this.max);
+                } else {
+                    volume = this.max;
+                }
+
+                return volume;
             },
 
             setVolume: function(value) {
