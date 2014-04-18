@@ -6,7 +6,8 @@ XASSET_THUMBNAIL_TAIL_NAME = '.jpg'
 import os
 import logging
 import StringIO
-from urlparse import urlparse, urlunparse
+from urlparse import urlparse, urlunparse, parse_qsl
+from urllib import urlencode
 
 from xmodule.modulestore import Location
 from .django import contentstore
@@ -124,8 +125,22 @@ class StaticContent(object):
         loc = StaticContent.compute_location(course_id_dict['org'], course_id_dict['course'], orig_path)
         loc_url = StaticContent.get_url_path_from_location(loc)
 
+        # parse the query params for "^/static/" and replace with the location url
+        orig_query = parse_qsl(query)
+        new_query_list = []
+        for query_item in orig_query:
+            if query_item[1].startswith("/static/"):
+                new_query = StaticContent.compute_location(course_id_dict['org'],
+                                                           course_id_dict['course'],
+                                                           query_item[1][8:],
+                                                           )
+                new_query_url = StaticContent.get_url_path_from_location(new_query)
+                new_query_list.append((query_item[0], new_query_url))
+            else:
+                new_query_list.append(query_item)
+
         # Reconstruct with new path
-        return urlunparse((scheme, netloc, loc_url, params, query, fragment))
+        return urlunparse((scheme, netloc, loc_url, params, urlencode(new_query_list), fragment))
 
     def stream_data(self):
         yield self._data
