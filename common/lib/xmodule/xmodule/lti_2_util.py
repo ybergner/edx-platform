@@ -15,8 +15,6 @@ from webob import Response
 from xblock.core import XBlock
 from oauthlib.oauth1 import Client
 
-import xmodule.lti_module
-
 log = logging.getLogger(__name__)
 
 LTI_2_0_REST_SUFFIX_PARSER = re.compile(r"^user/(?P<anon_id>\w+)", re.UNICODE)
@@ -170,32 +168,19 @@ class LTI20ModuleMixin(object):
     def clear_user_module_score(self, user):
         """
         Clears the module user state, including grades and comments.
-        Note that the publish call has to complete before we rebind and set this module state.
-        The reason is because rebinding "caches" the state, so publishing between rebinding and setting
-        state can cause state inconsistency
         """
-        self.system.publish(
-            self,
-            'grade',
-            {
-                'value': None,
-                'max_value': None,
-                'user_id': user.id
-            },
-        )
-
-        self.system.rebind_noauth_module_to_user(self, user)
-        self.module_score = xmodule.lti_module.LTIModule.module_score.default
-        self.score_comment = xmodule.lti_module.LTIModule.score_comment.default
+        self.set_user_module_score(user, None, None)
 
     def set_user_module_score(self, user, score, max_score, comment=""):
         """
         Sets the module user state, including grades and comments.
-        Note that the publish call has to complete before we rebind and set this module state.
-        The reason is because rebinding "caches" the state, so publishing between rebinding and setting
-        state can cause state inconsistency
         """
-        scaled_score = score * max_score
+        if score is not None and max_score is not None:
+            scaled_score = score * max_score
+        else:
+            scaled_score = None
+
+        self.system.rebind_noauth_module_to_user(self, user)
 
         # have to publish for the progress page...
         self.system.publish(
@@ -207,8 +192,6 @@ class LTI20ModuleMixin(object):
                 'user_id': user.id,
             },
         )
-        self.system.rebind_noauth_module_to_user(self, user)
-
         self.module_score = scaled_score
         self.score_comment = comment
 

@@ -350,18 +350,26 @@ def get_module_system_for_user(user, field_data_cache,
         field_data_cache_real_user = FieldDataCache.cache_for_descriptor_descendents(
             course_id,
             real_user,
-            descriptor
+            module.descriptor
         )
 
         (inner_system, inner_student_data) = get_module_system_for_user(
-            real_user, field_data_cache_real_user,  # These have implicit user bindings, the rest of args are considered not
-            descriptor, course_id, track_function, xqueue_callback_url_prefix, position, wrap_xmodule_display,
+            real_user, field_data_cache_real_user,  # These have implicit user bindings, rest of args considered not to
+            module.descriptor, course_id, track_function, xqueue_callback_url_prefix, position, wrap_xmodule_display,
             grade_bucket_type, static_asset_path
         )
-
-        module.bind_for_student(inner_system, LmsFieldData(descriptor._field_data, inner_student_data))  # pylint: disable=protected-access
-        module.scope_ids = descriptor.scope_ids._replace(user_id=real_user.id)  # pylint: disable=protected-access
-        descriptor.scope_ids = descriptor.scope_ids._replace(user_id=real_user.id)  # pylint: disable=protected-access
+        # rebinds module to a different student.  We'll change system, student_data, and scope_ids
+        module.descriptor.bind_for_student(
+            inner_system,
+            LmsFieldData(module.descriptor._field_data, inner_student_data)  # pylint: disable=protected-access
+        )
+        module.descriptor.scope_ids = (
+            module.descriptor.scope_ids._replace(user_id=real_user.id)  # pylint: disable=protected-access
+        )
+        module.scope_ids = module.descriptor.scope_ids  # this is needed b/c NamedTuples are immutable
+        # now bind the module to the new ModuleSystem instance and vice-versa
+        module.runtime = inner_system
+        inner_system.xmodule_instance = module
 
     # Build a list of wrapping functions that will be applied in order
     # to the Fragment content coming out of the xblocks that are about to be rendered.

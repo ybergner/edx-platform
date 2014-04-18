@@ -1134,7 +1134,7 @@ class XMLParsingSystem(DescriptorSystem):
         self.process_xml = process_xml
 
 
-class ModuleSystem(MetricsMixin,ConfigurableFragmentWrapper, Runtime):  # pylint: disable=abstract-method
+class ModuleSystem(MetricsMixin, ConfigurableFragmentWrapper, Runtime):  # pylint: disable=abstract-method
     """
     This is an abstraction such that x_modules can function independent
     of the courseware (e.g. import into other types of courseware, LMS,
