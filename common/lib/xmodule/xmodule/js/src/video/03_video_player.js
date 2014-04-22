@@ -526,11 +526,11 @@ function (HTML5Video, Resizer) {
             _this.videoPlayer.onSpeedChange(speed);
         });
 
-        this.el.on('volumechange', function (event, volume) {
+        this.el.on('volumechange volumechange:silent', function (event, volume) {
             _this.videoPlayer.onVolumeChange(volume);
         });
 
-        this.el.on('mute', function (event, enable) {
+        this.el.on('mute mute:silent', function (event, enable) {
             _this.videoPlayer.onMuteChange(enable);
         });
 
@@ -895,9 +895,10 @@ function (HTML5Video, Resizer) {
         this.videoPlayer.player.setVolume(volume);
     }
 
-    function onMuteChange(enable) {
-        var action = enable ? 'mute' : 'unMute';
+    function onMuteChange(muteState) {
+        var action = muteState ? 'mute' : 'unMute';
 
+        console.log(action);
         this.videoPlayer.player[action]();
     }
 

@@ -43,7 +43,7 @@ define(
                 this.a11y = new VolumeA11y(this.button, this.min, this.max);
                 this.render();
                 this.bindHandlers();
-                this.setVolume(Cookie.getVolume(), true);
+                this.setVolume(Cookie.getVolume(), true, false);
                 this.mute(Cookie.getMute(), true);
             },
 
@@ -84,9 +84,11 @@ define(
                 });
             },
 
-            updateState: function(event, state) {
-                this.setVolume(state.volume);
-                this.mute(state.isMuted);
+            updateState: function(event) {
+                this.setVolume(this.getVolume(), true, false);
+                this.mute(this.getMuteStatus(), true);
+                this.state.el.trigger('volumechange:silent', [this.getVolume()]);
+                this.state.el.trigger('mute:silent', [this.getMuteStatus()]);
             },
 
             getVolume: function() {
@@ -98,9 +100,9 @@ define(
                 this.a11y.update(this.getVolume());
 
                 if (this.getVolume() <= this.min) {
-                    this.updateButtonView(true);
+                    this.mute(true);
                 } else {
-                    this.updateButtonView(false);
+                    this.mute(false);
                 }
 
                 if (!withoutSlider) {
@@ -114,36 +116,34 @@ define(
             },
 
             increaseVolume: function() {
-                var current = this.getVolume(),
-                    volume = current + this.step,
-                    max = this.max;
+                var volume = Math.min(this.getVolume() + this.step, this.max);
 
-                volume = (volume <= max) ? volume : max;
-                this.setVolume(volume);
+                this.setVolume(volume, false, false);
             },
 
             decreaseVolume: function() {
-                var current = this.getVolume(),
-                    volume = current - this.step,
-                    min = this.min;
+                var volume = Math.max(this.getVolume() - this.step, this.min);
 
-                volume = (volume >= min) ? volume : min;
-                this.setVolume(volume);
+                this.setVolume(volume, false, false);
             },
 
-            mute: function(enable, silent) {
-                this.isMuted = enable;
-                this.updateButtonView(this.isMuted);
-                this.a11y.update(this.isMuted ? 0 : this.getVolume());
+            mute: function(muteStatus, silent) {
+                this.isMuted = muteStatus;
+                this.updateButtonView(this.getMuteStatus());
+                this.a11y.update(this.getMuteStatus() ? 0 : this.getVolume());
 
                 if (!silent) {
-                    Cookie.setMute(enable);
-                    this.state.el.trigger('mute', [this.isMuted]);
+                    Cookie.setMute(this.getMuteStatus());
+                    this.state.el.trigger('mute', [this.getMuteStatus()]);
                 }
+
+            },
+
+            getMuteStatus: function () {
+                return this.isMuted;
             },
 
             updateSliderView: function (volume) {
-                console.log('updateSliderView', volume)
                 this.volumeSlider.slider('value', volume);
             },
 
@@ -164,7 +164,7 @@ define(
             },
 
             toggleMute: function() {
-                if (this.isMuted) {
+                if (this.getMuteStatus()) {
                     this.mute(false);
                 } else {
                     this.mute(true);
@@ -235,19 +235,19 @@ define(
             },
 
             toggleMuteHandler: function(event) {
-                this.toggleMute()
+                this.toggleMute();
                 event.preventDefault();
             },
 
             volumeChangeHandler: function (event, value) {
-                if (this.isMuted) {
+                if (this.getMuteStatus()) {
                     this.mute(false);
                 }
             },
 
-            volumeMuteHandler: function (event, value) {
-                if (this.isMuted && this.getVolume() <= this.min) {
-                    this.setVolume(this.max);
+            volumeMuteHandler: function (event, muteStatus) {
+                if (muteStatus && this.getVolume() <= this.min) {
+                    this.setVolume(this.max, false, false);
                 }
             }
         };
@@ -283,7 +283,8 @@ define(
                 this.liveRegion = $('<div />', {
                     'class':  'sr video-live-region',
                     'role': 'status',
-                    'aria-live': 'polite'
+                    'aria-live': 'polite',
+                    'aria-atomic': 'false'
                 });
 
                 this.button.after(this.liveRegion);
@@ -349,9 +350,16 @@ define(
             },
 
             getMute: function() {
-                var cookies = Cookie.cookies;
+                var cookies = Cookie.cookies,
+                    value;
 
-                return $.cookie(cookies['mute']) || false;
+                try {
+                    value = JSON.parse($.cookie(cookies['mute']));
+                } catch (ex) {
+                    value = false;
+                }
+
+                return value || false;
             },
 
             setMute: function(value) {
