@@ -243,10 +243,6 @@ FEATURES = {
 
     # Turn off Advanced Security by default
     'ADVANCED_SECURITY': False,
-
-    # Show a "Download your certificate" on the Progress page if the lowest
-    # nonzero grade cutoff is met
-    'SHOW_PROGRESS_SUCCESS_BUTTON': False,
 }
 
 # Used for A/B testing
@@ -524,9 +520,9 @@ FAVICON_PATH = 'images/favicon.ico'
 
 # Locale/Internationalization
 TIME_ZONE = 'America/New_York'  # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-LANGUAGE_CODE = 'en'  # http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en@rtl'  # http://www.i18nguy.com/unicode/language-identifiers.html
 # these languages display right to left
-LANGUAGES_BIDI = ("en@rtl", "he", "ar", "fa")
+LANGUAGES_BIDI = ("en@rtl", "he", "ar", "fa", "fa-ir", "ur")
 
 # Sourced from http://www.localeplanet.com/icu/ and wikipedia
 # Languages that don't have any reviewed strings are commented out;
@@ -538,58 +534,58 @@ LANGUAGES = (
     ('fake2', u'Fake translations'),        # Another dummy language for testing (not pushed to prod)
 
     ('ar', u'العربية'),  # Arabic
-    ('az', u'azərbaycanca'),  # Azerbaijani
-    ('bg-bg', u'български (България)'),  # Bulgarian (Bulgaria)
-    ('bn', u'বাংলা'),  # Bengali
-    ('bn-bd', u'বাংলা (বাংলাদেশ)'),  # Bengali (Bangladesh)
-    ('bs', u'bosanski'),  # Bosnian
+#    ('az', u'azərbaycanca'),  # Azerbaijani
+#    ('bg-bg', u'български (България)'),  # Bulgarian (Bulgaria)
+#    ('bn', u'বাংলা'),  # Bengali
+#    ('bn-bd', u'বাংলা (বাংলাদেশ)'),  # Bengali (Bangladesh)
+#    ('bs', u'bosanski'),  # Bosnian
     ('ca', u'Català'),  # Catalan
-    ('ca@valencia', u'Català (València)'),  # Catalan (Valencia)
+#    ('ca@valencia', u'Català (València)'),  # Catalan (Valencia)
     ('cs', u'Čeština'),  # Czech
-    ('cy', u'Cymraeg'),  # Welsh
+#    ('cy', u'Cymraeg'),  # Welsh
     ('de-de', u'Deutsch (Deutschland)'),  # German (Germany)
-    ('el', u'Ελληνικά'),  # Greek
+#    ('el', u'Ελληνικά'),  # Greek
     ('en@lolcat', u'LOLCAT English'),  # LOLCAT English
     ('en@pirate', u'Pirate English'),  # Pirate English
     ('es-419', u'Español (Latinoamérica)'),  # Spanish (Latin America)
-    ('es-ar', u'Español (Argentina)'),  # Spanish (Argentina)
-    ('es-ec', u'Español (Ecuador)'),  # Spanish (Ecuador)
+#    ('es-ar', u'Español (Argentina)'),  # Spanish (Argentina)
+#    ('es-ec', u'Español (Ecuador)'),  # Spanish (Ecuador)
     ('es-es', u'Español (España)'),  # Spanish (Spain)
-    ('es-mx', u'Español (México)'),  # Spanish (Mexico)
-    ('es-pe', u'Español (Perú)'),  # Spanish (Peru)
-    ('es-us', u'Español (Estados Unidos)'),  # Spanish (United States)
-    ('et-ee', u'Eesti (Eesti)'),  # Estonian (Estonia)
-    ('eu-es', u'euskara (Espainia)'),  # Basque (Spain)
+#    ('es-mx', u'Español (México)'),  # Spanish (Mexico)
+#    ('es-pe', u'Español (Perú)'),  # Spanish (Peru)
+#    ('es-us', u'Español (Estados Unidos)'),  # Spanish (United States)
+#    ('et-ee', u'Eesti (Eesti)'),  # Estonian (Estonia)
+#    ('eu-es', u'euskara (Espainia)'),  # Basque (Spain)
     ('fa', u'فارسی'),  # Persian
     ('fa-ir', u'فارسی (ایران)'),  # Persian (Iran)
-    ('fi-fi', u'Suomi (Suomi)'),  # Finnish (Finland)
+#    ('fi-fi', u'Suomi (Suomi)'),  # Finnish (Finland)
     ('fr', u'Français'),  # French
-    ('gl', u'Galego'),  # Galician
+#    ('gl', u'Galego'),  # Galician
     ('he', u'עברית'),  # Hebrew
     ('hi', u'हिन्दी'),  # Hindi
-    ('hu', u'magyar'),  # Hungarian
-    ('hy-am', u'Հայերեն (Հայաստան)'),  # Armenian (Armenia)
+#    ('hu', u'magyar'),  # Hungarian
+    ('hy-am', u'Հայերէն (Հայաստանի Հանրապետութիւն)'),  # Armenian (Armenia)
     ('id', u'Bahasa Indonesia'),  # Indonesian
     ('it-it', u'Italiano (Italia)'),  # Italian (Italy)
     ('ja-jp', u'日本語(日本)'),  # Japanese (Japan)
-    ('kk-kz', u'қазақ тілі (Қазақстан)'),  # Kazakh (Kazakhstan)
-    ('km-kh', u'ភាសាខ្មែរ (កម្ពុជា)'),  # Khmer (Cambodia)
+#    ('kk-kz', u'қазақ тілі (Қазақстан)'),  # Kazakh (Kazakhstan)
+#    ('km-kh', u'ភាសាខ្មែរ (កម្ពុជា)'),  # Khmer (Cambodia)
     ('ko-kr', u'한국어(대한민국)'),  # Korean (Korea)
     ('lt-lt', u'Lietuvių (Lietuva)'),  # Lithuanian (Lithuania)
-    ('ml', u'മലയാളം'),  # Malayalam
-    ('mn', u'Монгол хэл'),  # Mongolian
-    ('ms', u'Bahasa Melayu'),  # Malay
+#    ('ml', u'മലയാളം'),  # Malayalam
+#    ('mn', u'Монгол хэл'),  # Mongolian
+#    ('ms', u'Bahasa Melayu'),  # Malay
     ('nb', u'Norsk bokmål'),  # Norwegian Bokmål
-    ('ne', u'नेपाली'),  # Nepali
+#    ('ne', u'नेपाली'),  # Nepali
     ('nl-nl', u'Nederlands (Nederland)'),  # Dutch (Netherlands)
     ('pl', u'Polski'),  # Polish
     ('pt-br', u'Português (Brasil)'),  # Portuguese (Brazil)
-    ('pt-pt', u'Português (Portugal)'),  # Portuguese (Portugal)
-    ('ru', u'Русский'),  # Russian
-    ('si', u'සිංහල'),  # Sinhala
-    ('sk', u'Slovenčina'),  # Slovak
+#    ('pt-pt', u'Português (Portugal)'),  # Portuguese (Portugal)
+#    ('ru', u'Русский'),  # Russian
+#    ('si', u'සිංහල'),  # Sinhala
+#    ('sk', u'Slovenčina'),  # Slovak
     ('sl', u'Slovenščina'),  # Slovenian
-    ('th', u'ไทย'),  # Thai
+#    ('th', u'ไทย'),  # Thai
     ('tr-tr', u'Türkçe (Türkiye)'),  # Turkish (Turkey)
     ('uk', u'Українська'),  # Ukranian
     ('ur', u'اردو'),  # Urdu
@@ -1295,11 +1291,6 @@ GRADES_DOWNLOAD = {
     'BUCKET': 'edx-grades',
     'ROOT_PATH': '/tmp/edx-s3/grades',
 }
-
-######################## PROGRESS SUCCESS BUTTON ##############################
-# The following fields are available in the URL: {course_id} {student_id}
-PROGRESS_SUCCESS_BUTTON_URL = 'http://<domain>/<path>/{course_id}'
-PROGRESS_SUCCESS_BUTTON_TEXT_OVERRIDE = None
 
 #### PASSWORD POLICY SETTINGS #####
 
