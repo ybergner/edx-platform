@@ -75,6 +75,12 @@ from xblock.fields import Boolean, Float
 
 log = logging.getLogger(__name__)
 
+docs_anchor_tag = (
+    "<a target='_blank'"
+    "href='http://edx.readthedocs.org/projects/ca/en/latest/problems_tools/tools.html#lti-component'>"
+    "http://edx.readthedocs.org/projects/ca/en/latest/problems_tools/tools.html#lti-component</a>"
+)
+
 
 class LTIFields(object):
     """
@@ -96,24 +102,89 @@ class LTIFields(object):
 
     https://github.com/idan/oauthlib/blob/master/oauthlib/oauth1/rfc5849/signature.py#L136
     """
-    display_name = String(display_name="Display Name", help="Display name for this module", scope=Scope.settings, default="LTI")
-    lti_id = String(help="Id of the tool", default='', scope=Scope.settings)
-    launch_url = String(help="URL of the tool", default='http://www.example.com', scope=Scope.settings)
-    custom_parameters = List(help="Custom parameters (vbid, book_location, etc..)", scope=Scope.settings)
-    open_in_a_new_page = Boolean(help="Should LTI be opened in new page?", default=True, scope=Scope.settings)
-    graded = Boolean(help="Grades will be considered in overall score.", default=False, scope=Scope.settings)
+    display_name = String(
+        display_name="Display name",
+        help=(
+            "Name displayed to students for this LTI component.  "
+            "Also may be used in analytics reports to identify this component."
+        ),
+        scope=Scope.settings,
+        default="LTI",
+    )
+    lti_id = String(
+        display_name="LTI ID",
+        help=(
+            "id of the external tool linked to this component.  Should match one of the entries set in the course "
+            "'Advanced Settings', under the 'LTI Passports' setting. "
+            "See " + docs_anchor_tag + " for more details."
+        ),
+        default='',
+        scope=Scope.settings
+    )
+    launch_url = String(
+        display_name="Launch URL",
+        help=(
+            "Launch URL of the external tool linked to this LTI component. "
+            "See " + docs_anchor_tag + " for more details.  "
+            "<b>Only applicable when 'Hide launch elements' is set to False.</b>"
+        ),
+        default='http://www.example.com',
+        scope=Scope.settings)
+    custom_parameters = List(
+        display_name="Custom Parameters",
+        help=(
+            "Custom parameters for this LTI component (vbid, book_location, etc...).  "
+            "See " + docs_anchor_tag + " for more details."
+        ),
+        scope=Scope.settings)
+    open_in_a_new_page = Boolean(
+        display_name="Open in new page",
+        help=(
+            "Should the external LTI learning tool be opened in new browser page/tab?  If True, the student will see "
+            "a button which can be clicked to launch the external learning tool.  If False, the external learning "
+            "tool will be automatically launched and will be displayed in an iframe enclosed in this component.  "
+            "<b>Only applicable when 'Hide launch elements' is set to False.</b>"
+        ),
+        default=True,
+        scope=Scope.settings
+    )
+    has_score = Boolean(
+        display_name="Has score",
+        help=(
+            "Is a numeric score for the student computed for this LTI component?  "
+            "(This score can be included in the overall course grade.)"
+        ),
+        default=False,
+        scope=Scope.settings
+    )
     weight = Float(
-        help="Weight for student grades.",
+        display_name="Weight",
+        help="Maximum score possible for this component, applicable when 'Has score' is set to True.  Defaults to 1.0",
         default=1.0,
         scope=Scope.settings,
         values={"min": 0},
     )
-    has_score = Boolean(help="Does this LTI module have score?", default=False, scope=Scope.settings)
-    module_score = Float(help="The score kept in the xblock KVS -- duplicate of the published score in django DB",
-                         default=None,
-                         scope=Scope.user_state)
-    score_comment = String(help="Comment as returned from grader, LTI2.0 spec", default="", scope=Scope.user_state)
-    hide_launch = Boolean(help="Do not show the launch button or iframe", default=False, scope=Scope.settings)
+    module_score = Float(
+        help="The score kept in the xblock KVS -- duplicate of the published score in django DB",
+        default=None,
+        scope=Scope.user_state
+    )
+    score_comment = String(
+        help="Comment as returned from grader, LTI2.0 spec",
+        default="",
+        scope=Scope.user_state
+    )
+    hide_launch = Boolean(
+        display_name="Hide launch elements",
+        help=(
+            "Hide both the launch button and any iframes which might otherwise display external learning tools.  "
+            "This option is typically only selected when you do not want this LTI component to launch any external "
+            "tools, but rather want to use the component as a grade placeholder for "
+            "syncing with an external grading system.  "
+        ),
+        default=False,
+        scope=Scope.settings
+    )
 
 
 class LTIModule(LTIFields, LTI20ModuleMixin, XModule):
@@ -196,6 +267,13 @@ class LTIModule(LTIFields, LTI20ModuleMixin, XModule):
 
         Otherwise error message from LTI provider is generated.
     """
+
+    @property
+    def graded(self):
+        """
+        Alias of the `has_score` property
+        """
+        return self.has_score
 
     css = {'scss': [resource_string(__name__, 'css/lti/lti.scss')]}
 

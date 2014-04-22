@@ -251,7 +251,7 @@ def see_elem_text(_step, elem, text):
     selector_map = {
         'progress': '.problem-progress',
         'feedback': '.problem-feedback',
-        'module title': '.title'
+        'module title': '.problem-header'
     }
     assert_in(elem, selector_map)
     assert_true(world.css_has_text(selector_map[elem], text))

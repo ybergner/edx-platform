@@ -92,7 +92,7 @@ Feature: LMS.LTI component
   And I see in the gradebook table that "HW" is "80"
   And I see in the gradebook table that "Total" is "8"
   And I visit the LTI component
-  Then I see LTI component progress with text "Score: 8.00 / 10.0"
+  Then I see LTI component progress with text "(Score: 8.00 / 10.0)"
   Then I see LTI component feedback with text "This is awesome."
 
   #10
@@ -103,11 +103,11 @@ Feature: LMS.LTI component
   | False              | 10     | True      | True      |
   And I submit answer to LTI 2 question
   And I visit the LTI component
-  Then I see LTI component progress with text "Score: 8.00 / 10.0"
+  Then I see LTI component progress with text "(Score: 8.00 / 10.0)"
   Then I see LTI component feedback with text "This is awesome."
   And the LTI provider deletes my grade and feedback
   And I visit the LTI component (have to reload)
-  Then in the LTI component I do not see progress
+  Then I see LTI component progress with text "(10.0 points possible)"
   Then in the LTI component I do not see feedback
   And I click on the "Progress" tab
   Then I see text "Problem Scores: 0/10"
@@ -124,7 +124,7 @@ Feature: LMS.LTI component
   | open_in_a_new_page | hide_launch |
   | False              | True        |
   Then in the LTI component I do not see a launch button
-  Then I see LTI component module title with text "LTI (External resource)"
+  Then I see LTI component module title with text "LTI (EXTERNAL RESOURCE)"
 
   #12
   Scenario: LTI component that set to hide_launch and not open_in_a_new_page shows no iframe
@@ -133,4 +133,4 @@ Feature: LMS.LTI component
   | open_in_a_new_page | hide_launch |
   | True               | True        |
   Then in the LTI component I do not see an provider iframe
-  Then I see LTI component module title with text "LTI (External resource)"
+  Then I see LTI component module title with text "LTI (EXTERNAL RESOURCE)"
