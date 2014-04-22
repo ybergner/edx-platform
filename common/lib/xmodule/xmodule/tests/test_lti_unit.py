@@ -397,13 +397,13 @@ class LTIModuleTest(LogicTest):
     def test_max_score(self):
         self.xmodule.weight = 100.0
 
-        self.xmodule.graded = True
+        self.assertFalse(self.xmodule.graded)
+        self.assertFalse(self.xmodule.has_score)
         self.assertEqual(self.xmodule.max_score(), None)
 
         self.xmodule.has_score = True
-        self.assertEqual(self.xmodule.max_score(), 100.0)
 
-        self.xmodule.graded = False
+        self.assertTrue(self.xmodule.graded)
         self.assertEqual(self.xmodule.max_score(), 100.0)
 
     def test_context_id(self):

@@ -75,7 +75,7 @@ from xblock.fields import Boolean, Float
 
 log = logging.getLogger(__name__)
 
-docs_anchor_tag = (
+DOCS_ANCHOR_TAG = (
     "<a target='_blank'"
     "href='http://edx.readthedocs.org/projects/ca/en/latest/problems_tools/tools.html#lti-component'>"
     "http://edx.readthedocs.org/projects/ca/en/latest/problems_tools/tools.html#lti-component</a>"
@@ -116,7 +116,7 @@ class LTIFields(object):
         help=(
             "id of the external tool linked to this component.  Should match one of the entries set in the course "
             "'Advanced Settings', under the 'LTI Passports' setting. "
-            "See " + docs_anchor_tag + " for more details."
+            "See " + DOCS_ANCHOR_TAG + " for more details."
         ),
         default='',
         scope=Scope.settings
@@ -125,7 +125,7 @@ class LTIFields(object):
         display_name="Launch URL",
         help=(
             "Launch URL of the external tool linked to this LTI component. "
-            "See " + docs_anchor_tag + " for more details.  "
+            "See " + DOCS_ANCHOR_TAG + " for more details.  "
             "<b>Only applicable when 'Hide launch elements' is set to False.</b>"
         ),
         default='http://www.example.com',
@@ -134,7 +134,7 @@ class LTIFields(object):
         display_name="Custom Parameters",
         help=(
             "Custom parameters for this LTI component (vbid, book_location, etc...).  "
-            "See " + docs_anchor_tag + " for more details."
+            "See " + DOCS_ANCHOR_TAG + " for more details."
         ),
         scope=Scope.settings)
     open_in_a_new_page = Boolean(
