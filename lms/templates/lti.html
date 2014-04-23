@@ -9,10 +9,10 @@
 % if has_score and weight:
     <div class="problem-progress">
         % if module_score is not None:
-            ## Translators: "Score" here indicates the numeric grade the student received on this LTI unit
-            (${_("Score")}: ${"{:.2f}".format(module_score)} / ${weight})
+            ## Translators: "points" is the student's achieved score on this LTI unit, and "total_points" is the maximum number of points achievable.
+            (${_("{points} / {total_points} points").format(points=module_score, total_points=weight)})
         % else:
-            ## Translators: "points possible is the maximum number of points achievable on this LTI unit
+            ## Translators: "total_points" is the maximum number of points achievable on this LTI unit
             (${_("{total_points} points possible").format(total_points=weight)})
         % endif
     </div>
