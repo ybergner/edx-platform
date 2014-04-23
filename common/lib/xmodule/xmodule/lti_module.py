@@ -77,8 +77,8 @@ log = logging.getLogger(__name__)
 
 DOCS_ANCHOR_TAG = (
     "<a target='_blank'"
-    "href='http://edx.readthedocs.org/projects/ca/en/latest/problems_tools/tools.html#lti-component'>"
-    "http://edx.readthedocs.org/projects/ca/en/latest/problems_tools/tools.html#lti-component</a>"
+    "href='http://edx.readthedocs.org/projects/ca/en/latest/exercises_tools/lti_component.html'>"
+    "the edX LTI documentation</a>"
 )
 
 
@@ -103,10 +103,10 @@ class LTIFields(object):
     https://github.com/idan/oauthlib/blob/master/oauthlib/oauth1/rfc5849/signature.py#L136
     """
     display_name = String(
-        display_name="Display name",
+        display_name="Display Name",
         help=(
-            "Name displayed to students for this LTI component.  "
-            "Also may be used in analytics reports to identify this component."
+            "Enter the name that students see for this component.  "
+            "Analytics reports may also use the display name to identify this component."
         ),
         scope=Scope.settings,
         default="LTI",
@@ -114,52 +114,56 @@ class LTIFields(object):
     lti_id = String(
         display_name="LTI ID",
         help=(
-            "id of the external tool linked to this component.  Should match one of the entries set in the course "
-            "'Advanced Settings', under the 'LTI Passports' setting. "
-            "See " + DOCS_ANCHOR_TAG + " for more details."
+            "Enter the LTI ID for the external LTI provider.  "
+            "This value must be the same LTI ID that you entered in the "
+            "LTI Passports setting on the Advanced Settings page."
+            "<br />See " + DOCS_ANCHOR_TAG + " for more details on this setting."
         ),
         default='',
         scope=Scope.settings
     )
     launch_url = String(
-        display_name="Launch URL",
+        display_name="LTI URL",
         help=(
-            "Launch URL of the external tool linked to this LTI component. "
-            "See " + DOCS_ANCHOR_TAG + " for more details.  "
-            "<b>Only applicable when 'Hide launch elements' is set to False.</b>"
+            "Enter the URL of the external tool that this component launches. "
+            "This setting is only used when Hide External Tool is set to False."
+            "<br />See " + DOCS_ANCHOR_TAG + " for more details on this setting."
         ),
         default='http://www.example.com',
         scope=Scope.settings)
     custom_parameters = List(
         display_name="Custom Parameters",
         help=(
-            "Custom parameters for this LTI component (vbid, book_location, etc...).  "
-            "See " + DOCS_ANCHOR_TAG + " for more details."
+            "Add the key/value pair for any custom parameters, such as the page your e-book should open to or "
+            "the background color for this component."
+            "<br />See " + DOCS_ANCHOR_TAG + " for more details on this setting."
         ),
         scope=Scope.settings)
     open_in_a_new_page = Boolean(
-        display_name="Open in new page",
+        display_name="Open in New Page",
         help=(
-            "Should the external LTI learning tool be opened in new browser page/tab?  If True, the student will see "
-            "a button which can be clicked to launch the external learning tool.  If False, the external learning "
-            "tool will be automatically launched and will be displayed in an iframe enclosed in this component.  "
-            "<b>Only applicable when 'Hide launch elements' is set to False.</b>"
+            "Select True if you want students to click a link that opens the LTI tool in a new window. "
+            "Select False if you want the LTI content to open in an IFrame in the current page. "
+            "This setting is only used when Hide External Tool is set to False.  "
         ),
         default=True,
         scope=Scope.settings
     )
     has_score = Boolean(
-        display_name="Has score",
+        display_name="Scored",
         help=(
-            "Is a numeric score for the student computed for this LTI component?  "
-            "(This score can be included in the overall course grade.)"
+            "Select True if this component has a numerical score that will be supplied by an external LTI system."
         ),
         default=False,
         scope=Scope.settings
     )
     weight = Float(
         display_name="Weight",
-        help="Maximum score possible for this component, applicable when 'Has score' is set to True.  Defaults to 1.0",
+        help=(
+            "Enter the number of points possible for this component.  "
+            "The default value is 1.0.  "
+            "This setting is only used when Scored is set to True."
+        ),
         default=1.0,
         scope=Scope.settings,
         values={"min": 0},
@@ -175,12 +179,11 @@ class LTIFields(object):
         scope=Scope.user_state
     )
     hide_launch = Boolean(
-        display_name="Hide launch elements",
+        display_name="Hide External Tool",
         help=(
-            "Hide both the launch button and any iframes which might otherwise display external learning tools.  "
-            "This option is typically only selected when you do not want this LTI component to launch any external "
-            "tools, but rather want to use the component as a grade placeholder for "
-            "syncing with an external grading system.  "
+            "Select True if you want to use this component as a placeholder for syncing with an external grading  "
+            "system rather than launch an external tool.  "
+            "This setting hides the Launch button and any IFrames for this component."
         ),
         default=False,
         scope=Scope.settings
