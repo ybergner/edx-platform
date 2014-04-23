@@ -219,3 +219,14 @@ class ModuleI18nService(object):
         # then Cale was a liar.
         from util.date_utils import strftime_localized
         return strftime_localized(*args, **kwargs)
+
+
+class LmsMetadataService(object):
+    """
+    Implement the XBlock runtime "Metadata" service.
+
+    Allows the retrieval of LMS specific metadata. Exposes methods specific to
+    the LMS configuration and requests.
+    """
+    def is_preview_enabled(self):
+        return get_default_store_name_for_current_request() == "draft"
