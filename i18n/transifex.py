@@ -16,6 +16,17 @@ def push():
     execute('tx push -s')
 
 
+def pull_all_rtl():
+    print("Pulling all translated RTL languages from transifex...")
+    # these languages display right to left
+    # LANGUAGES_BIDI = ("en@rtl", "he", "ar", "fa", "fa-ir", "ur")
+    rtl_langs = ['he', 'ar', 'fa', 'fa_IR', 'ur']
+    for lang in rtl_langs:
+        execute('tx pull -l ' + lang)
+
+    clean_translated_locales(langs=rtl_langs)
+
+
 def pull():
     print("Pulling languages from transifex...")
     # Pull translations from all languages where there is
@@ -24,12 +35,15 @@ def pull():
     clean_translated_locales()
 
 
-def clean_translated_locales():
+def clean_translated_locales(langs=None):
     """
     Strips out the warning from all translated po files
     about being an English source file.
     """
-    for locale in CONFIGURATION.translated_locales:
+    locales = CONFIGURATION.translated_locales
+    if langs:
+        locales = langs
+    for locale in locales:
         clean_locale(locale)
 
 
@@ -83,5 +97,7 @@ if __name__ == '__main__':
         push()
     elif args.command == "pull":
         pull()
+    elif args.command == 'rtl':
+        pull_all_rtl()
     else:
         raise Exception("unknown command ({cmd})".format(cmd=args.command))

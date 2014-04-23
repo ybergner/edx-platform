@@ -28,12 +28,12 @@ locales:
 #    - es_US  # Spanish (United States)
 #    - et_EE  # Estonian (Estonia)
 #    - eu_ES  # Basque (Spain)
-#    - fa  # Persian
-#    - fa_IR  # Persian (Iran)
+    - fa  # Persian
+    - fa_IR  # Persian (Iran)
 #    - fi_FI  # Finnish (Finland)
     - fr  # French
 #    - gl  # Galician
-#    - he  # Hebrew
+    - he  # Hebrew
     - hi  # Hindi
 #    - hu  # Hungarian
     - hy_AM  # Armenian (Armenia)
@@ -60,7 +60,7 @@ locales:
 #    - th  # Thai
     - tr_TR  # Turkish (Turkey)
     - uk  # Ukranian
-#    - ur  # Urdu
+    - ur  # Urdu
     - vi  # Vietnamese
     - zh_CN  # Chinese (China)
     - zh_TW  # Chinese (Taiwan)
