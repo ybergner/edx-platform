@@ -1,5 +1,5 @@
 # #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
-# edX community translations have been downloaded from Catalan (http://www.transifex.com/projects/p/edx-platform/language/ca/).
+# edX translation file.
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -15,13 +15,12 @@
 # Translators:
 # claudi <claudix.kernel@gmail.com>, 2014
 # #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
-# edX community translations have been downloaded from Catalan (http://www.transifex.com/projects/p/edx-platform/language/ca/)
+# edX translation file
 # Copyright (C) 2014 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
 # Translators:
 # claudi <claudix.kernel@gmail.com>, 2014
-# mcolomer <mcmlilhity@gmail.com>, 2014
 # #-#-#-#-#  mako-studio.po (edx-platform)  #-#-#-#-#
 # edX translation file
 # Copyright (C) 2014 edX
@@ -43,14 +42,13 @@
 # 
 # Translators:
 # claudi <claudix.kernel@gmail.com>, 2014
-# mcolomer <mcmlilhity@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: edx-platform\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2014-04-27 11:11-0400\n"
-"PO-Revision-Date: 2014-04-25 17:00+0000\n"
-"Last-Translator: mcolomer <mcmlilhity@gmail.com>\n"
+"POT-Creation-Date: 2014-04-22 10:12-0400\n"
+"PO-Revision-Date: 2014-03-23 19:30+0000\n"
+"Last-Translator: claudi <claudix.kernel@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/edx-platform/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,15 +75,15 @@ msgstr "Inscripcions tancades"
 
 #: common/djangoapps/course_modes/views.py
 msgid "Enrollment mode not supported"
-msgstr "Mode d'inscripció insuportable."
+msgstr ""
 
 #: common/djangoapps/course_modes/views.py
 msgid "Invalid amount selected."
-msgstr "Quantitat sel·leccionada invàlida."
+msgstr ""
 
 #: common/djangoapps/course_modes/views.py
 msgid "No selected price or selected price is too low."
-msgstr "Preu no sel·leccionat o massa baix."
+msgstr ""
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Administrator"
@@ -180,16 +178,6 @@ msgstr "No estàs inscrit en aquest curs"
 #: common/djangoapps/student/views.py
 msgid "Enrollment action is invalid"
 msgstr "La inscripció no és vàlida"
-
-#. Translators: provider_name is the name of an external, third-party user
-#. authentication service (like
-#. Google or LinkedIn).
-#: common/djangoapps/student/views.py
-msgid ""
-"There is no {platform_name} account associated with your {provider_name} "
-"account. Please use your {platform_name} credentials or pick another "
-"provider."
-msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "There was an error receiving your login information. Please email us."
@@ -838,10 +826,6 @@ msgid ""
 "by that feedback."
 msgstr ""
 
-#: common/lib/capa/capa/inputtypes.py
-msgid "No response from Xqueue within {xqueue_timeout} seconds. Aborted."
-msgstr ""
-
 #: common/lib/capa/capa/responsetypes.py
 msgid "Error {err} in evaluating hint function {hintfn}."
 msgstr ""
@@ -964,11 +948,11 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/capa_base.py
 msgid "Check"
-msgstr "Comprovar"
+msgstr ""
 
 #: common/lib/xmodule/xmodule/capa_base.py
 msgid "Final Check"
-msgstr "Comprovació final"
+msgstr ""
 
 #: common/lib/xmodule/xmodule/capa_base.py
 msgid "Checking..."
@@ -2405,82 +2389,72 @@ msgstr ""
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid "AI Assessment"
-msgstr "Avaluació d'Al"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid "Peer Assessment"
-msgstr "Avaluació per parelles"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid "Not yet available"
-msgstr "Encara no està disponible"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid "Automatic Checker"
-msgstr "Comprovador automàtic"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid "Instructor Assessment"
-msgstr "Avaluació de l'instructor"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid ""
 "Error occurred while contacting the grading service.  Please notify course "
 "staff."
 msgstr ""
-"Hi ha hagut un error mentre es contactava amb el servei de qualificacions. "
-"Si us plau, notifica-ho al personal del curs."
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid ""
 "Error occurred while contacting the grading service.  Please notify your edX"
 " point of contact."
 msgstr ""
-"Hi ha hagut un error mentre es contactava amb el servei de qualificacions. "
-"Si us plau, notifica-ho al teu punt de contacte de l'edX."
 
 #: lms/djangoapps/open_ended_grading/utils.py
 msgid "for course {0} and student {1}."
-msgstr "pel curs {0} i l'estudiant {1}."
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid ""
 "View all problems that require peer assessment in this particular course."
 msgstr ""
-"Veure tots els problemes que requereixen avaluació per parelles en aquest "
-"curs en particular."
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid ""
 "View ungraded submissions submitted by students for the open ended problems "
 "in the course."
 msgstr ""
-"Veure les presentacions sense qualificar dels estudiants per els problemes "
-"oberts en el curs."
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid ""
 "View open ended problems that you have previously submitted for grading."
-msgstr "Veure els problemes oberts que prèviament ha presentat per avaluar."
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid "View submissions that have been flagged by students as inappropriate."
 msgstr ""
-"Veure els submissions que han estat bandejades pels estudiants com a "
-"inapropiades."
 
 #: lms/djangoapps/open_ended_grading/views.py
 #: lms/djangoapps/open_ended_grading/views.py
 msgid "New submissions to grade"
-msgstr "Noves submissions per avaluar"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid "New grades have been returned"
-msgstr "Noves avaluacions han sigut tornades"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid "Submissions have been flagged for review"
-msgstr "Les submissions han sigut etiquetades per revisió"
+msgstr ""
 
 #: lms/djangoapps/open_ended_grading/views.py
 msgid ""
@@ -2490,10 +2464,6 @@ msgid ""
 "        Please check back later for this.\n"
 "        "
 msgstr ""
-"\n"
-"Error inicialitzant l'avaluació per parelles.\n"
-"No s'ha creat un mòdul d'avaluació per parelles en el curs que t'autoritzi a avaluar altres persones.\n"
-"Sisplau, torna-ho a provar més tard."
 
 #: lms/djangoapps/shoppingcart/models.py
 msgid "Order Payment Confirmation"
@@ -2688,7 +2658,7 @@ msgstr "Ha d'iniciar la sessió per afegir una cistella de compra"
 #: lms/djangoapps/shoppingcart/views.py
 #: lms/djangoapps/shoppingcart/tests/test_views.py
 msgid "The course you requested does not exist."
-msgstr "El curs que ha demanat no existeix."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/views.py
 #: lms/djangoapps/shoppingcart/tests/test_views.py
@@ -2702,7 +2672,7 @@ msgstr "Vostè ja està afegit al curs {0}."
 
 #: lms/djangoapps/shoppingcart/views.py
 msgid "Course added to cart."
-msgstr "Curs afegit a la cistella."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/views.py
 msgid "You do not have permission to view this page."
@@ -2710,29 +2680,23 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The payment processor did not return a required parameter: {0}"
-msgstr "El processedor de pagament no retorna un paràmetre obligatori: {0}"
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The payment processor returned a badly-typed value {0} for param {1}."
 msgstr ""
-"El processedor de pagament ha retornat un valor mal escrit {0} per el param "
-"{1}."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
 "The payment processor accepted an order whose number is not in our system."
 msgstr ""
-"El processedor de pagaments ha acceptat una ordre el número de la qual no "
-"està al nostre sistema."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
 "The amount charged by the processor {0} {1} is different than the total cost"
 " of the order {2} {3}."
 msgstr ""
-"La quantitat carregada per el processador {0} {1} és diferent que el cost "
-"total de la comanda {2} {3}."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2785,15 +2749,15 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "Successful transaction."
-msgstr "Transacció exitosa."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The request is missing one or more required fields."
-msgstr "Falten un o més camps requerits a la sol·licitud."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "One or more fields in the request contains invalid data."
-msgstr "Un o més camps de la sol·licitud contenen informació no vàlida."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2809,8 +2773,6 @@ msgid ""
 "Error: General system failure. Possible fix: retry the payment after a few "
 "minutes."
 msgstr ""
-"Error: fallada del sistema general. Torni a provar de fer el pagament d'aquí"
-" uns quants minuts."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2834,8 +2796,6 @@ msgid ""
 "The issuing bank has questions about the request. Possible fix: retry with "
 "another form of payment"
 msgstr ""
-"El banc emissor té qüestions sobre la sol·licitud. Pot tornar-ho a intentar "
-"mitjançant una altra forma de pagament."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2859,18 +2819,16 @@ msgid ""
 "Insufficient funds in the account. Possible fix: retry with another form of "
 "payment"
 msgstr ""
-"Fons insuficients en el compte. Pot tornar-ho a provar mitjançant una altra "
-"forma de pagament."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "Unknown reason"
-msgstr "Raó desconeguda"
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
 "Issuing bank unavailable. Possible fix: retry again after a few minutes"
-msgstr "Banc emissor no disponible. Pot tornar-ho a provar d'aquí uns minuts."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2885,23 +2843,17 @@ msgid ""
 "The card has reached the credit limit. Possible fix: retry with another form"
 " of payment"
 msgstr ""
-"La tarjeta ha arribat al límit de crèdit. Pot tornar-ho a provar amb una "
-"altra forma de pagament."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
 "Invalid card verification number. Possible fix: retry with another form of "
 "payment"
 msgstr ""
-"Número de verificació de la tarjeta invàlid. Pot tornar-ho a provar amb una "
-"altra forma de pagament."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
 "Invalid account number. Possible fix: retry with another form of payment"
 msgstr ""
-"Número de compte no vàlid. Pot tornar-ho a provar amb una altra forma de "
-"pagament"
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2916,8 +2868,6 @@ msgid ""
 "General decline by the processor.  Possible fix: retry with another form of "
 "payment"
 msgstr ""
-"Disminució general del processador. Pot tornar-ho a provar mitjançant una "
-"altra forma de pagament"
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2928,22 +2878,20 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The requested amount exceeds the originally authorized amount."
-msgstr "La quantitat demanada sobrepassa la quantitat originalment permesa."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "Processor Failure.  Possible fix: retry the payment"
-msgstr "Fallada del processedor. Torni a provar el pagament"
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The authorization has already been captured"
-msgstr "L'autorització ja ha sigut capturada"
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
 "The requested transaction amount must match the previous transaction amount."
 msgstr ""
-"La quantitat demanada de transacció ha de concordar amb la quantitat prèvia "
-"de transacció."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2955,7 +2903,7 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The request ID is invalid."
-msgstr "L'ID sol·licitat és invàlid."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2966,7 +2914,7 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The transaction has already been settled or reversed."
-msgstr "La transacció ja ha estat col·locada o invertida."
+msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -2979,8 +2927,6 @@ msgstr ""
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "You requested a credit for a capture that was previously voided"
 msgstr ""
-"Vostè ha sol·licitat un crèdit per una captura que ha sigut prèviament "
-"anul·lada."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -3963,8 +3909,7 @@ msgstr ""
 #: cms/templates/login.html cms/templates/register.html
 #: lms/templates/login.html lms/templates/provider_login.html
 #: lms/templates/provider_login.html lms/templates/register.html
-#: lms/templates/register.html lms/templates/signup_modal.html
-#: lms/templates/sysadmin_dashboard.html
+#: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
 #: lms/templates/university_profile/edge.html
 msgid "Password"
 msgstr ""
@@ -3974,7 +3919,7 @@ msgstr ""
 #: cms/templates/widgets/header.html
 #: lms/templates/wiki/includes/article_menu.html
 msgid "Settings"
-msgstr "Configuració"
+msgstr ""
 
 #: cms/templates/manage_users.html
 #: lms/templates/courseware/instructor_dashboard.html
@@ -3988,7 +3933,7 @@ msgstr ""
 #: lms/templates/combinedopenended/selfassessment/self_assessment_prompt.html
 #: lms/templates/verify_student/face_upload.html
 msgid "Save"
-msgstr "Guardar"
+msgstr ""
 
 #: cms/templates/register.html cms/templates/widgets/header.html
 #: lms/templates/index.html
@@ -4273,20 +4218,17 @@ msgstr ""
 
 #: lms/templates/contact.html
 msgid "Media"
-msgstr "Mitjans de comunicació"
+msgstr ""
 
 #: lms/templates/contact.html
 msgid ""
 "Please visit our {link_start}media/press page{link_end} for more "
 "information. For any media or press inquiries, please email {email}."
 msgstr ""
-"Si us plau, visit el nostre {link_start}media/press page{link_end} per més "
-"informació. Per qualsevol consulta dels mitjans de comunicació, si us plau, "
-"envieu un correu a {email}."
 
 #: lms/templates/contact.html
 msgid "Universities"
-msgstr "Universitats"
+msgstr ""
 
 #: lms/templates/contact.html
 msgid ""
@@ -4312,45 +4254,9 @@ msgstr ""
 msgid "Please verify your new email"
 msgstr ""
 
-#. Translators: this message is displayed when a user tries to link their
-#. account with a third-party authentication provider (for example, Google or
-#. LinkedIn) with a given edX account, but their third-party account is
-#. already
-#. associated with another edX account. provider_name is the name of the
-#. third-party authentication provider, and platform_name is the name of the
-#. edX deployment.
-#: lms/templates/dashboard.html
-msgid ""
-"The selected {provider_name} account is already linked to another "
-"{platform_name} account. Please {link_start}log out{link_end}, then log in "
-"with your {provider_name} account."
-msgstr ""
-
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard/_dashboard_info_language.html
 msgid "edit"
-msgstr ""
-
-#. Translators: this section lists all the third-party authentication
-#. providers
-#. (for example, Google and LinkedIn) the user can link with or unlink from
-#. their edX account.
-#: lms/templates/dashboard.html
-msgid "Account Links"
-msgstr ""
-
-#. Translators: clicking on this removes the link between a user's edX account
-#. and their account with an external authentication provider (like Google or
-#. LinkedIn).
-#: lms/templates/dashboard.html
-msgid "unlink"
-msgstr ""
-
-#. Translators: clicking on this creates a link between a user's edX account
-#. and their account with an external authentication provider (like Google or
-#. LinkedIn).
-#: lms/templates/dashboard.html
-msgid "link"
 msgstr ""
 
 #: lms/templates/dashboard.html lms/templates/dashboard.html
@@ -4901,21 +4807,6 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#. Translators: this is the last choice of a number of choices of how to log
-#. in
-#. to the site.
-#: lms/templates/login.html
-msgid "or, if you have connected one of these providers, log in below."
-msgstr ""
-
-#. Translators: provider_name is the name of an external, third-party user
-#. authentication provider (like Google or LinkedIn).
-#. Translators: provider_name is the name of an external, third-party user
-#. authentication service (like Google or LinkedIn).
-#: lms/templates/login.html lms/templates/register.html
-msgid "Sign in with {provider_name}"
-msgstr ""
-
 #: lms/templates/lti.html
 msgid "External resource"
 msgstr ""
@@ -5240,26 +5131,6 @@ msgstr ""
 
 #: lms/templates/register.html
 msgid "Register below to create your {platform_name} account"
-msgstr ""
-
-#: lms/templates/register.html
-msgid "Register to start learning today!"
-msgstr ""
-
-#: lms/templates/register.html
-msgid ""
-"or create your own {platform_name} account by completing all "
-"<strong>required*</strong> fields below."
-msgstr ""
-
-#. Translators: selected_provider is the name of an external, third-party user
-#. authentication service (like Google or LinkedIn).
-#: lms/templates/register.html
-msgid "You've successfully signed in with {selected_provider}."
-msgstr ""
-
-#: lms/templates/register.html
-msgid "Finish your account registration below to start learning."
 msgstr ""
 
 #: lms/templates/register.html
@@ -5730,10 +5601,6 @@ msgstr ""
 
 #: lms/templates/video.html lms/templates/video.html
 msgid "{file_format}"
-msgstr ""
-
-#: lms/templates/video.html
-msgid "Download Handout"
 msgstr ""
 
 #: lms/templates/word_cloud.html
@@ -6660,10 +6527,6 @@ msgid "Course Progress for Student '{username}' ({email})"
 msgstr ""
 
 #: lms/templates/courseware/progress.html
-msgid "Download your certificate"
-msgstr ""
-
-#: lms/templates/courseware/progress.html
 msgid "{earned:.3n} of {total:.3n} possible points"
 msgstr ""
 
@@ -7326,6 +7189,10 @@ msgstr ""
 msgid "User Profile"
 msgstr ""
 
+#: lms/templates/discussion/user_profile.html
+msgid "Active Threads"
+msgstr ""
+
 #: lms/templates/discussion/mustache/_inline_thread.mustache
 #: lms/templates/discussion/mustache/_inline_thread_cohorted.mustache
 msgid "Expand discussion"
@@ -7347,10 +7214,6 @@ msgstr "..."
 
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "View discussion"
-msgstr ""
-
-#: lms/templates/discussion/mustache/_user_profile.mustache
-msgid "Active Threads"
 msgstr ""
 
 #: lms/templates/emails/activation_email.txt
@@ -12115,7 +11978,7 @@ msgstr "creat"
 
 #: wiki/forms.py
 msgid "Only localhost... muahahaha"
-msgstr "Només hostes locals... muahahaha"
+msgstr "Només localhost... ha ha ha ha"
 
 #: wiki/forms.py
 msgid "Initial title of the article. May be overridden with revision titles."
