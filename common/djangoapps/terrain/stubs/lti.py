@@ -66,7 +66,7 @@ class StubLtiHandler(StubHttpRequestHandler):
                 # Set data for grades what need to be stored as server data
                 if 'lis_outcome_service_url' in self.post_dict:
                     self.server.grade_data = {
-                        'callback_url': self.post_dict.get('lis_outcome_service_url'),
+                        'callback_url': self.post_dict.get('lis_outcome_service_url').replace('https', 'http'),
                         'sourcedId': self.post_dict.get('lis_result_sourcedid')
                     }
 
