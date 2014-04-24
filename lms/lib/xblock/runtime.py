@@ -102,7 +102,7 @@ class LmsHandlerUrls(object):
 
         # If third-party, return fully-qualified url
         if thirdparty:
-            scheme = 'http' if 'sandbox' in settings.SITE_NAME or settings.DEBUG else 'https'
+            scheme = "https" if settings.HTTPS == "on" else "http"
             url = '{scheme}://{host}{path}'.format(
                 scheme=scheme,
                 host=settings.SITE_NAME,

@@ -152,7 +152,7 @@ class LTIFields(object):
     has_score = Boolean(
         display_name="Scored",
         help=(
-            "Select True if this component has a numerical score that will be supplied by an external LTI system."
+            "Select True if this component will receive a numerical score from the external LTI system."
         ),
         default=False,
         scope=Scope.settings
