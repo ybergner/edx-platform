@@ -63,6 +63,7 @@
 # jkfreij <jkfreij@gmail.com>, 2014
 # khateeb <eng.elkhteeb@gmail.com>, 2013
 # najwan <najwanrousan@gmail.com>, 2013
+# sarina <sarina@edx.org>, 2014
 # #-#-#-#-#  messages.po (edx-platform)  #-#-#-#-#
 # edX translation file
 # Copyright (C) 2013 edX
@@ -12820,7 +12821,7 @@ msgstr "المقرر الحالي:"
 
 #: cms/templates/widgets/header.html
 msgid "{course_name}'s Navigation:"
-msgstr "تصفح course_name}'s}:"
+msgstr "تصفح {course_name}:"
 
 #: cms/templates/widgets/header.html
 msgid "Outline"
