@@ -326,7 +326,7 @@ class InlineDiscussionUnicodeTestCase(ModuleStoreTestCase, UnicodeTestMixin):
         request = RequestFactory().get("dummy_url")
         request.user = self.student
 
-        response = views.inline_discussion(request, self.course.id, "dummy_discussion_id")
+        response = views.inline_discussion(request, self.course.id.to_deprecated_string(), "dummy_discussion_id")
         self.assertEqual(response.status_code, 200)
         response_data = json.loads(response.content)
         self.assertEqual(response_data["discussion_data"][0]["title"], text)
