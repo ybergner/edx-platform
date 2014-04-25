@@ -113,6 +113,7 @@ def inline_discussion(request, course_id, discussion_id):
     Renders JSON for DiscussionModules
     """
     nr_transaction = newrelic.agent.current_transaction()
+    course_id = SlashSeparatedCourseKey.from_deprecated_string(course_id)
 
     course = get_course_with_access(request.user, 'load_forum', course_id)
 
