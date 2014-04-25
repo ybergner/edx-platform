@@ -56,6 +56,7 @@ class SplitWMongoCourseBoostrapper(unittest.TestCase):
         self.draft_mongo = DraftMongoModuleStore(self.db_config, **self.modulestore_options)
         self.addCleanup(self.tear_down_mongo)
         self.old_course_key = None
+        self.runtime = None
         self._create_course()
 
     def tear_down_split(self):

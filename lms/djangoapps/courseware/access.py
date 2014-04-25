@@ -349,7 +349,7 @@ def _dispatch(table, action, user, obj):
         type(obj), action))
 
 
-def _adjust_start_date_for_beta_testers(user, descriptor, course_id=None):
+def _adjust_start_date_for_beta_testers(user, descriptor, course_id=None):  # pylint: disable=invalid-name
     """
     If user is in a beta test group, adjust the start date by the appropriate number of
     days.
@@ -385,7 +385,7 @@ def _adjust_start_date_for_beta_testers(user, descriptor, course_id=None):
     return descriptor.start
 
 
-def _has_instructor_access_to_location(user, location, course_id=None):
+def _has_instructor_access_to_location(user, location, course_id=None):  # pylint: disable=invalid-name
     return _has_access_to_location(user, 'instructor', location, course_id)
 
 
@@ -452,7 +452,7 @@ def _has_staff_access_to_course_id(user, course_id):
     return _has_staff_access_to_location(user, loc, course_id)
 
 
-def _has_instructor_access_to_descriptor(user, descriptor, course_id):
+def _has_instructor_access_to_descriptor(user, descriptor, course_id):  # pylint: disable=invalid-name
     """Helper method that checks whether the user has staff access to
     the course of the location.
 

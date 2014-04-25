@@ -163,7 +163,7 @@ class TestMixedModuleStore(LocMapperSetupSansDjango):
         # and then to the root UsageKey
         self.course_locations = {
             course_id: course_key.make_usage_key('course', course_key.run)
-            for course_id, course_key in self.course_locations.iteritems()
+            for course_id, course_key in self.course_locations.iteritems()  # pylint: disable=maybe-no-member
         }
         self.fake_location = Location('foo', 'bar', 'slowly', 'vertical', 'baz')
         self.import_chapter_location = self.course_locations[self.MONGO_COURSEID].replace(
@@ -202,7 +202,7 @@ class TestMixedModuleStore(LocMapperSetupSansDjango):
     @ddt.data('direct', 'split')
     def test_has_item(self, default_ms):
         self.initdb(default_ms)
-        for course_locn in self.course_locations.itervalues():
+        for course_locn in self.course_locations.itervalues():  # pylint: disable=maybe-no-member
             self.assertTrue(self.store.has_item(course_locn))
 
         # try negative cases
@@ -214,7 +214,7 @@ class TestMixedModuleStore(LocMapperSetupSansDjango):
     @ddt.data('direct', 'split')
     def test_get_item(self, default_ms):
         self.initdb(default_ms)
-        for course_locn in self.course_locations.itervalues():
+        for course_locn in self.course_locations.itervalues():  # pylint: disable=maybe-no-member
             self.assertIsNotNone(self.store.get_item(course_locn))
 
         # try negative cases
@@ -228,7 +228,7 @@ class TestMixedModuleStore(LocMapperSetupSansDjango):
     @ddt.data('direct', 'split')
     def test_get_items(self, default_ms):
         self.initdb(default_ms)
-        for course_locn in self.course_locations.itervalues():
+        for course_locn in self.course_locations.itervalues():  # pylint: disable=maybe-no-member
             locn = course_locn.course_key
             # NOTE: use get_course if you just want the course. get_items is expensive
             modules = self.store.get_items(locn, category='course')
@@ -309,7 +309,7 @@ class TestMixedModuleStore(LocMapperSetupSansDjango):
     @ddt.data('direct', 'split')
     def test_get_course(self, default_ms):
         self.initdb(default_ms)
-        for course_location in self.course_locations.itervalues():
+        for course_location in self.course_locations.itervalues():  # pylint: disable=maybe-no-member
             # NOTE: use get_course if you just want the course. get_items is expensive
             course = self.store.get_course(course_location.course_key)
             self.assertIsNotNone(course)

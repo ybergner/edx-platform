@@ -146,6 +146,7 @@ class PeerGradingModuleTest(unittest.TestCase, DummyModulestore):
         Mainly for diff coverage
         @return:
         """
+        # pylint: disable=protected-access
         with self.assertRaises(ItemNotFoundError):
             self.peer_grading._find_corresponding_module_for_location(
                 Location('org', 'course', 'run', 'category', 'name', 'revision')

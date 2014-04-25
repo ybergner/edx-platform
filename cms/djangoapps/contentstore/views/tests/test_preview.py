@@ -1,7 +1,6 @@
 """
 Tests for contentstore.views.preview.py
 """
-import re
 from django.test import TestCase
 from django.test.client import RequestFactory
 

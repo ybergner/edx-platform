@@ -28,8 +28,6 @@ from xmodule.exceptions import NotFoundError
 from git.test.lib.asserts import assert_not_none
 from xmodule.x_module import XModuleMixin
 
-import unittest
-
 
 log = logging.getLogger(__name__)
 

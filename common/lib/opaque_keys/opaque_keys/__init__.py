@@ -116,6 +116,7 @@ class OpaqueKey(object):
         return (namespace, rest)
 
     def __init__(self, *args, **kwargs):
+        # pylint: disable=no-member
         if len(args) + len(kwargs) != len(self.KEY_FIELDS):
             raise TypeError('__init__() takes exactly {} arguments ({} given)'.format(
                 len(self.KEY_FIELDS),
@@ -139,7 +140,7 @@ class OpaqueKey(object):
         self._initialized = True
 
     def replace(self, **kwargs):
-        existing_values = {key: getattr(self, key) for key in self.KEY_FIELDS}
+        existing_values = {key: getattr(self, key) for key in self.KEY_FIELDS}  # pylint: disable=no-member
         existing_values.update(kwargs)
         return type(self)(**existing_values)
 
@@ -153,33 +154,33 @@ class OpaqueKey(object):
         raise AttributeError("Can't delete {!r}. OpaqueKeys are immutable.".format(name))
 
     def __unicode__(self):
-        return self.NAMESPACE_SEPARATOR.join([self.CANONICAL_NAMESPACE, self._to_string()])
+        return self.NAMESPACE_SEPARATOR.join([self.CANONICAL_NAMESPACE, self._to_string()])  # pylint: disable=no-member
 
     def __copy__(self):
         return self.replace()
 
     def __deepcopy__(self, memo):
         return self.replace(**{
-            key: deepcopy(getattr(self, key), memo) for key in self.KEY_FIELDS
+            key: deepcopy(getattr(self, key), memo) for key in self.KEY_FIELDS  # pylint: disable=no-member
         })
 
     def __setstate__(self, state_dict):
         # used by pickle to set fields on an unpickled object
         for key in state_dict:
-            if key in self.KEY_FIELDS:
+            if key in self.KEY_FIELDS:  # pylint: disable=no-member
                 setattr(self, key, state_dict[key])
 
     def __getstate__(self):
         # used by pickle to get fields on an unpickled object
         pickleable_dict = {}
-        for key in self.KEY_FIELDS:
+        for key in self.KEY_FIELDS:  # pylint: disable=no-member
             pickleable_dict[key] = getattr(self, key)
         return pickleable_dict
 
     @property
     def _key(self):
         """Returns a tuple of key fields"""
-        return tuple(getattr(self, field) for field in self.KEY_FIELDS)
+        return tuple(getattr(self, field) for field in self.KEY_FIELDS)  # pylint: disable=no-member
 
     def __eq__(self, other):
         return (
@@ -204,7 +205,7 @@ class OpaqueKey(object):
     def __repr__(self):
         return '{}({})'.format(
             self.__class__.__name__,
-            ', '.join(repr(getattr(self, key)) for key in self.KEY_FIELDS)
+            ', '.join(repr(getattr(self, key)) for key in self.KEY_FIELDS)  # pylint: disable=no-member
         )
 
     @classmethod
@@ -214,7 +215,7 @@ class OpaqueKey(object):
         subclasses of `cls`.
         """
         return EnabledExtensionManager(
-            cls.KEY_TYPE,
+            cls.KEY_TYPE,  # pylint: disable=no-member
             check_func=lambda extension: issubclass(extension.plugin, cls),
             invoke_on_load=False,
         )
@@ -232,7 +233,8 @@ class OpaqueKey(object):
         if serialized is None:
             raise InvalidKeyError(cls, serialized)
 
-        namespace, rest = cls._separate_namespace(serialized)  # pylint: disable=protected-access
+        # pylint: disable=protected-access
+        namespace, rest = cls._separate_namespace(serialized)
         try:
             return cls._drivers()[namespace].plugin._from_string(rest)
         except KeyError:

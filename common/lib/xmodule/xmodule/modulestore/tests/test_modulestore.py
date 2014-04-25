@@ -40,7 +40,7 @@ def check_has_course_method(modulestore, locator, locator_key_fields):
         assert_true(modulestore.has_course(locator, ignore_case))
 
         for key_field in locator_key_fields:
-            locator_changes_that_should_not_be_found = [
+            locator_changes_that_should_not_be_found = [  # pylint: disable=invalid-name
                 # replace value for one of the keys
                 {key_field: 'fake'},
                 # add a character at the end

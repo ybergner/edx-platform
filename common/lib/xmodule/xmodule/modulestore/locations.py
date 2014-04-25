@@ -175,7 +175,7 @@ class LocationBase(object):
             self._check_location_part(part, INVALID_CHARS)
         self._check_location_part(name, INVALID_CHARS_NAME)
 
-        return super(LocationBase, self).__init__(org, course, run, category, name, revision)
+        super(LocationBase, self).__init__(org, course, run, category, name, revision)
 
     @property
     def tag(self):
@@ -288,10 +288,10 @@ class i4xEncoder(json.JSONEncoder):
     If provided as the cls to json.dumps, will serialize and Locations as i4x strings and other
     keys using the unicode strings.
     """
-    def default(self, o):
-        if isinstance(o, OpaqueKey):
-            if isinstance(o, (LocationBase, SlashSeparatedCourseKey)):
-                return o.to_deprecated_string()
+    def default(self, key):
+        if isinstance(key, OpaqueKey):
+            if isinstance(key, (LocationBase, SlashSeparatedCourseKey)):
+                return key.to_deprecated_string()
             else:
-                return unicode(o)
-        super(i4xEncoder, self).default(o)
+                return unicode(key)
+        super(i4xEncoder, self).default(key)

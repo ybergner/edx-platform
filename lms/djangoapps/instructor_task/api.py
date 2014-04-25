@@ -53,7 +53,7 @@ def get_instructor_task_history(course_id, usage_key=None, student=None, task_ty
     return instructor_tasks.order_by('-id')
 
 
-def submit_rescore_problem_for_student(request, usage_key, student):
+def submit_rescore_problem_for_student(request, usage_key, student):  # pylint: disable=invalid-name
     """
     Request a problem to be rescored as a background task.
 
@@ -82,7 +82,7 @@ def submit_rescore_problem_for_student(request, usage_key, student):
     return submit_task(request, task_type, task_class, usage_key.course_key, task_input, task_key)
 
 
-def submit_rescore_problem_for_all_students(request, usage_key):
+def submit_rescore_problem_for_all_students(request, usage_key):  # pylint: disable=invalid-name
     """
     Request a problem to be rescored as a background task.
 
@@ -112,7 +112,7 @@ def submit_rescore_problem_for_all_students(request, usage_key):
     return submit_task(request, task_type, task_class, usage_key.course_key, task_input, task_key)
 
 
-def submit_reset_problem_attempts_for_all_students(request, usage_key):
+def submit_reset_problem_attempts_for_all_students(request, usage_key):  # pylint: disable=invalid-name
     """
     Request to have attempts reset for a problem as a background task.
 
@@ -141,7 +141,7 @@ def submit_reset_problem_attempts_for_all_students(request, usage_key):
     return submit_task(request, task_type, task_class, usage_key.course_key, task_input, task_key)
 
 
-def submit_delete_problem_state_for_all_students(request, usage_key):
+def submit_delete_problem_state_for_all_students(request, usage_key):  # pylint: disable=invalid-name
     """
     Request to have state deleted for a problem as a background task.
 

@@ -46,7 +46,7 @@ class CourseKeyField(mongoengine.StringField):
         else:
             return super(CourseKeyField, self).validate(value)
 
-    def prepare_query_value(self, op, value):
+    def prepare_query_value(self, _opt, value):
         return self.to_mongo(value)
 
 
@@ -83,5 +83,5 @@ class UsageKeyField(mongoengine.StringField):
         else:
             return super(UsageKeyField, self).validate(value)
 
-    def prepare_query_value(self, op, value):
+    def prepare_query_value(self, _opt, value):
         return self.to_mongo(value)

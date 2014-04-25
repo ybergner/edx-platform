@@ -127,7 +127,7 @@ class StudentModuleHistory(models.Model):
     max_grade = models.FloatField(null=True, blank=True)
 
     @receiver(post_save, sender=StudentModule)
-    def save_history(sender, instance, **kwargs):
+    def save_history(sender, instance, **kwargs):  # pylint: disable=no-self-argument
         if instance.module_type in StudentModuleHistory.HISTORY_SAVING_TYPES:
             history_entry = StudentModuleHistory(student_module=instance,
                                                  version=None,
@@ -267,4 +267,4 @@ class OfflineComputedGradeLog(models.Model):
     nstudents = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return "[OCGLog] %s: %s" % (self.course_id.to_deprecated_string(), self.created)
+        return "[OCGLog] %s: %s" % (self.course_id.to_deprecated_string(), self.created)  # pylint: disable=no-member

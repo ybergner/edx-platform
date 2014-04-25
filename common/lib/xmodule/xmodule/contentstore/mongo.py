@@ -123,7 +123,7 @@ class MongoContentStore(ContentStore):
     def close_stream(self, handle):
         try:
             handle.close()
-        except Exception:
+        except Exception:  # pylint: disable=broad-except
             pass
 
     def export(self, location, output_directory):
@@ -153,7 +153,7 @@ class MongoContentStore(ContentStore):
         assets, __ = self.get_all_content_for_course(course_key)
 
         for asset in assets:
-            asset_location = MongoModuleStore._location_from_id(asset['_id'], course_key.run)
+            asset_location = MongoModuleStore._location_from_id(asset['_id'], course_key.run)  # pylint: disable=protected-access
             self.export(asset_location, output_directory)
             for attr, value in asset.iteritems():
                 if attr not in ['_id', 'md5', 'uploadDate', 'length', 'chunkSize']:
@@ -271,7 +271,7 @@ class MongoContentStore(ContentStore):
         referenced by other runs or other courses.
         :param course_key:
         """
-        course_query = MongoModuleStore._course_key_to_son(course_key, tag=XASSET_LOCATION_TAG)
+        course_query = MongoModuleStore._course_key_to_son(course_key, tag=XASSET_LOCATION_TAG)  # pylint: disable=protected-access
         matching_assets = self.fs_files.find(course_query)
         for asset in matching_assets:
             self.fs.delete(asset['_id'])

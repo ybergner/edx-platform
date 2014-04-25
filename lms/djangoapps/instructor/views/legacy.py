@@ -1518,25 +1518,25 @@ def _do_enroll_students(course, course_key, students, overload=False, auto_enrol
                 + ('on' if auto_enroll else 'off')
 
             if email_students:
-                #User is allowed to enroll but has not signed up yet
+                # User is allowed to enroll but has not signed up yet
                 d['email_address'] = student
                 d['message'] = 'allowed_enroll'
                 send_mail_ret = send_mail_to_student(student, d)
                 status[student] += (', email sent' if send_mail_ret else '')
             continue
 
-        #Student has already registered
+        # Student has already registered
         if CourseEnrollment.is_enrolled(user, course_key):
             status[student] = 'already enrolled'
             continue
 
         try:
-            #Not enrolled yet
-            ce = CourseEnrollment.enroll(user, course_key)
+            # Not enrolled yet
+            cenroll = CourseEnrollment.enroll(user, course_key)
             status[student] = 'added'
 
             if email_students:
-                #User enrolled for first time, populate dict with user specific info
+                # User enrolled for first time, populate dict with user specific info
                 d['email_address'] = student
                 d['full_name'] = user.profile.name
                 d['message'] = 'enrolled_enroll'

@@ -427,6 +427,7 @@ class PaidCourseRegistrationAnnotation(models.Model):
     annotation = models.TextField(null=True)
 
     def __unicode__(self):
+        # pylint: disable=no-member
         return u"{} : {}".format(self.course_id.to_deprecated_string(), self.annotation)
 
 
@@ -567,7 +568,10 @@ class CertificateItem(OrderItem):
             "course_num": course.display_number_with_default,
             "course_start_date_text": course.start_date_text,
             "course_has_started": course.start > datetime.today().replace(tzinfo=pytz.utc),
-            "course_root_url": reverse('course_root', kwargs={'course_id': self.course_id.to_deprecated_string()}),
+            "course_root_url": reverse(
+                'course_root',
+                kwargs={'course_id': self.course_id.to_deprecated_string()}  # pylint: disable=no-member
+            ),
             "dashboard_url": reverse('dashboard'),
         }
 

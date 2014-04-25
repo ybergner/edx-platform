@@ -1,3 +1,9 @@
+"""
+Helper lib for instructor_tasks API.
+
+Includes methods to check args for rescoring task, encoding student input,
+and task submission logic, including handling the Celery backend.
+"""
 import hashlib
 import json
 import logging
@@ -247,7 +253,7 @@ def check_arguments_for_rescoring(usage_key):
         raise NotImplementedError(msg)
 
 
-def encode_problem_and_student_input(usage_key, student=None):
+def encode_problem_and_student_input(usage_key, student=None):  # pylint: disable=invalid-name
     """
     Encode optional usage_key and optional student into task_key and task_input values.
 

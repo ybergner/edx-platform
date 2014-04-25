@@ -43,6 +43,7 @@ class EmbargoedCourse(models.Model):
         not_em = "Not "
         if self.embargoed:
             not_em = ""
+        # pylint: disable=no-member
         return u"Course '{}' is {}Embargoed".format(self.course_id.to_deprecated_string(), not_em)
 
 

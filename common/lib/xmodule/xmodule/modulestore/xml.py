@@ -173,7 +173,7 @@ class ImportSystem(XMLParsingSystem, MakoDescriptorSystem):
                     self,
                     id_generator,
                 )
-            except Exception as err:
+            except Exception as err:  # pylint: disable=broad-except
                 if not self.load_error_modules:
                     raise
 
@@ -275,7 +275,7 @@ def create_block_from_xml(xml_data, system, id_generator):
         XBlock: The fully instantiated :class:`~xblock.core.XBlock`.
 
     """
-    def _convert_reference_fields_to_keys(xblock):
+    def _convert_reference_fields_to_keys(xblock):  # pylint: disable=invalid-name
         """
         Find all fields of type reference and convert the payload into UsageKeys
         """
@@ -329,8 +329,8 @@ class ParentTracker(object):
 
         child and parent must be :class:`.Location` instances.
         """
-        s = self._parents.setdefault(child, set())
-        s.add(parent)
+        setp = self._parents.setdefault(child, set())
+        setp.add(parent)
 
     def is_known(self, child):
         """
@@ -421,9 +421,9 @@ class XMLModuleStore(ModuleStoreReadBase):
         course_descriptor = None
         try:
             course_descriptor = self.load_course(course_dir, course_ids, errorlog.tracker)
-        except Exception as e:
+        except Exception as exc:  # pylint: disable=broad-except
             msg = "ERROR: Failed to load course '{0}': {1}".format(
-                course_dir.encode("utf-8"), unicode(e)
+                course_dir.encode("utf-8"), unicode(exc)
             )
             log.exception(msg)
             errorlog.tracker(msg)
@@ -676,10 +676,10 @@ class XMLModuleStore(ModuleStoreReadBase):
                         module.save()
 
                         self.modules[course_descriptor.id][module.scope_ids.usage_id] = module
-                except Exception, e:
+                except Exception as exc:  # pylint: disable=broad-except
                     logging.exception("Failed to load %s. Skipping... \
-                            Exception: %s", filepath, unicode(e))
-                    system.error_tracker("ERROR: " + unicode(e))
+                            Exception: %s", filepath, unicode(exc))
+                    system.error_tracker("ERROR: " + unicode(exc))
 
     def has_item(self, usage_key):
         """

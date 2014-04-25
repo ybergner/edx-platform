@@ -96,7 +96,7 @@ class KeyTests(TestCase):
         key = HexKey(10)
 
         with self.assertRaises(AttributeError):
-            key.value = 11
+            key.value = 11  # pylint: disable=attribute-defined-outside-init
 
     def test_equality(self):
         self.assertEquals(DummyKey.from_string('hex:0x10'), DummyKey.from_string('hex:0x10'))
@@ -155,7 +155,6 @@ class KeyTests(TestCase):
     def test_ordering(self):
         ten = HexKey(value=10)
         eleven = HexKey(value=11)
-        twelve = Base10Key(value=12)
 
         self.assertLess(ten, eleven)
         self.assertLessEqual(ten, ten)
@@ -169,6 +168,7 @@ class KeyTests(TestCase):
         ten = HexKey(value=10)
         twelve = Base10Key(value=12)
 
+        # pylint: disable=pointless-statement
         with self.assertRaises(TypeError):
             ten < twelve
 
