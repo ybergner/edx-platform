@@ -587,7 +587,6 @@ class PeerGradingModule(PeerGradingFields, XModule):
 
         ajax_url = self.ajax_url
         html = self.system.render_template('peer_grading/peer_grading.html', {
-            'course_id': self.course_id,
             'ajax_url': ajax_url,
             'success': success,
             'problem_list': good_problem_list,
