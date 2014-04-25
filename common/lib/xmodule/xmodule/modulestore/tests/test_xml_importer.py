@@ -27,7 +27,7 @@ class ModuleStoreNoSettings(unittest.TestCase):
     FS_ROOT = DATA_DIR
     DEFAULT_CLASS = 'xmodule.modulestore.tests.test_xml_importer.StubXBlock'
     RENDER_TEMPLATE = lambda t_n, d, ctx = None, nsp = 'main': ''
-        
+
     modulestore_options = {
         'default_class': DEFAULT_CLASS,
         'fs_root': DATA_DIR,
@@ -61,6 +61,7 @@ class ModuleStoreNoSettings(unittest.TestCase):
         """
         self.addCleanup(self.cleanup_modulestore)
         super(ModuleStoreNoSettings, self).setUp()
+
 
 #===========================================
 def modulestore():
@@ -143,7 +144,7 @@ class RemapNamespaceTest(ModuleStoreNoSettings):
         new_version = import_module(
             self.xblock,
             modulestore(),
-            self.xblock.location.course_key, 
+            self.xblock.location.course_key,
             target_location_namespace,
             do_import_static=False
         )
@@ -222,4 +223,3 @@ class RemapNamespaceTest(ModuleStoreNoSettings):
         self.assertNotIn(
             'graded', new_version.get_explicitly_set_fields_by_scope(scope=Scope.settings)
         )
-

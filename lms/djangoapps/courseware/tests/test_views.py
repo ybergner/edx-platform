@@ -172,7 +172,7 @@ class ViewsTestCase(TestCase):
     def verify_end_date(self, course_id, expected_end_text=None):
         """
         Visits the about page for `course_id` and tests that both the text "Classes End", as well
-        as the specified `expected_end_text`, is present on the page. 
+        as the specified `expected_end_text`, is present on the page.
 
         If `expected_end_text` is None, verifies that the about page *does not* contain the text
         "Classes End".
@@ -265,6 +265,7 @@ class ViewsTestCase(TestCase):
         })
         response = self.client.get(url)
         self.assertFalse('<script>' in response.content)
+
 
 # setting TIME_ZONE_DISPLAYED_FOR_DEADLINES explicitly
 @override_settings(MODULESTORE=TEST_DATA_MIXED_MODULESTORE, TIME_ZONE_DISPLAYED_FOR_DEADLINES="UTC")
@@ -459,4 +460,3 @@ class ProgressPageTests(ModuleStoreTestCase):
 
         resp = views.progress(self.request, self.course.id.to_deprecated_string())
         self.assertEquals(resp.status_code, 200)
-
