@@ -1,5 +1,5 @@
 # #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
-# edX translation file.
+# edX community translations have been downloaded from Spanish (Spain) (http://www.transifex.com/projects/p/edx-platform/language/es_ES/).
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -22,7 +22,7 @@
 # juditseb <juditseb@hotmail.com>, 2014
 # valenciaupv <valenciaupv@gmail.com>, 2014
 # #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
-# edX translation file
+# edX community translations have been downloaded from Spanish (Spain) (http://www.transifex.com/projects/p/edx-platform/language/es_ES/)
 # Copyright (C) 2014 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -82,14 +82,15 @@
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
 # Translators:
+# spentamanyu <i.delamo@gmail.com>, 2014
 # jorts <jorts@upv.es>, 2014
 # juanan <juanan@diariolinux.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: edx-platform\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2014-04-22 10:12-0400\n"
-"PO-Revision-Date: 2014-04-22 13:33+0000\n"
+"POT-Creation-Date: 2014-04-27 11:11-0400\n"
+"PO-Revision-Date: 2014-04-25 10:00+0000\n"
 "Last-Translator: spentamanyu <i.delamo@gmail.com>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/projects/p/edx-platform/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -223,6 +224,16 @@ msgstr "No está inscrito en este curso"
 #: common/djangoapps/student/views.py
 msgid "Enrollment action is invalid"
 msgstr "La inscripción no es válida"
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like
+#. Google or LinkedIn).
+#: common/djangoapps/student/views.py
+msgid ""
+"There is no {platform_name} account associated with your {provider_name} "
+"account. Please use your {platform_name} credentials or pick another "
+"provider."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "There was an error receiving your login information. Please email us."
@@ -900,6 +911,10 @@ msgid ""
 msgstr ""
 "Enviado. Tan pronto como se reciba una respuesta, este mensaje será "
 "reemplazado con el mensaje devuelto."
+
+#: common/lib/capa/capa/inputtypes.py
+msgid "No response from Xqueue within {xqueue_timeout} seconds. Aborted."
+msgstr ""
 
 #: common/lib/capa/capa/responsetypes.py
 msgid "Error {err} in evaluating hint function {hintfn}."
@@ -1929,7 +1944,7 @@ msgstr "Nivel de comentario demasiado profundo"
 
 #: lms/djangoapps/django_comment_client/base/views.py
 msgid "allowed file types are '%(file_types)s'"
-msgstr "son tipos de ficheros permitidos '%(file_types)s'"
+msgstr "los tipos de ficheros permitidos son '%(file_types)s'"
 
 #: lms/djangoapps/django_comment_client/base/views.py
 msgid "maximum upload file size is %(file_size)sK"
@@ -3487,7 +3502,7 @@ msgid ""
 " user account at edx.org."
 msgstr ""
 "Usted ha recibido este correo porque solicitó un reinicio de la contraseña "
-"para su cuenta en edX"
+"para su cuenta en edx.org"
 
 #: lms/templates/registration/password_reset_email.html
 msgid "Please go to the following page and choose a new password:"
@@ -3684,7 +3699,7 @@ msgstr "Cambiar"
 
 #: lms/templates/wiki/history.html lms/templates/wiki/history.html
 msgid "Merge selected with current..."
-msgstr "Fusionar la seleccionada con la actual..."
+msgstr "Fusionar lo seleccionado con lo actual..."
 
 #: lms/templates/wiki/history.html
 msgid "Switch to selected version"
@@ -4278,7 +4293,8 @@ msgstr "¿Olvidaste tu contraseña?"
 #: cms/templates/login.html cms/templates/register.html
 #: lms/templates/login.html lms/templates/provider_login.html
 #: lms/templates/provider_login.html lms/templates/register.html
-#: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
+#: lms/templates/register.html lms/templates/signup_modal.html
+#: lms/templates/sysadmin_dashboard.html
 #: lms/templates/university_profile/edge.html
 msgid "Password"
 msgstr "Contraseña"
@@ -4674,10 +4690,46 @@ msgstr "Ocurrió un error, por favor inténtelo de nuevo mas tarde."
 msgid "Please verify your new email"
 msgstr "Por favor, verifica tu nuevo email"
 
+#. Translators: this message is displayed when a user tries to link their
+#. account with a third-party authentication provider (for example, Google or
+#. LinkedIn) with a given edX account, but their third-party account is
+#. already
+#. associated with another edX account. provider_name is the name of the
+#. third-party authentication provider, and platform_name is the name of the
+#. edX deployment.
+#: lms/templates/dashboard.html
+msgid ""
+"The selected {provider_name} account is already linked to another "
+"{platform_name} account. Please {link_start}log out{link_end}, then log in "
+"with your {provider_name} account."
+msgstr ""
+
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard/_dashboard_info_language.html
 msgid "edit"
 msgstr "editar"
+
+#. Translators: this section lists all the third-party authentication
+#. providers
+#. (for example, Google and LinkedIn) the user can link with or unlink from
+#. their edX account.
+#: lms/templates/dashboard.html
+msgid "Account Links"
+msgstr ""
+
+#. Translators: clicking on this removes the link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "unlink"
+msgstr ""
+
+#. Translators: clicking on this creates a link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "link"
+msgstr ""
 
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 msgid "Reset Password"
@@ -5279,6 +5331,21 @@ msgstr "Preferencias de la cuenta"
 msgid "Remember me"
 msgstr "Recuérdame"
 
+#. Translators: this is the last choice of a number of choices of how to log
+#. in
+#. to the site.
+#: lms/templates/login.html
+msgid "or, if you have connected one of these providers, log in below."
+msgstr ""
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication provider (like Google or LinkedIn).
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/login.html lms/templates/register.html
+msgid "Sign in with {provider_name}"
+msgstr ""
+
 #: lms/templates/lti.html
 msgid "External resource"
 msgstr "Recurso externo"
@@ -5648,6 +5715,26 @@ msgstr "¡Bienvenido!"
 #: lms/templates/register.html
 msgid "Register below to create your {platform_name} account"
 msgstr "Regístrate a continuación para crear tu cuenta en {platform_name}"
+
+#: lms/templates/register.html
+msgid "Register to start learning today!"
+msgstr ""
+
+#: lms/templates/register.html
+msgid ""
+"or create your own {platform_name} account by completing all "
+"<strong>required*</strong> fields below."
+msgstr ""
+
+#. Translators: selected_provider is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/register.html
+msgid "You've successfully signed in with {selected_provider}."
+msgstr ""
+
+#: lms/templates/register.html
+msgid "Finish your account registration below to start learning."
+msgstr ""
 
 #: lms/templates/register.html
 msgid "Please complete the following fields to register for an account. "
@@ -6138,6 +6225,10 @@ msgstr "Descargar transcripción"
 #: lms/templates/video.html lms/templates/video.html
 msgid "{file_format}"
 msgstr "{file_format}"
+
+#: lms/templates/video.html
+msgid "Download Handout"
+msgstr "Descargar Handout"
 
 #: lms/templates/word_cloud.html
 msgid "Your words:"
@@ -7151,6 +7242,10 @@ msgid "Course Progress for Student '{username}' ({email})"
 msgstr "Progreso del curso para el estudiante '{username}' ({email})"
 
 #: lms/templates/courseware/progress.html
+msgid "Download your certificate"
+msgstr ""
+
+#: lms/templates/courseware/progress.html
 msgid "{earned:.3n} of {total:.3n} possible points"
 msgstr "{earned:.3n} de {total:.3n} puntos posibles"
 
@@ -7864,10 +7959,6 @@ msgstr ""
 msgid "User Profile"
 msgstr "Perfil de Usuario"
 
-#: lms/templates/discussion/user_profile.html
-msgid "Active Threads"
-msgstr "Hilos Activos"
-
 #: lms/templates/discussion/mustache/_inline_thread.mustache
 #: lms/templates/discussion/mustache/_inline_thread_cohorted.mustache
 msgid "Expand discussion"
@@ -7892,6 +7983,10 @@ msgstr "..."
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "View discussion"
 msgstr "Ver debate"
+
+#: lms/templates/discussion/mustache/_user_profile.mustache
+msgid "Active Threads"
+msgstr "Hilos Activos"
 
 #: lms/templates/emails/activation_email.txt
 msgid ""
@@ -8860,11 +8955,11 @@ msgstr "Cantidad de estudiantes que han abierto una subsección"
 
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Download Student Opened as a CSV"
-msgstr ""
+msgstr "Descargar las secciones abiertas por los alumnos como CSV"
 
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Download Student Grades as a CSV"
-msgstr ""
+msgstr "Descargar las puntuaciones de los estudiantes como CSV"
 
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
@@ -13885,8 +13980,8 @@ msgid ""
 "New image %s was successfully uploaded. You can use it by selecting it from "
 "the list of available images."
 msgstr ""
-"La imagen %s fue grabada con éxito. Puedes usarla seleccionandola de la "
-"lista de imágenes disponibles"
+"La nueva imagen %s fue grabada con éxito. Puedes usarla seleccionandola de "
+"la lista de imágenes disponibles"
 
 #: wiki/plugins/images/forms.py
 msgid "Are you sure?"
@@ -13996,7 +14091,7 @@ msgstr "Has cerrado la sesión. ¡Adiós!"
 
 #: wiki/views/accounts.py
 msgid "You are now logged in! Have fun!"
-msgstr "Te has identificado correctamente. ¡A disfrutar!"
+msgstr "¡Te has identificado correctamente!. ¡A disfrutar!"
 
 #: wiki/views/article.py
 msgid "New article '%s' created."

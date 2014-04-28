@@ -1,17 +1,19 @@
 # #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
-# edX translation file.
+# edX community translations have been downloaded from Kazakh (Kazakhstan) (http://www.transifex.com/projects/p/edx-platform/language/kk_KZ/).
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
 # Translators:
+# aermek <aermek81@gmail.com>, 2014
 # #-#-#-#-#  django-studio.po (edx-platform)  #-#-#-#-#
 # edX translation file.
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
 # Translators:
+# aermek <aermek81@gmail.com>, 2014
 # #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
-# edX translation file
+# edX community translations have been downloaded from Kazakh (Kazakhstan) (http://www.transifex.com/projects/p/edx-platform/language/kk_KZ/)
 # Copyright (C) 2014 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -38,13 +40,14 @@
 # 
 # Translators:
 # eudj1n <eudjin@gmail.com>, 2014
+# eudj1n <eudjin@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: edx-platform\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2014-04-22 09:02-0400\n"
-"PO-Revision-Date: 2014-04-15 16:50+0000\n"
-"Last-Translator: eudj1n <eudjin@gmail.com>\n"
+"POT-Creation-Date: 2014-04-27 11:11-0400\n"
+"PO-Revision-Date: 2014-04-24 12:54+0000\n"
+"Last-Translator: Ablai <a.zhastalapov@ecc.kz>\n"
 "Language-Team: Kazakh (Kazakhstan) (http://www.transifex.com/projects/p/edx-platform/language/kk_KZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,19 +86,19 @@ msgstr ""
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Administrator"
-msgstr ""
+msgstr "Әкімгер"
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Moderator"
-msgstr ""
+msgstr "Модератор"
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Community TA"
-msgstr ""
+msgstr "Қауымның техникалық көмекшісі"
 
 #: common/djangoapps/django_comment_common/models.py
 msgid "Student"
-msgstr ""
+msgstr "Оқушы"
 
 #: common/djangoapps/student/middleware.py
 msgid ""
@@ -175,6 +178,16 @@ msgstr ""
 msgid "Enrollment action is invalid"
 msgstr ""
 
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like
+#. Google or LinkedIn).
+#: common/djangoapps/student/views.py
+msgid ""
+"There is no {platform_name} account associated with your {provider_name} "
+"account. Please use your {platform_name} credentials or pick another "
+"provider."
+msgstr ""
+
 #: common/djangoapps/student/views.py
 msgid "There was an error receiving your login information. Please email us."
 msgstr ""
@@ -208,7 +221,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Please enter a username"
-msgstr ""
+msgstr "Қолданушы атын енгізіңіз"
 
 #: common/djangoapps/student/views.py
 msgid "Please choose an option"
@@ -248,7 +261,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "You must accept the terms of service."
-msgstr ""
+msgstr "Сізге қызметті пайдалану шарттарымен келісу қажет."
 
 #: common/djangoapps/student/views.py
 msgid "Username must be minimum of two characters long"
@@ -312,7 +325,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Valid e-mail is required."
-msgstr ""
+msgstr "Дұрыс электронды пошта енгізу қажет."
 
 #: common/djangoapps/student/views.py
 msgid "Username should only consist of A-Z and 0-9, with no spaces."
@@ -356,15 +369,15 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Invalid password"
-msgstr ""
+msgstr "Қате құпия сөз "
 
 #: common/djangoapps/student/views.py
 msgid "Valid e-mail address required."
-msgstr ""
+msgstr "Дұрыс электронды пошта енгізу қажет."
 
 #: common/djangoapps/student/views.py
 msgid "An account with this e-mail already exists."
-msgstr ""
+msgstr "Бұл электронды поштаға сәйкес тіркелу жазбасы бар."
 
 #: common/djangoapps/student/views.py
 msgid "Old email is the same as the new email."
@@ -372,11 +385,11 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Name required"
-msgstr ""
+msgstr "Атты енгізу қажет"
 
 #: common/djangoapps/student/views.py common/djangoapps/student/views.py
 msgid "Invalid ID"
-msgstr ""
+msgstr "Қате сәйкестендіргіш"
 
 #. Translators: the translation for "LONG_DATE_FORMAT" must be a format
 #. string for formatting dates in a long form.  For example, the
@@ -791,7 +804,7 @@ msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py common/lib/capa/capa/inputtypes.py
 msgid "unanswered"
-msgstr ""
+msgstr "жауабы жоқ"
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "queued"
@@ -813,6 +826,10 @@ msgstr ""
 msgid ""
 "Submitted. As soon as a response is returned, this message will be replaced "
 "by that feedback."
+msgstr ""
+
+#: common/lib/capa/capa/inputtypes.py
+msgid "No response from Xqueue within {xqueue_timeout} seconds. Aborted."
 msgstr ""
 
 #: common/lib/capa/capa/responsetypes.py
@@ -937,11 +954,11 @@ msgstr ""
 
 #: common/lib/xmodule/xmodule/capa_base.py
 msgid "Check"
-msgstr ""
+msgstr "Тексеру"
 
 #: common/lib/xmodule/xmodule/capa_base.py
 msgid "Final Check"
-msgstr ""
+msgstr "Соңғы тексеру"
 
 #: common/lib/xmodule/xmodule/capa_base.py
 msgid "Checking..."
@@ -1083,7 +1100,7 @@ msgstr ""
 #: common/lib/xmodule/xmodule/tabs.py
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Progress"
-msgstr ""
+msgstr "Ілгерілеу"
 
 #. Translators: "Wiki" is the name of the course's wiki page
 #: common/lib/xmodule/xmodule/tabs.py lms/djangoapps/course_wiki/views.py
@@ -1357,27 +1374,27 @@ msgstr ""
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 msgid "Navigation"
-msgstr ""
+msgstr "Навигация"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 msgid "About these documents"
-msgstr ""
+msgstr "Осы құжаттар жайлы"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 msgid "Index"
-msgstr ""
+msgstr "Басты бет"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 #: lms/templates/wiki/plugins/attachments/index.html
 #: lms/templates/discussion/_thread_list_template.html
 msgid "Search"
-msgstr ""
+msgstr "Іздеу"
 
 #: common/static/js/vendor/mathjax-MathJax-c9db6ac/docs/source/mjtheme/layout.html
 #: lms/templates/static_templates/copyright.html
 #: lms/templates/static_templates/copyright.html
 msgid "Copyright"
-msgstr ""
+msgstr "Авторлық құқық"
 
 #: lms/djangoapps/class_dashboard/dashboard_data.py
 msgid ""
@@ -1568,7 +1585,7 @@ msgstr ""
 #: lms/djangoapps/dashboard/tests/test_sysadmin.py
 #: lms/templates/tracking_log.html
 msgid "username"
-msgstr ""
+msgstr "қолданушы аты"
 
 #: lms/djangoapps/dashboard/sysadmin.py lms/djangoapps/dashboard/sysadmin.py
 #: lms/djangoapps/dashboard/tests/test_sysadmin.py
@@ -1634,7 +1651,7 @@ msgstr ""
 #: lms/djangoapps/dashboard/sysadmin.py lms/djangoapps/dashboard/sysadmin.py
 #: cms/templates/index.html cms/templates/settings.html
 msgid "Course Name"
-msgstr ""
+msgstr "Курс аты"
 
 #: lms/djangoapps/dashboard/sysadmin.py
 msgid "Directory/ID"
@@ -1646,7 +1663,7 @@ msgstr ""
 
 #: lms/djangoapps/dashboard/sysadmin.py
 msgid "Last Change"
-msgstr ""
+msgstr "Соңғы өзгеріс"
 
 #: lms/djangoapps/dashboard/sysadmin.py
 msgid "Last Editor"
@@ -1679,7 +1696,7 @@ msgstr ""
 
 #: lms/djangoapps/dashboard/sysadmin.py
 msgid "instructors"
-msgstr ""
+msgstr "нұсқаушылар"
 
 #: lms/djangoapps/dashboard/sysadmin.py
 msgid "Enrollment information for all courses"
@@ -1761,13 +1778,13 @@ msgstr ""
 
 #: lms/djangoapps/django_comment_client/base/views.py
 msgid "Good"
-msgstr ""
+msgstr "Жақсы"
 
 #: lms/djangoapps/django_comment_client/forum/views.py
 #: lms/templates/discussion/_inline_new_post.html
 #: lms/templates/discussion/_new_post.html
 msgid "All Groups"
-msgstr ""
+msgstr "Барлық топтар"
 
 #: lms/djangoapps/instructor/views/api.py
 msgid "User does not exist."
@@ -1785,14 +1802,14 @@ msgstr ""
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Username"
-msgstr ""
+msgstr "Қолданушы аты"
 
 #: lms/djangoapps/instructor/views/api.py lms/templates/help_modal.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 #: lms/templates/open_ended_problems/open_ended_flagged_problems.html
 msgid "Name"
-msgstr ""
+msgstr "Аты"
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/djangoapps/instructor/views/instructor_dashboard.py
@@ -1800,7 +1817,7 @@ msgstr ""
 #: lms/templates/courseware/instructor_dashboard.html
 #: lms/templates/university_profile/edge.html
 msgid "Email"
-msgstr ""
+msgstr "Электронды пошта"
 
 #: lms/djangoapps/instructor/views/api.py
 msgid "Language"
@@ -1817,7 +1834,7 @@ msgstr ""
 #: lms/djangoapps/instructor/views/api.py lms/templates/register.html
 #: lms/templates/signup_modal.html
 msgid "Gender"
-msgstr ""
+msgstr "Жынысы"
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/templates/instructor/instructor_dashboard_2/analytics.html
@@ -1844,11 +1861,11 @@ msgstr ""
 #: lms/djangoapps/instructor/views/api.py
 #: lms/templates/verify_student/midcourse_reverify_dash.html
 msgid "Complete"
-msgstr ""
+msgstr "Толық"
 
 #: lms/djangoapps/instructor/views/api.py
 msgid "Incomplete"
-msgstr ""
+msgstr "Толық емес"
 
 #: lms/djangoapps/instructor/views/api.py
 msgid ""
@@ -2040,7 +2057,7 @@ msgstr ""
 
 #: lms/djangoapps/instructor/views/legacy.py
 msgid "Your email was successfully queued for sending."
-msgstr ""
+msgstr "Сіздің электронды хатыңыз жіберу кезегіне сәтті қойылды."
 
 #: lms/djangoapps/instructor/views/legacy.py
 msgid "Grades from {course_id}"
@@ -2132,7 +2149,7 @@ msgstr ""
 #: lms/templates/verify_student/_modal_editname.html
 #: lms/templates/verify_student/face_upload.html
 msgid "Full Name"
-msgstr ""
+msgstr "Толық аты"
 
 #: lms/djangoapps/instructor/views/legacy.py
 msgid "edX email"
@@ -2201,7 +2218,7 @@ msgstr ""
 #: lms/djangoapps/instructor_task/tasks.py
 #: lms/templates/wiki/plugins/attachments/index.html wiki/models/article.py
 msgid "deleted"
-msgstr ""
+msgstr "өшірілді"
 
 #. Translators: This is a past-tense verb that is inserted into task progress
 #. messages as {action}.
@@ -2211,7 +2228,7 @@ msgstr ""
 
 #: lms/djangoapps/instructor_task/tasks.py
 msgid "graded"
-msgstr ""
+msgstr "бағаланған"
 
 #: lms/djangoapps/instructor_task/views.py
 #: lms/djangoapps/instructor_task/views.py
@@ -2730,7 +2747,7 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "Successful transaction."
-msgstr ""
+msgstr "Сәтті транзакция."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "The request is missing one or more required fields."
@@ -2804,7 +2821,7 @@ msgstr ""
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid "Unknown reason"
-msgstr ""
+msgstr "Белгісіз себеп"
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 msgid ""
@@ -3055,15 +3072,15 @@ msgstr ""
 
 #: lms/templates/registration/password_reset_confirm.html
 msgid "Your New Password"
-msgstr ""
+msgstr "Сіздің жаңа құпия сөзіңіз"
 
 #: lms/templates/registration/password_reset_confirm.html
 msgid "Your New Password Again"
-msgstr ""
+msgstr "Сіздің жаңа құпия сөзіңіз, қайтадан"
 
 #: lms/templates/registration/password_reset_confirm.html
 msgid "Change My Password"
-msgstr ""
+msgstr "Құпия сөзді өзгерту"
 
 #: lms/templates/registration/password_reset_confirm.html
 msgid "Your Password Reset Was Unsuccessful"
@@ -3084,7 +3101,7 @@ msgstr ""
 #: cms/templates/login.html lms/templates/login-sidebar.html
 #: lms/templates/register-sidebar.html
 msgid "Need Help?"
-msgstr ""
+msgstr "Көмек керек пе?"
 
 #: lms/templates/registration/password_reset_confirm.html
 msgid ""
@@ -3111,15 +3128,15 @@ msgstr ""
 
 #: lms/templates/registration/password_reset_email.html
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Біздің сайтты пайдаланғаныңыз үшін рахмет!"
 
 #: lms/templates/registration/password_reset_email.html
 msgid "The edX Team"
-msgstr ""
+msgstr "edX Командасы"
 
 #: lms/templates/wiki/article.html
 msgid "Last modified:"
-msgstr ""
+msgstr "Соңғы рет өзгертілген:"
 
 #: lms/templates/wiki/article.html
 msgid "See all children"
@@ -3127,25 +3144,25 @@ msgstr ""
 
 #: lms/templates/wiki/article.html
 msgid "This article was last modified:"
-msgstr ""
+msgstr "Бұл мақала соңғы рет өзгертілген:"
 
 #: lms/templates/wiki/create.html lms/templates/wiki/create.html.py
 msgid "Add new article"
-msgstr ""
+msgstr "Жаңа мақала қосу"
 
 #: lms/templates/wiki/create.html
 msgid "Create article"
-msgstr ""
+msgstr "Мақала құру"
 
 #: lms/templates/wiki/create.html lms/templates/wiki/delete.html
 #: lms/templates/wiki/delete.html.py
 msgid "Go back"
-msgstr ""
+msgstr "Артқа қайту"
 
 #: lms/templates/wiki/delete.html lms/templates/wiki/delete.html.py
 #: lms/templates/wiki/edit.html
 msgid "Delete article"
-msgstr ""
+msgstr "Мақаланы алып тастау"
 
 #: lms/templates/wiki/delete.html
 #: lms/templates/wiki/plugins/attachments/index.html
@@ -3155,7 +3172,7 @@ msgstr ""
 #: lms/templates/discussion/_underscore_templates.html
 #: lms/templates/discussion/mustache/_inline_thread_show.mustache
 msgid "Delete"
-msgstr ""
+msgstr "Алып тастау"
 
 #: lms/templates/wiki/delete.html
 msgid "You cannot delete a root article."
@@ -3194,15 +3211,15 @@ msgstr ""
 #: lms/templates/discussion/mustache/_inline_thread_show.mustache
 #: lms/templates/wiki/includes/article_menu.html
 msgid "Edit"
-msgstr ""
+msgstr "Түзеу"
 
 #: lms/templates/wiki/edit.html lms/templates/wiki/edit.html.py
 msgid "Save changes"
-msgstr ""
+msgstr "Өзгертулерді сақтау"
 
 #: lms/templates/wiki/edit.html cms/templates/unit.html
 msgid "Preview"
-msgstr ""
+msgstr "Алдын-ала көру"
 
 #. #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
 #. Translators: this is a control to allow users to exit out of this modal
@@ -3221,7 +3238,7 @@ msgstr ""
 #: lms/templates/modal/_modal-settings-language.html
 #: lms/templates/modal/accessible_confirm.html
 msgid "Close"
-msgstr ""
+msgstr "Жабу"
 
 #: lms/templates/wiki/edit.html
 msgid "Wiki Preview"
@@ -3241,11 +3258,11 @@ msgstr ""
 
 #: lms/templates/wiki/edit.html
 msgid "Back to editor"
-msgstr ""
+msgstr "Редакторға қайту"
 
 #: lms/templates/wiki/history.html
 msgid "History"
-msgstr ""
+msgstr "Тарих"
 
 #: lms/templates/wiki/history.html
 msgid ""
@@ -3269,7 +3286,7 @@ msgstr ""
 
 #: lms/templates/wiki/history.html
 msgid "Change"
-msgstr ""
+msgstr "Өзгерту"
 
 #: lms/templates/wiki/history.html lms/templates/wiki/history.html
 msgid "Merge selected with current..."
@@ -3417,7 +3434,7 @@ msgstr ""
 
 #: lms/templates/wiki/includes/cheatsheet.html
 msgid "Unordered List"
-msgstr ""
+msgstr "Реттелмеген тізім"
 
 #: lms/templates/wiki/includes/cheatsheet.html
 msgid "Sub Item 1"
@@ -3429,11 +3446,11 @@ msgstr ""
 
 #: lms/templates/wiki/includes/cheatsheet.html
 msgid "Ordered"
-msgstr ""
+msgstr "Реттелген"
 
 #: lms/templates/wiki/includes/cheatsheet.html
 msgid "List"
-msgstr ""
+msgstr "Тізім"
 
 #: lms/templates/wiki/includes/cheatsheet.html
 msgid "Quotes"
@@ -3493,11 +3510,11 @@ msgstr ""
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "Size"
-msgstr ""
+msgstr "Көлемі"
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "File History"
-msgstr ""
+msgstr "Файл тарихы"
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "Detach"
@@ -3517,7 +3534,7 @@ msgstr ""
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "File history"
-msgstr ""
+msgstr "Файл тарихы"
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "revisions"
@@ -3530,11 +3547,11 @@ msgstr ""
 #: cms/djangoapps/contentstore/course_info_model.py
 #: cms/djangoapps/contentstore/course_info_model.py
 msgid "Invalid course update id."
-msgstr ""
+msgstr "Курстың жаңарту сәйкестендіргіші дұрыс емес."
 
 #: cms/djangoapps/contentstore/course_info_model.py
 msgid "Course update not found."
-msgstr ""
+msgstr "Курстың жаңартуы табылмады."
 
 #: cms/djangoapps/contentstore/git_export_utils.py
 msgid ""
@@ -3564,7 +3581,7 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/git_export_utils.py
 msgid "Unable to export course to xml."
-msgstr ""
+msgstr "Курсты xml форматына экспорттау мүмкін емес."
 
 #: cms/djangoapps/contentstore/git_export_utils.py
 msgid "Unable to configure git username and password"
@@ -3575,6 +3592,8 @@ msgid ""
 "Unable to commit changes. This is usually because there are no changes to be"
 " committed"
 msgstr ""
+"Өзгертулерді сақтау мүмкін емес. Бұл әдетте өзгертулер болмағандықтан "
+"туындайды."
 
 #: cms/djangoapps/contentstore/git_export_utils.py
 msgid ""
@@ -3605,7 +3624,7 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/utils.py lms/templates/notes.html
 msgid "My Notes"
-msgstr ""
+msgstr "Менің жазбаларым"
 
 #: cms/djangoapps/contentstore/management/commands/git_export.py
 msgid ""
@@ -3615,7 +3634,7 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/views/assets.py
 msgid "Upload completed"
-msgstr ""
+msgstr "Жүктеу аяқталды"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid ""
@@ -3629,6 +3648,9 @@ msgid ""
 "\n"
 "{err}"
 msgstr ""
+"'{name}' курсын құру мүмкін емес.\n"
+"\n"
+"{err}"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid ""
@@ -3657,15 +3679,15 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/views/import_export.py
 msgid "We only support uploading a .tar.gz file."
-msgstr ""
+msgstr "Тек қана .tar.gz файлдарын жүктеу мүмкін"
 
 #: cms/djangoapps/contentstore/views/import_export.py
 msgid "File upload corrupted. Please try again"
-msgstr ""
+msgstr "Файлды жүктеу кезінде қате. Қайта жүктеп көріңіз"
 
 #: cms/djangoapps/contentstore/views/import_export.py
 msgid "Could not find the course.xml file in the package."
-msgstr ""
+msgstr "Пакет ішінде course.xml файлы табылмады."
 
 #: cms/djangoapps/contentstore/views/item.py
 msgid "Duplicate of {0}"
@@ -3689,11 +3711,11 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Insufficient permissions"
-msgstr ""
+msgstr "Ырқыңыз жеткіліксіз "
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Could not find user by email address '{email}'."
-msgstr ""
+msgstr "'{email}' электронды поштаға сәйкес қолданушы табылмады."
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "User {email} has registered but has not yet activated his/her account."
@@ -3705,11 +3727,11 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Only instructors may create other instructors"
-msgstr ""
+msgstr "Тек нұсқаушылар басқа нұсқаушыларды құра алады"
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "You may not remove the last instructor from a course"
-msgstr ""
+msgstr "Сіз курстың жалғыз нұсқаушысын өшіре алмайсыз"
 
 #: cms/djangoapps/course_creators/models.py
 msgid "unrequested"
@@ -3717,19 +3739,19 @@ msgstr ""
 
 #: cms/djangoapps/course_creators/models.py
 msgid "pending"
-msgstr ""
+msgstr "орындалу үстінде"
 
 #: cms/djangoapps/course_creators/models.py
 msgid "granted"
-msgstr ""
+msgstr "рұқсат етілді"
 
 #: cms/djangoapps/course_creators/models.py
 msgid "denied"
-msgstr ""
+msgstr "рұқсатсыз"
 
 #: cms/djangoapps/course_creators/models.py
 msgid "Studio user"
-msgstr ""
+msgstr "Studio қолданушы"
 
 #: cms/djangoapps/course_creators/models.py
 msgid "The date when state was last updated"
@@ -3764,7 +3786,7 @@ msgstr ""
 #: lms/templates/courseware/instructor_dashboard.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 msgid "Loading..."
-msgstr ""
+msgstr "Жүктелу үстінде..."
 
 #. Translators: this is a verb describing the action of viewing more details
 #: cms/templates/container_xblock_component.html
@@ -3792,7 +3814,7 @@ msgstr ""
 #: lms/templates/discussion/mustache/_inline_discussion_cohorted.mustache
 #: lms/templates/verify_student/face_upload.html
 msgid "Cancel"
-msgstr ""
+msgstr "Болдырмау"
 
 #: cms/templates/index.html
 #: lms/templates/instructor/instructor_dashboard_2/course_info.html
@@ -3818,7 +3840,8 @@ msgstr ""
 #: cms/templates/login.html cms/templates/register.html
 #: lms/templates/login.html lms/templates/provider_login.html
 #: lms/templates/provider_login.html lms/templates/register.html
-#: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
+#: lms/templates/register.html lms/templates/signup_modal.html
+#: lms/templates/sysadmin_dashboard.html
 #: lms/templates/university_profile/edge.html
 msgid "Password"
 msgstr ""
@@ -3828,7 +3851,7 @@ msgstr ""
 #: cms/templates/widgets/header.html
 #: lms/templates/wiki/includes/article_menu.html
 msgid "Settings"
-msgstr ""
+msgstr "Күйге келтіру"
 
 #: cms/templates/manage_users.html
 #: lms/templates/courseware/instructor_dashboard.html
@@ -3842,7 +3865,7 @@ msgstr ""
 #: lms/templates/combinedopenended/selfassessment/self_assessment_prompt.html
 #: lms/templates/verify_student/face_upload.html
 msgid "Save"
-msgstr ""
+msgstr "Сақтау"
 
 #: cms/templates/register.html cms/templates/widgets/header.html
 #: lms/templates/index.html
@@ -4021,7 +4044,7 @@ msgstr ""
 
 #: common/templates/course_modes/choose.html
 msgid "or"
-msgstr ""
+msgstr "әлде"
 
 #: common/templates/course_modes/choose.html
 msgid "Audit This Course"
@@ -4052,7 +4075,7 @@ msgstr ""
 #: lms/templates/annotatable.html lms/templates/textannotation.html
 #: lms/templates/videoannotation.html
 msgid "Collapse Instructions"
-msgstr ""
+msgstr "Нұсқаулықты жиыру"
 
 #: lms/templates/annotatable.html
 msgid "Guided Discussion"
@@ -4060,7 +4083,7 @@ msgstr ""
 
 #: lms/templates/annotatable.html
 msgid "Hide Annotations"
-msgstr ""
+msgstr "Түсініктемені көрсетпеу"
 
 #: lms/templates/contact.html lms/templates/static_templates/about.html
 #: lms/templates/static_templates/about.html
@@ -4079,7 +4102,7 @@ msgstr ""
 #: lms/templates/static_templates/contact.html
 #: lms/templates/static_templates/contact.html
 msgid "Contact"
-msgstr ""
+msgstr "Жалғасу"
 
 #: lms/templates/contact.html
 msgid "Class Feedback"
@@ -4143,7 +4166,7 @@ msgstr ""
 
 #: lms/templates/course.html
 msgid "New"
-msgstr ""
+msgstr "Жаңа"
 
 #: lms/templates/dashboard.html
 msgid "Dashboard"
@@ -4159,9 +4182,45 @@ msgstr ""
 msgid "Please verify your new email"
 msgstr ""
 
+#. Translators: this message is displayed when a user tries to link their
+#. account with a third-party authentication provider (for example, Google or
+#. LinkedIn) with a given edX account, but their third-party account is
+#. already
+#. associated with another edX account. provider_name is the name of the
+#. third-party authentication provider, and platform_name is the name of the
+#. edX deployment.
+#: lms/templates/dashboard.html
+msgid ""
+"The selected {provider_name} account is already linked to another "
+"{platform_name} account. Please {link_start}log out{link_end}, then log in "
+"with your {provider_name} account."
+msgstr ""
+
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard/_dashboard_info_language.html
 msgid "edit"
+msgstr ""
+
+#. Translators: this section lists all the third-party authentication
+#. providers
+#. (for example, Google and LinkedIn) the user can link with or unlink from
+#. their edX account.
+#: lms/templates/dashboard.html
+msgid "Account Links"
+msgstr ""
+
+#. Translators: clicking on this removes the link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "unlink"
+msgstr ""
+
+#. Translators: clicking on this creates a link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "link"
 msgstr ""
 
 #: lms/templates/dashboard.html lms/templates/dashboard.html
@@ -4309,7 +4368,7 @@ msgstr ""
 
 #: lms/templates/enroll_students.html
 msgid "Course: "
-msgstr ""
+msgstr "Курс:"
 
 #: lms/templates/enroll_students.html
 msgid "Add new students"
@@ -4341,7 +4400,7 @@ msgstr ""
 
 #: lms/templates/folditbasic.html
 msgid "Status:"
-msgstr ""
+msgstr "Мәртебе:"
 
 #: lms/templates/folditbasic.html
 msgid "You have successfully gotten to level {goal_level}."
@@ -4357,7 +4416,7 @@ msgstr ""
 
 #: lms/templates/folditbasic.html
 msgid "Level"
-msgstr ""
+msgstr "Деңгей"
 
 #: lms/templates/folditbasic.html
 #: lms/templates/courseware/instructor_dashboard.html
@@ -4370,11 +4429,11 @@ msgstr ""
 
 #: lms/templates/folditchallenge.html
 msgid "User"
-msgstr ""
+msgstr "Пайдаланушы"
 
 #: lms/templates/folditchallenge.html
 msgid "Score"
-msgstr ""
+msgstr "Нәтиже"
 
 #: lms/templates/footer.html
 msgid "About"
@@ -4513,11 +4572,11 @@ msgstr ""
 #: lms/templates/instructor/staff_grading.html
 #: lms/templates/peer_grading/peer_grading_problem.html
 msgid "Submit"
-msgstr ""
+msgstr "Жіберу"
 
 #: lms/templates/help_modal.html
 msgid "Thank You!"
-msgstr ""
+msgstr "Рақмет!"
 
 #: lms/templates/help_modal.html
 msgid ""
@@ -4712,6 +4771,21 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
+#. Translators: this is the last choice of a number of choices of how to log
+#. in
+#. to the site.
+#: lms/templates/login.html
+msgid "or, if you have connected one of these providers, log in below."
+msgstr ""
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication provider (like Google or LinkedIn).
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/login.html lms/templates/register.html
+msgid "Sign in with {provider_name}"
+msgstr ""
+
 #: lms/templates/lti.html
 msgid "External resource"
 msgstr ""
@@ -4794,7 +4868,7 @@ msgstr ""
 #: lms/templates/name_changes.html lms/templates/name_changes.html
 #: lms/templates/sysadmin_dashboard_gitlogs.html
 msgid "Error"
-msgstr ""
+msgstr "Қате"
 
 #: lms/templates/name_changes.html
 msgid "Rejected"
@@ -4876,7 +4950,7 @@ msgstr ""
 
 #: lms/templates/problem.html
 msgid "Show Answer"
-msgstr ""
+msgstr "Жауапты көрсету"
 
 #: lms/templates/problem.html
 msgid "Reveal Answer"
@@ -4990,7 +5064,7 @@ msgstr ""
 
 #: lms/templates/register-sidebar.html
 msgid "Next Steps"
-msgstr ""
+msgstr "Келесі адымдары"
 
 #: lms/templates/register-sidebar.html
 msgid ""
@@ -5036,6 +5110,26 @@ msgstr ""
 
 #: lms/templates/register.html
 msgid "Register below to create your {platform_name} account"
+msgstr ""
+
+#: lms/templates/register.html
+msgid "Register to start learning today!"
+msgstr ""
+
+#: lms/templates/register.html
+msgid ""
+"or create your own {platform_name} account by completing all "
+"<strong>required*</strong> fields below."
+msgstr ""
+
+#. Translators: selected_provider is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/register.html
+msgid "You've successfully signed in with {selected_provider}."
+msgstr ""
+
+#: lms/templates/register.html
+msgid "Finish your account registration below to start learning."
 msgstr ""
 
 #: lms/templates/register.html
@@ -5125,7 +5219,7 @@ msgstr ""
 #: lms/templates/seq_module.html lms/templates/seq_module.html
 #: lms/templates/discussion/mustache/_pagination.mustache
 msgid "Next"
-msgstr ""
+msgstr "Келесі"
 
 #: lms/templates/signup_modal.html
 msgid "Sign Up for {platform_name}"
@@ -5452,11 +5546,11 @@ msgstr ""
 
 #: lms/templates/video.html
 msgid "Video position"
-msgstr ""
+msgstr "Бейне позициясы"
 
 #: lms/templates/video.html
 msgid "Play"
-msgstr ""
+msgstr "Жүргізу"
 
 #: lms/templates/video.html
 msgid "Speeds"
@@ -5468,19 +5562,19 @@ msgstr ""
 
 #: lms/templates/video.html
 msgid "Volume"
-msgstr ""
+msgstr "Дыбыс"
 
 #: lms/templates/video.html
 msgid "Fill browser"
-msgstr ""
+msgstr "Браузерді толтыру"
 
 #: lms/templates/video.html
 msgid "HD off"
-msgstr ""
+msgstr "HD сөндірулі"
 
 #: lms/templates/video.html lms/templates/video.html
 msgid "Turn off captions"
-msgstr ""
+msgstr "Тақырыптарды өшіру"
 
 #: lms/templates/video.html
 msgid "Skip to end of transcript."
@@ -5508,6 +5602,10 @@ msgstr ""
 msgid "{file_format}"
 msgstr ""
 
+#: lms/templates/video.html
+msgid "Download Handout"
+msgstr ""
+
 #: lms/templates/word_cloud.html
 msgid "Your words:"
 msgstr ""
@@ -5527,7 +5625,7 @@ msgstr ""
 #: lms/templates/combinedopenended/combined_open_ended.html
 #: lms/templates/peer_grading/peer_grading_problem.html
 msgid "Hide Question"
-msgstr ""
+msgstr "Сұрақты көрсетпеу"
 
 #: lms/templates/combinedopenended/combined_open_ended.html
 msgid "New Submission"
@@ -5831,7 +5929,7 @@ msgstr ""
 
 #: lms/templates/courseware/courseware.html
 msgid "Open Calculator"
-msgstr ""
+msgstr "Калькуляторды аш"
 
 #: lms/templates/courseware/courseware.html
 msgid "Calculator Input Field"
@@ -6430,6 +6528,10 @@ msgid "Course Progress for Student '{username}' ({email})"
 msgstr ""
 
 #: lms/templates/courseware/progress.html
+msgid "Download your certificate"
+msgstr ""
+
+#: lms/templates/courseware/progress.html
 msgid "{earned:.3n} of {total:.3n} possible points"
 msgstr ""
 
@@ -6724,7 +6826,7 @@ msgstr ""
 
 #: lms/templates/discussion/_discussion_module.html
 msgid "Show Discussion"
-msgstr ""
+msgstr "Талқылауды көрсету"
 
 #: lms/templates/discussion/_discussion_module_studio.html
 msgid "To view live discussions, click Preview or View Live in Unit Settings."
@@ -6798,7 +6900,7 @@ msgstr ""
 #: lms/templates/discussion/mustache/_inline_discussion_cohorted.mustache
 #: wiki/forms.py wiki/forms.py wiki/forms.py
 msgid "Title"
-msgstr ""
+msgstr "Аты"
 
 #: lms/templates/discussion/_inline_new_post.html
 #: lms/templates/discussion/_new_post.html
@@ -6836,7 +6938,7 @@ msgstr ""
 
 #: lms/templates/discussion/_similar_posts.html
 msgid "Hide"
-msgstr ""
+msgstr "Көрсетпеу"
 
 #: lms/templates/discussion/_thread_list_template.html
 msgid "Discussion Home"
@@ -6906,7 +7008,7 @@ msgstr ""
 #: lms/templates/discussion/mustache/_inline_thread_show.mustache
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "anonymous"
-msgstr ""
+msgstr "аноним"
 
 #: lms/templates/discussion/_underscore_templates.html
 msgid "&bull; This thread is closed."
@@ -6929,12 +7031,12 @@ msgstr ""
 
 #: lms/templates/discussion/_underscore_templates.html
 msgid "Pin Thread"
-msgstr ""
+msgstr "Тақырыпты бекіту"
 
 #: lms/templates/discussion/_underscore_templates.html
 #: lms/templates/discussion/mustache/_inline_thread_show.mustache
 msgid "Pinned"
-msgstr ""
+msgstr "Бекітілді"
 
 #: lms/templates/discussion/_underscore_templates.html
 msgid "(this post is about %(courseware_title_linked)s)"
@@ -7059,7 +7161,7 @@ msgstr ""
 
 #: lms/templates/discussion/_user_profile.html
 msgid ", "
-msgstr ""
+msgstr ","
 
 #: lms/templates/discussion/_user_profile.html
 msgid "%s discussion started"
@@ -7090,10 +7192,6 @@ msgstr ""
 msgid "User Profile"
 msgstr ""
 
-#: lms/templates/discussion/user_profile.html
-msgid "Active Threads"
-msgstr ""
-
 #: lms/templates/discussion/mustache/_inline_thread.mustache
 #: lms/templates/discussion/mustache/_inline_thread_cohorted.mustache
 msgid "Expand discussion"
@@ -7111,10 +7209,14 @@ msgstr ""
 #: lms/templates/discussion/mustache/_pagination.mustache
 #: lms/templates/discussion/mustache/_pagination.mustache
 msgid "…"
-msgstr ""
+msgstr "..."
 
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "View discussion"
+msgstr ""
+
+#: lms/templates/discussion/mustache/_user_profile.mustache
+msgid "Active Threads"
 msgstr ""
 
 #: lms/templates/emails/activation_email.txt
@@ -7154,6 +7256,11 @@ msgstr ""
 msgid ""
 "You have been invited to be a beta tester for {course_name} at {site_name} "
 "by a member of the course staff."
+msgstr ""
+
+#: lms/templates/emails/add_beta_tester_email_message.txt
+#: lms/templates/emails/enroll_email_enrolledmessage.txt
+msgid "To start accessing course materials, please visit {course_url}"
 msgstr ""
 
 #: lms/templates/emails/add_beta_tester_email_message.txt
@@ -7256,10 +7363,6 @@ msgstr ""
 msgid ""
 "You have been enrolled in {course_name} at {site_name} by a member of the "
 "course staff. The course should now appear on your {site_name} dashboard."
-msgstr ""
-
-#: lms/templates/emails/enroll_email_enrolledmessage.txt
-msgid "To start accessing course materials, please visit {course_url}"
 msgstr ""
 
 #: lms/templates/emails/enroll_email_enrolledmessage.txt
@@ -7407,7 +7510,7 @@ msgstr ""
 
 #: lms/templates/instructor/staff_grading.html
 msgid "(Hide)"
-msgstr ""
+msgstr "(Көрсетпеу)"
 
 #: lms/templates/instructor/staff_grading.html
 #: lms/templates/peer_grading/peer_grading_problem.html
@@ -8126,7 +8229,7 @@ msgstr ""
 #: lms/templates/open_ended_problems/open_ended_problems.html
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Problem Name"
-msgstr ""
+msgstr "Есеп атауы"
 
 #: lms/templates/open_ended_problems/open_ended_problems.html
 msgid "Grader Type"
@@ -8162,7 +8265,7 @@ msgstr ""
 
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Graded"
-msgstr ""
+msgstr "Бағаланды"
 
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Available"
@@ -8170,7 +8273,7 @@ msgstr ""
 
 #: lms/templates/peer_grading/peer_grading.html
 msgid "Required"
-msgstr ""
+msgstr "Міндетті"
 
 #: lms/templates/peer_grading/peer_grading.html
 msgid "No due date"
@@ -11888,7 +11991,7 @@ msgstr ""
 
 #: wiki/forms.py wiki/forms.py
 msgid "Summary"
-msgstr ""
+msgstr "сома"
 
 #: wiki/forms.py
 msgid ""
@@ -11975,7 +12078,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Owner"
-msgstr ""
+msgstr "Иесі"
 
 #: wiki/forms.py
 msgid "Enter the username of the owner."
@@ -11983,7 +12086,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "(none)"
-msgstr ""
+msgstr "(жоқ)"
 
 #: wiki/forms.py
 msgid "Inherit permissions"

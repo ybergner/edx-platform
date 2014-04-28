@@ -1601,7 +1601,7 @@ msgstr "文件格式不支持。请上传一个后缀名为<code>tar.gz</code>�
 
 #: cms/static/js/views/metadata.js
 msgid "Upload File"
-msgstr ""
+msgstr "上传文件"
 
 #: cms/static/js/views/overview.js
 msgid "Collapse All Sections"

@@ -1,5 +1,5 @@
 # #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
-# edX translation file.
+# edX community translations have been downloaded from Estonian (Estonia) (http://www.transifex.com/projects/p/edx-platform/language/et_EE/).
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -13,7 +13,7 @@
 # Translators:
 # Triple <nyke@planet.ee>, 2013
 # #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
-# edX translation file
+# edX community translations have been downloaded from Estonian (Estonia) (http://www.transifex.com/projects/p/edx-platform/language/et_EE/)
 # Copyright (C) 2014 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -42,7 +42,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: edx-platform\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2014-04-22 10:12-0400\n"
+"POT-Creation-Date: 2014-04-27 11:11-0400\n"
 "PO-Revision-Date: 2014-02-06 03:20+0000\n"
 "Last-Translator: nedbat <ned@edx.org>\n"
 "Language-Team: Estonian (Estonia) (http://www.transifex.com/projects/p/edx-platform/language/et_EE/)\n"
@@ -174,6 +174,16 @@ msgstr "Sa pole registreerunud sellele kursusele"
 #: common/djangoapps/student/views.py
 msgid "Enrollment action is invalid"
 msgstr "Registreerumine pole lubatud"
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like
+#. Google or LinkedIn).
+#: common/djangoapps/student/views.py
+msgid ""
+"There is no {platform_name} account associated with your {provider_name} "
+"account. Please use your {platform_name} credentials or pick another "
+"provider."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "There was an error receiving your login information. Please email us."
@@ -791,7 +801,7 @@ msgstr ""
 
 #: common/lib/capa/capa/inputtypes.py common/lib/capa/capa/inputtypes.py
 msgid "unanswered"
-msgstr ""
+msgstr "vastamata"
 
 #: common/lib/capa/capa/inputtypes.py
 msgid "queued"
@@ -813,6 +823,10 @@ msgstr ""
 msgid ""
 "Submitted. As soon as a response is returned, this message will be replaced "
 "by that feedback."
+msgstr ""
+
+#: common/lib/capa/capa/inputtypes.py
+msgid "No response from Xqueue within {xqueue_timeout} seconds. Aborted."
 msgstr ""
 
 #: common/lib/capa/capa/responsetypes.py
@@ -3221,7 +3235,7 @@ msgstr "Eelvaade"
 #: lms/templates/modal/_modal-settings-language.html
 #: lms/templates/modal/accessible_confirm.html
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 #: lms/templates/wiki/edit.html
 msgid "Wiki Preview"
@@ -3818,7 +3832,8 @@ msgstr ""
 #: cms/templates/login.html cms/templates/register.html
 #: lms/templates/login.html lms/templates/provider_login.html
 #: lms/templates/provider_login.html lms/templates/register.html
-#: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
+#: lms/templates/register.html lms/templates/signup_modal.html
+#: lms/templates/sysadmin_dashboard.html
 #: lms/templates/university_profile/edge.html
 msgid "Password"
 msgstr "Parool"
@@ -4052,7 +4067,7 @@ msgstr ""
 #: lms/templates/annotatable.html lms/templates/textannotation.html
 #: lms/templates/videoannotation.html
 msgid "Collapse Instructions"
-msgstr ""
+msgstr "Tõmba juhised kokku"
 
 #: lms/templates/annotatable.html
 msgid "Guided Discussion"
@@ -4060,7 +4075,7 @@ msgstr ""
 
 #: lms/templates/annotatable.html
 msgid "Hide Annotations"
-msgstr ""
+msgstr "Peida kommentaarid"
 
 #: lms/templates/contact.html lms/templates/static_templates/about.html
 #: lms/templates/static_templates/about.html
@@ -4159,9 +4174,45 @@ msgstr ""
 msgid "Please verify your new email"
 msgstr ""
 
+#. Translators: this message is displayed when a user tries to link their
+#. account with a third-party authentication provider (for example, Google or
+#. LinkedIn) with a given edX account, but their third-party account is
+#. already
+#. associated with another edX account. provider_name is the name of the
+#. third-party authentication provider, and platform_name is the name of the
+#. edX deployment.
+#: lms/templates/dashboard.html
+msgid ""
+"The selected {provider_name} account is already linked to another "
+"{platform_name} account. Please {link_start}log out{link_end}, then log in "
+"with your {provider_name} account."
+msgstr ""
+
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard/_dashboard_info_language.html
 msgid "edit"
+msgstr ""
+
+#. Translators: this section lists all the third-party authentication
+#. providers
+#. (for example, Google and LinkedIn) the user can link with or unlink from
+#. their edX account.
+#: lms/templates/dashboard.html
+msgid "Account Links"
+msgstr ""
+
+#. Translators: clicking on this removes the link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "unlink"
+msgstr ""
+
+#. Translators: clicking on this creates a link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "link"
 msgstr ""
 
 #: lms/templates/dashboard.html lms/templates/dashboard.html
@@ -4712,6 +4763,21 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
+#. Translators: this is the last choice of a number of choices of how to log
+#. in
+#. to the site.
+#: lms/templates/login.html
+msgid "or, if you have connected one of these providers, log in below."
+msgstr ""
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication provider (like Google or LinkedIn).
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/login.html lms/templates/register.html
+msgid "Sign in with {provider_name}"
+msgstr ""
+
 #: lms/templates/lti.html
 msgid "External resource"
 msgstr ""
@@ -5036,6 +5102,26 @@ msgstr ""
 
 #: lms/templates/register.html
 msgid "Register below to create your {platform_name} account"
+msgstr ""
+
+#: lms/templates/register.html
+msgid "Register to start learning today!"
+msgstr ""
+
+#: lms/templates/register.html
+msgid ""
+"or create your own {platform_name} account by completing all "
+"<strong>required*</strong> fields below."
+msgstr ""
+
+#. Translators: selected_provider is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/register.html
+msgid "You've successfully signed in with {selected_provider}."
+msgstr ""
+
+#: lms/templates/register.html
+msgid "Finish your account registration below to start learning."
 msgstr ""
 
 #: lms/templates/register.html
@@ -5452,11 +5538,11 @@ msgstr ""
 
 #: lms/templates/video.html
 msgid "Video position"
-msgstr ""
+msgstr "Video asukoht"
 
 #: lms/templates/video.html
 msgid "Play"
-msgstr ""
+msgstr "Esita"
 
 #: lms/templates/video.html
 msgid "Speeds"
@@ -5468,19 +5554,19 @@ msgstr ""
 
 #: lms/templates/video.html
 msgid "Volume"
-msgstr ""
+msgstr "Heli tugevus"
 
 #: lms/templates/video.html
 msgid "Fill browser"
-msgstr ""
+msgstr "Täida ekraan"
 
 #: lms/templates/video.html
 msgid "HD off"
-msgstr ""
+msgstr "HD välja"
 
 #: lms/templates/video.html lms/templates/video.html
 msgid "Turn off captions"
-msgstr ""
+msgstr "Peida subtiitrid"
 
 #: lms/templates/video.html
 msgid "Skip to end of transcript."
@@ -5506,6 +5592,10 @@ msgstr ""
 
 #: lms/templates/video.html lms/templates/video.html
 msgid "{file_format}"
+msgstr ""
+
+#: lms/templates/video.html
+msgid "Download Handout"
 msgstr ""
 
 #: lms/templates/word_cloud.html
@@ -6432,6 +6522,10 @@ msgid "Course Progress for Student '{username}' ({email})"
 msgstr ""
 
 #: lms/templates/courseware/progress.html
+msgid "Download your certificate"
+msgstr ""
+
+#: lms/templates/courseware/progress.html
 msgid "{earned:.3n} of {total:.3n} possible points"
 msgstr ""
 
@@ -6726,7 +6820,7 @@ msgstr ""
 
 #: lms/templates/discussion/_discussion_module.html
 msgid "Show Discussion"
-msgstr ""
+msgstr "Näita arutelu"
 
 #: lms/templates/discussion/_discussion_module_studio.html
 msgid "To view live discussions, click Preview or View Live in Unit Settings."
@@ -6838,7 +6932,7 @@ msgstr ""
 
 #: lms/templates/discussion/_similar_posts.html
 msgid "Hide"
-msgstr ""
+msgstr "Peida"
 
 #: lms/templates/discussion/_thread_list_template.html
 msgid "Discussion Home"
@@ -6908,7 +7002,7 @@ msgstr ""
 #: lms/templates/discussion/mustache/_inline_thread_show.mustache
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "anonymous"
-msgstr ""
+msgstr "anonüümne"
 
 #: lms/templates/discussion/_underscore_templates.html
 msgid "&bull; This thread is closed."
@@ -6927,7 +7021,7 @@ msgstr ""
 #: lms/templates/discussion/_underscore_templates.html
 #: lms/templates/discussion/_underscore_templates.html
 msgid "Report Misuse"
-msgstr ""
+msgstr "Teata väärkasutusest"
 
 #: lms/templates/discussion/_underscore_templates.html
 msgid "Pin Thread"
@@ -7094,10 +7188,6 @@ msgstr ""
 msgid "User Profile"
 msgstr ""
 
-#: lms/templates/discussion/user_profile.html
-msgid "Active Threads"
-msgstr ""
-
 #: lms/templates/discussion/mustache/_inline_thread.mustache
 #: lms/templates/discussion/mustache/_inline_thread_cohorted.mustache
 msgid "Expand discussion"
@@ -7115,10 +7205,14 @@ msgstr ""
 #: lms/templates/discussion/mustache/_pagination.mustache
 #: lms/templates/discussion/mustache/_pagination.mustache
 msgid "…"
-msgstr ""
+msgstr "…"
 
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "View discussion"
+msgstr ""
+
+#: lms/templates/discussion/mustache/_user_profile.mustache
+msgid "Active Threads"
 msgstr ""
 
 #: lms/templates/emails/activation_email.txt

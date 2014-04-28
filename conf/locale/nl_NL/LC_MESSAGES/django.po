@@ -66,7 +66,7 @@ msgstr ""
 #. needs to grade
 #: cms/djangoapps/contentstore/utils.py common/lib/xmodule/xmodule/tabs.py
 msgid "Open Ended Panel"
-msgstr ""
+msgstr "Paneel zonder vast einde"
 
 #: common/djangoapps/course_modes/models.py
 msgid "Honor Code Certificate"
@@ -234,7 +234,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Please choose an option"
-msgstr ""
+msgstr "Kies alsjeblieft een optie"
 
 #: common/djangoapps/student/views.py
 msgid "User with username {} does not exist"
@@ -338,7 +338,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Username should only consist of A-Z and 0-9, with no spaces."
-msgstr ""
+msgstr "Gebruikersnamen mogen alleen A-Z en 0-9 bevatten, zonder spaties."
 
 #: common/djangoapps/student/views.py common/djangoapps/student/views.py
 msgid "Password: "
@@ -378,7 +378,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "Invalid password"
-msgstr ""
+msgstr "Ongeldig wachtwoord"
 
 #: common/djangoapps/student/views.py
 msgid "Valid e-mail address required."
@@ -386,7 +386,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "An account with this e-mail already exists."
-msgstr ""
+msgstr "Een account met dit e-mailadres bestaat al."
 
 #: common/djangoapps/student/views.py
 msgid "Old email is the same as the new email."
@@ -398,7 +398,7 @@ msgstr ""
 
 #: common/djangoapps/student/views.py common/djangoapps/student/views.py
 msgid "Invalid ID"
-msgstr ""
+msgstr "Ongeldig ID"
 
 #. Translators: the translation for "LONG_DATE_FORMAT" must be a format
 #. string for formatting dates in a long form.  For example, the
@@ -1813,7 +1813,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: lms/templates/help_modal.html
+#: lms/djangoapps/instructor/views/api.py lms/templates/help_modal.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 #: lms/templates/instructor/instructor_dashboard_2/metrics.html
 #: lms/templates/open_ended_problems/open_ended_flagged_problems.html
@@ -2227,7 +2227,7 @@ msgstr ""
 #: lms/djangoapps/instructor_task/tasks.py
 #: lms/templates/wiki/plugins/attachments/index.html wiki/models/article.py
 msgid "deleted"
-msgstr ""
+msgstr "verwijderd"
 
 #. Translators: This is a past-tense verb that is inserted into task progress
 #. messages as {action}.
@@ -2572,7 +2572,7 @@ msgstr ""
 #: lms/templates/shoppingcart/verified_cert_receipt.html
 #: wiki/plugins/attachments/forms.py
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: lms/djangoapps/shoppingcart/reports.py
 msgid "Comments"
@@ -3230,8 +3230,11 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
+#. #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
 #. Translators: this is a control to allow users to exit out of this modal
 #. interface (a menu or piece of UI that takes the full focus of the screen)
+#: lms/templates/wiki/edit.html lms/templates/wiki/history.html
+#: lms/templates/wiki/history.html lms/templates/wiki/includes/cheatsheet.html
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard.html lms/templates/forgot_password_modal.html
@@ -3476,7 +3479,7 @@ msgstr ""
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "Upload new file"
-msgstr ""
+msgstr "Nieuw bestand uploaden"
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "Search and add file"
@@ -3528,7 +3531,7 @@ msgstr ""
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "Replace"
-msgstr ""
+msgstr "Vervang"
 
 #: lms/templates/wiki/plugins/attachments/index.html
 msgid "Restore"
@@ -3652,6 +3655,9 @@ msgid ""
 "\n"
 "{err}"
 msgstr ""
+"Kan de cursus '{name}' niet aanmaken.\n"
+"\n"
+"{err}"
 
 #: cms/djangoapps/contentstore/views/course.py
 msgid ""
@@ -3712,11 +3718,11 @@ msgstr ""
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Insufficient permissions"
-msgstr ""
+msgstr "Sorry, jij mag dit niet doen."
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "Could not find user by email address '{email}'."
-msgstr ""
+msgstr "Wij kennen dit E-mail adres niet '{email}'."
 
 #: cms/djangoapps/contentstore/views/user.py
 msgid "User {email} has registered but has not yet activated his/her account."
@@ -3752,7 +3758,7 @@ msgstr ""
 
 #: cms/djangoapps/course_creators/models.py
 msgid "Studio user"
-msgstr ""
+msgstr "Studio gebruiker"
 
 #: cms/djangoapps/course_creators/models.py
 msgid "The date when state was last updated"
@@ -3852,7 +3858,7 @@ msgstr ""
 #: cms/templates/widgets/header.html
 #: lms/templates/wiki/includes/article_menu.html
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: cms/templates/manage_users.html
 #: lms/templates/courseware/instructor_dashboard.html
@@ -3866,7 +3872,7 @@ msgstr ""
 #: lms/templates/combinedopenended/selfassessment/self_assessment_prompt.html
 #: lms/templates/verify_student/face_upload.html
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: cms/templates/register.html cms/templates/widgets/header.html
 #: lms/templates/index.html
@@ -3914,7 +3920,7 @@ msgstr ""
 #: lms/templates/navigation.html lms/templates/static_templates/help.html
 #: lms/templates/static_templates/help.html wiki/plugins/help/wiki_plugin.py
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: common/templates/course_modes/choose.html
 msgid "Upgrade Your Registration for {} | Choose Your Track"
@@ -6901,6 +6907,7 @@ msgstr ""
 #: lms/templates/discussion/_underscore_templates.html
 #: lms/templates/discussion/mustache/_inline_discussion.mustache
 #: lms/templates/discussion/mustache/_inline_discussion_cohorted.mustache
+#: wiki/forms.py wiki/forms.py wiki/forms.py
 msgid "Title"
 msgstr "Titel"
 
@@ -9674,7 +9681,7 @@ msgstr ""
 
 #: cms/templates/404.html
 msgid "The page that you were looking for was not found."
-msgstr ""
+msgstr "De pagina die u zocht is niet gevonden."
 
 #: cms/templates/404.html
 msgid ""
@@ -9713,7 +9720,7 @@ msgstr ""
 
 #: cms/templates/activation_active.html
 msgid "Your account is already active"
-msgstr ""
+msgstr "Uw account is al geactiveerd"
 
 #: cms/templates/activation_active.html
 msgid ""
@@ -9754,7 +9761,7 @@ msgstr ""
 
 #: cms/templates/activation_invalid.html
 msgid "Contact edX Support"
-msgstr ""
+msgstr "Neem contact op met edX Support"
 
 #: cms/templates/asset_index.html cms/templates/asset_index.html
 #: cms/templates/widgets/header.html
@@ -9782,7 +9789,7 @@ msgstr ""
 #: cms/templates/edit-tabs.html cms/templates/overview.html
 #: cms/templates/textbooks.html cms/templates/widgets/header.html
 msgid "Content"
-msgstr ""
+msgstr "Inhoud"
 
 #: cms/templates/asset_index.html cms/templates/container.html
 #: cms/templates/course_info.html cms/templates/edit-tabs.html
@@ -9826,7 +9833,7 @@ msgstr ""
 #: cms/templates/asset_index.html cms/templates/container.html
 #: cms/templates/overview.html cms/templates/settings_graders.html
 msgid "What can I do on this page?"
-msgstr ""
+msgstr "Wat kan ik op deze pagina doen?"
 
 #: cms/templates/asset_index.html
 msgid ""
@@ -9837,7 +9844,7 @@ msgstr ""
 
 #: cms/templates/asset_index.html
 msgid "Your file has been deleted."
-msgstr ""
+msgstr "Uw bestand is verwijderd."
 
 #: cms/templates/asset_index.html
 msgid "close alert"
@@ -9847,25 +9854,28 @@ msgstr ""
 #: cms/templates/export_git.html cms/templates/import.html
 #: cms/templates/widgets/header.html
 msgid "Tools"
-msgstr ""
+msgstr "Gereedschappen"
 
 #: cms/templates/checklists.html
 msgid "Course Checklists"
-msgstr ""
+msgstr "Cursus Controlelijst"
 
 #: cms/templates/checklists.html
 msgid "Current Checklists"
-msgstr ""
+msgstr "Huidige controlelijsten"
 
 #: cms/templates/checklists.html
 msgid "What are course checklists?"
-msgstr ""
+msgstr "Wat zijn cursus controlelijsten?"
 
 #: cms/templates/checklists.html
 msgid ""
 "Course checklists are tools to help you understand and keep track of all the"
 " steps necessary to get your course ready for students."
 msgstr ""
+"Cursus controlelijsten zijn gereedschappen die hulp bieden bij het begrijpen"
+" en bijhouden van alle stappen die nodig zijn om uw cursus gereed te maken "
+"voor studenten."
 
 #: cms/templates/checklists.html
 msgid ""
@@ -9898,15 +9908,15 @@ msgstr ""
 
 #: cms/templates/container.html
 msgid "This page has no content yet."
-msgstr ""
+msgstr "Deze pagina heeft nog geen inhoud."
 
 #: cms/templates/container.html cms/templates/container.html
 msgid "Publishing Status"
-msgstr ""
+msgstr "Status van publicatie"
 
 #: cms/templates/container.html
 msgid "Published"
-msgstr ""
+msgstr "Gepubliceerd"
 
 #: cms/templates/container.html
 msgid ""
@@ -9916,7 +9926,7 @@ msgstr ""
 
 #: cms/templates/container.html
 msgid "Draft"
-msgstr ""
+msgstr "Concept"
 
 #: cms/templates/container.html
 msgid ""
@@ -9952,11 +9962,11 @@ msgstr ""
 #: cms/templates/edit-tabs.html cms/templates/edit-tabs.html
 #: cms/templates/export.html cms/templates/widgets/header.html
 msgid "Pages"
-msgstr ""
+msgstr "Paginas"
 
 #: cms/templates/edit-tabs.html
 msgid "New Page"
-msgstr ""
+msgstr "Nieuwe pagina"
 
 #: cms/templates/edit-tabs.html cms/templates/edit_subsection.html
 #: cms/templates/index.html cms/templates/overview.html
@@ -9973,11 +9983,11 @@ msgstr ""
 
 #: cms/templates/edit-tabs.html
 msgid "Show this page"
-msgstr ""
+msgstr "Toon deze pagina"
 
 #: cms/templates/edit-tabs.html cms/templates/edit-tabs.html
 msgid "Show/hide page"
-msgstr ""
+msgstr "Toon/verberg deze pagina"
 
 #: cms/templates/edit-tabs.html cms/templates/edit-tabs.html
 msgid "This page cannot be reordered"
@@ -10004,7 +10014,7 @@ msgstr ""
 
 #: cms/templates/edit-tabs.html
 msgid "Custom pages"
-msgstr ""
+msgstr "Aangepaste paginas"
 
 #: cms/templates/edit-tabs.html
 msgid ""
@@ -10012,24 +10022,30 @@ msgid ""
 "course content. For example, you can create pages for the grading policy, "
 "course slides, and a course calendar. "
 msgstr ""
+"U kunt aangepaste paginas aanmaken en bewerken om uw studenten van "
+"additioneel cursusmateriaal te voorzien. U kunt bijvoorbeeld paginas "
+"aanmaken voor het beoordelingsbeleid, de dias van de cursus en de kalender "
+"van de cursus."
 
 #: cms/templates/edit-tabs.html
 msgid "How do pages look to students in my course?"
-msgstr ""
+msgstr "Hoe zien paginas eruit voor studenten van mijn cursus?"
 
 #: cms/templates/edit-tabs.html
 msgid ""
 "Students see the default and custom pages at the top of your course and use "
 "these links to navigate."
 msgstr ""
+"Studenten zien de standaard en aangepaste pagina bovenaan uw cursus en "
+"gebruiken deze  verwijzingen om te navigeren."
 
 #: cms/templates/edit-tabs.html
 msgid "See an example"
-msgstr ""
+msgstr "Bekijk een voorbeeld"
 
 #: cms/templates/edit-tabs.html
 msgid "Pages in Your Course"
-msgstr ""
+msgstr "Paginas in uw curus"
 
 #: cms/templates/edit-tabs.html
 msgid "Preview of Pages in your course"
@@ -10057,7 +10073,7 @@ msgstr ""
 
 #: cms/templates/edit_subsection.html
 msgid "Units:"
-msgstr ""
+msgstr "Eenheden:"
 
 #: cms/templates/edit_subsection.html
 msgid "Subsection Settings"
@@ -10078,12 +10094,14 @@ msgstr ""
 
 #: cms/templates/edit_subsection.html
 msgid "UTC"
-msgstr ""
+msgstr "UTC"
 
 #: cms/templates/edit_subsection.html
 msgid ""
 "The date above differs from the release date of {name}, which is unset."
 msgstr ""
+"De bovenstaande datum verschilt van de uitgiftedatum van {name} welke niet "
+"is ingesteld."
 
 #: cms/templates/edit_subsection.html
 msgid "The date above differs from the release date of {name} - {start_time}"
@@ -10099,19 +10117,19 @@ msgstr ""
 
 #: cms/templates/edit_subsection.html
 msgid "Set a due date"
-msgstr ""
+msgstr "Stel een vervaldatum in"
 
 #: cms/templates/edit_subsection.html
 msgid "Due Day"
-msgstr ""
+msgstr "Vervaldag"
 
 #: cms/templates/edit_subsection.html
 msgid "Due Time"
-msgstr ""
+msgstr "Vervaltijd"
 
 #: cms/templates/edit_subsection.html
 msgid "Remove due date"
-msgstr ""
+msgstr "Verwijder vervaldatum"
 
 #: cms/templates/edit_subsection.html
 msgid "Preview Drafts"
@@ -10223,7 +10241,7 @@ msgstr ""
 
 #: cms/templates/export.html
 msgid "Certificates"
-msgstr ""
+msgstr "Certificaten"
 
 #: cms/templates/export.html
 msgid "Why export a course?"
@@ -11495,7 +11513,7 @@ msgstr ""
 
 #: cms/templates/settings_advanced.html
 msgid "Your policy changes have been saved."
-msgstr ""
+msgstr "Uw beleidswijzigingen zijn opgeslagen."
 
 #: cms/templates/settings_advanced.html
 msgid "There was an error saving your information. Please see below."
@@ -11785,20 +11803,20 @@ msgstr ""
 
 #: cms/templates/widgets/footer.html
 msgid "All rights reserved."
-msgstr ""
+msgstr "Alle rechten voorbehouden."
 
 #: cms/templates/widgets/footer.html cms/templates/widgets/header.html
 #: cms/templates/widgets/sock.html
 msgid "Contact Us"
-msgstr ""
+msgstr "Neem contact met ons op"
 
 #: cms/templates/widgets/header.html
 msgid "Current Course:"
-msgstr ""
+msgstr "Huidige cursus:"
 
 #: cms/templates/widgets/header.html
 msgid "{course_name}'s Navigation:"
-msgstr ""
+msgstr "{course_name}'s Navigatie:"
 
 #: cms/templates/widgets/header.html
 msgid "Outline"
@@ -11810,19 +11828,19 @@ msgstr ""
 
 #: cms/templates/widgets/header.html
 msgid "Schedule &amp; Details"
-msgstr ""
+msgstr "Rooster &amp; Details"
 
 #: cms/templates/widgets/header.html
 msgid "Checklists"
-msgstr ""
+msgstr "Controlelijsten"
 
 #: cms/templates/widgets/header.html
 msgid "Import"
-msgstr ""
+msgstr "Importeer"
 
 #: cms/templates/widgets/header.html
 msgid "Export"
-msgstr ""
+msgstr "Exporteer"
 
 #: cms/templates/widgets/header.html
 msgid "Help &amp; Account Navigation"
@@ -11830,7 +11848,7 @@ msgstr ""
 
 #: cms/templates/widgets/header.html cms/templates/widgets/sock.html
 msgid "This is a PDF Document"
-msgstr ""
+msgstr "Dit is een PDF-Document"
 
 #: cms/templates/widgets/header.html
 msgid "Studio Documentation"
@@ -11843,15 +11861,15 @@ msgstr ""
 
 #: cms/templates/widgets/header.html
 msgid "Currently signed in as:"
-msgstr ""
+msgstr "Momenteel aangemeld als:"
 
 #: cms/templates/widgets/header.html
 msgid "Sign Out"
-msgstr ""
+msgstr "Afmelden"
 
 #: cms/templates/widgets/header.html
 msgid "You're not currently signed in"
-msgstr ""
+msgstr "U bent momenteel niet aangemeld"
 
 #: cms/templates/widgets/header.html
 msgid "How Studio Works"
@@ -11873,32 +11891,32 @@ msgstr ""
 #: cms/templates/widgets/problem-edit.html
 #: cms/templates/widgets/problem-edit.html
 msgid "Multiple Choice"
-msgstr ""
+msgstr "Meerkeuze"
 
 #: cms/templates/widgets/problem-edit.html
 #: cms/templates/widgets/problem-edit.html
 msgid "Checkboxes"
-msgstr ""
+msgstr "Selectievakjes"
 
 #: cms/templates/widgets/problem-edit.html
 #: cms/templates/widgets/problem-edit.html
 msgid "Text Input"
-msgstr ""
+msgstr "Tekstuele invoer"
 
 #: cms/templates/widgets/problem-edit.html
 #: cms/templates/widgets/problem-edit.html
 msgid "Numerical Input"
-msgstr ""
+msgstr "Numerieke invoer"
 
 #: cms/templates/widgets/problem-edit.html
 #: cms/templates/widgets/problem-edit.html
 msgid "Dropdown"
-msgstr ""
+msgstr "Vervolgkeuzelijst"
 
 #: cms/templates/widgets/problem-edit.html
 #: cms/templates/widgets/problem-edit.html
 msgid "Explanation"
-msgstr ""
+msgstr "Uitleg"
 
 #: cms/templates/widgets/problem-edit.html
 msgid "Advanced Editor"
@@ -11937,7 +11955,7 @@ msgstr ""
 
 #: cms/templates/widgets/sock.html
 msgid "Enroll in edX101"
-msgstr ""
+msgstr "Inschrijven bij edx101"
 
 #: cms/templates/widgets/sock.html
 msgid "Contact us about Studio"
@@ -11951,7 +11969,7 @@ msgstr ""
 
 #: cms/templates/widgets/tabs-aggregator.html
 msgid "name"
-msgstr ""
+msgstr "naam"
 
 #: cms/templates/widgets/units.html
 msgid "Delete this unit"
@@ -11975,7 +11993,7 @@ msgstr "Dit is een sleutelserie."
 
 #: wiki/admin.py wiki/models/article.py
 msgid "created"
-msgstr ""
+msgstr "gecreëerd"
 
 #: wiki/forms.py
 msgid "Only localhost... muahahaha"
@@ -11987,7 +12005,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Type in some contents"
-msgstr ""
+msgstr "Typ enige inhoud"
 
 #: wiki/forms.py
 msgid ""
@@ -11998,16 +12016,18 @@ msgstr ""
 
 #: wiki/forms.py wiki/forms.py
 msgid "Contents"
-msgstr ""
+msgstr "Inhoud"
 
 #: wiki/forms.py wiki/forms.py
 msgid "Summary"
-msgstr ""
+msgstr "Samenvatting"
 
 #: wiki/forms.py
 msgid ""
 "Give a short reason for your edit, which will be stated in the revision log."
 msgstr ""
+"Geen een korte motivatie voor de bewerking, deze zal worden opgeslagen in "
+"het revisie-logbestand."
 
 #: wiki/forms.py
 msgid ""
@@ -12018,11 +12038,11 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "No changes made. Nothing to save."
-msgstr ""
+msgstr "Geen veranderingen. Niets om op te slaan."
 
 #: wiki/forms.py
 msgid "Select an option"
-msgstr ""
+msgstr "Selecteer een optie"
 
 #: wiki/forms.py
 msgid "Slug"
@@ -12053,7 +12073,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "Yes, I am sure"
-msgstr ""
+msgstr "Ja, ik weet het zeker"
 
 #: wiki/forms.py
 msgid "Purge"
@@ -12074,30 +12094,32 @@ msgstr ""
 #: wiki/forms.py
 msgid "While you tried to delete this article, it was modified. TAKE CARE!"
 msgstr ""
+"Terwijl u probeerde dit artikel te verwijderen werd er een verandering "
+"doorgevoerd. WEES ALERT!"
 
 #: wiki/forms.py
 msgid "Lock article"
-msgstr ""
+msgstr "Zet artikel op slot"
 
 #: wiki/forms.py
 msgid "Deny all users access to edit this article."
-msgstr ""
+msgstr "Ontzeg alle gebruikers de mogelijkheid om dit artikel te bewerken."
 
 #: wiki/forms.py
 msgid "Permissions"
-msgstr ""
+msgstr "Permissies"
 
 #: wiki/forms.py
 msgid "Owner"
-msgstr ""
+msgstr "Eigenaar"
 
 #: wiki/forms.py
 msgid "Enter the username of the owner."
-msgstr ""
+msgstr "Voer de gebruikersnaam van de eigenaar in."
 
 #: wiki/forms.py
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #: wiki/forms.py
 msgid "Inherit permissions"
@@ -12119,7 +12141,7 @@ msgstr ""
 
 #: wiki/forms.py
 msgid "No user with that username"
-msgstr ""
+msgstr "Geen gebruiker met die gebruikersnaam"
 
 #: wiki/forms.py
 msgid "Article locked for editing"
@@ -12140,7 +12162,7 @@ msgstr ""
 #: wiki/models/article.py wiki/models/pluginbase.py
 #: wiki/plugins/attachments/models.py
 msgid "current revision"
-msgstr ""
+msgstr "huidige revisie"
 
 #: wiki/models/article.py
 msgid ""
@@ -12150,7 +12172,7 @@ msgstr ""
 
 #: wiki/models/article.py
 msgid "modified"
-msgstr ""
+msgstr "gewijzigd"
 
 #: wiki/models/article.py
 msgid "Article properties last modified"
@@ -12158,23 +12180,28 @@ msgstr ""
 
 #: wiki/models/article.py
 msgid "owner"
-msgstr ""
+msgstr "eigenaar"
 
 #: wiki/models/article.py
 msgid ""
 "The owner of the article, usually the creator. The owner always has both "
 "read and write access."
 msgstr ""
+"De eigenaar van het artikel, normaal gesproken de aanmaker. De eigenaar "
+"heeft altijd zowel lees- als schrijftoegang."
 
 #: wiki/models/article.py
 msgid "group"
-msgstr ""
+msgstr "groep"
 
 #: wiki/models/article.py
 msgid ""
 "Like in a UNIX file system, permissions can be given to a user according to "
 "group membership. Groups are handled through the Django auth system."
 msgstr ""
+"Zoals in een UNIX bestandssysteem kunnen permissies gegeven worden aan een "
+"gebruiker corresponderend aan groepslidmaatschap. Groepen worden afgehandeld"
+" door het Django auth systeem."
 
 #: wiki/models/article.py
 msgid "group read access"
@@ -12218,11 +12245,11 @@ msgstr ""
 
 #: wiki/models/article.py
 msgid "IP address"
-msgstr ""
+msgstr "IP-adres"
 
 #: wiki/models/article.py
 msgid "user"
-msgstr ""
+msgstr "gebruiker"
 
 #: wiki/models/article.py
 msgid "locked"
@@ -12230,7 +12257,7 @@ msgstr ""
 
 #: wiki/models/article.py wiki/models/pluginbase.py
 msgid "article"
-msgstr ""
+msgstr "artikel"
 
 #: wiki/models/article.py
 msgid "article contents"
@@ -12278,11 +12305,11 @@ msgstr ""
 
 #: wiki/models/urlpath.py
 msgid "URL path"
-msgstr ""
+msgstr "URL-pad"
 
 #: wiki/models/urlpath.py
 msgid "URL paths"
-msgstr ""
+msgstr "URL-paden"
 
 #: wiki/models/urlpath.py
 msgid "Sorry but you cannot have a root article with a slug."
@@ -12314,11 +12341,11 @@ msgstr ""
 
 #: wiki/plugins/attachments/forms.py
 msgid "Yes I am sure..."
-msgstr ""
+msgstr "Ja ik weet het zeker..."
 
 #: wiki/plugins/attachments/markdown_extensions.py
 msgid "Click to download file"
-msgstr ""
+msgstr "Klik om het bestand te downloaden"
 
 #: wiki/plugins/attachments/models.py
 msgid ""
@@ -12328,7 +12355,7 @@ msgstr ""
 
 #: wiki/plugins/attachments/models.py
 msgid "original filename"
-msgstr ""
+msgstr "oorspronkelijke bestandsnaam"
 
 #: wiki/plugins/attachments/models.py
 msgid "attachment"
@@ -12340,7 +12367,7 @@ msgstr ""
 
 #: wiki/plugins/attachments/models.py
 msgid "file"
-msgstr ""
+msgstr "bestand"
 
 #: wiki/plugins/attachments/models.py
 msgid "attachment revision"
@@ -12356,13 +12383,15 @@ msgstr ""
 
 #: wiki/plugins/attachments/views.py wiki/plugins/attachments/views.py
 msgid "Your file could not be saved: %s"
-msgstr ""
+msgstr "Uw bestand kon niet worden opgeslagen: %s"
 
 #: wiki/plugins/attachments/views.py wiki/plugins/attachments/views.py
 msgid ""
 "Your file could not be saved, probably because of a permission error on the "
 "web server."
 msgstr ""
+"Uw bestand kon niet worden opgeslagen, waarschijnlijk door een fout in de "
+"permissies op de webserver."
 
 #: wiki/plugins/attachments/views.py
 msgid "%s uploaded and replaces old attachment."
@@ -12384,7 +12413,7 @@ msgstr ""
 
 #: wiki/plugins/attachments/views.py
 msgid "The file %s was deleted."
-msgstr ""
+msgstr "Het bestand %s werd verwijderd."
 
 #: wiki/plugins/attachments/views.py
 msgid "This article is no longer related to the file %s."
@@ -12406,19 +12435,19 @@ msgstr ""
 
 #: wiki/plugins/images/forms.py
 msgid "Are you sure?"
-msgstr ""
+msgstr "Weet u het zeker?"
 
 #: wiki/plugins/images/models.py
 msgid "image"
-msgstr ""
+msgstr "afbeelding"
 
 #: wiki/plugins/images/models.py
 msgid "images"
-msgstr ""
+msgstr "afbeeldingen"
 
 #: wiki/plugins/images/models.py
 msgid "Image: %s"
-msgstr ""
+msgstr "Afbeelding: %s"
 
 #: wiki/plugins/images/models.py
 msgid "Current revision not set!!"
@@ -12466,7 +12495,7 @@ msgstr ""
 
 #: wiki/plugins/notifications/forms.py
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaties"
 
 #: wiki/plugins/notifications/forms.py
 msgid "When this article is edited"
@@ -12490,15 +12519,15 @@ msgstr ""
 
 #: wiki/plugins/notifications/models.py
 msgid "Article deleted: %s"
-msgstr ""
+msgstr "Artikel verwijderd: %s"
 
 #: wiki/plugins/notifications/models.py
 msgid "Article modified: %s"
-msgstr ""
+msgstr "Artikel aangepast: %s"
 
 #: wiki/plugins/notifications/models.py
 msgid "New article created: %s"
-msgstr ""
+msgstr "Nieuw artikel aangemaakt: %s"
 
 #: wiki/views/accounts.py
 msgid "You are now sign up... and now you can sign in!"
@@ -12506,23 +12535,23 @@ msgstr ""
 
 #: wiki/views/accounts.py
 msgid "You are no longer logged in. Bye bye!"
-msgstr ""
+msgstr "U bent niet langer aangemeld. Tot ziens!"
 
 #: wiki/views/accounts.py
 msgid "You are now logged in! Have fun!"
-msgstr ""
+msgstr "U bent nu aangemeld! Veel plezier!"
 
 #: wiki/views/article.py
 msgid "New article '%s' created."
-msgstr ""
+msgstr "Nieuw artikel '%s' aangemaakt."
 
 #: wiki/views/article.py
 msgid "There was an error creating this article: %s"
-msgstr ""
+msgstr "Er is een fout opgetreden bij het aanmaken van dit artikel: %s"
 
 #: wiki/views/article.py
 msgid "There was an error creating this article."
-msgstr ""
+msgstr "Er is een fout opgetreden bij het aanmaken van dit artikel."
 
 #: wiki/views/article.py
 msgid ""
@@ -12542,7 +12571,7 @@ msgstr ""
 
 #: wiki/views/article.py
 msgid "Your changes were saved."
-msgstr ""
+msgstr "Uw wijzigingen zijn opgeslagen."
 
 #: wiki/views/article.py
 msgid "A new revision of the article was succesfully added."
@@ -12562,7 +12591,7 @@ msgstr ""
 
 #: wiki/views/article.py
 msgid "New title"
-msgstr ""
+msgstr "Nieuwe titel"
 
 #: wiki/views/article.py
 msgid "Merge between Revision #%(r1)d and Revision #%(r2)d"

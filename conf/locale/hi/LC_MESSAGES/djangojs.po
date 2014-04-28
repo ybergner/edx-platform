@@ -1476,15 +1476,15 @@ msgstr ""
 #: cms/static/js/base.js cms/static/js/views/course_info_update.js
 #: cms/static/js/views/pages/container.js
 msgid "Deleting&hellip;"
-msgstr ""
+msgstr "हटा रहा है&hellip;"
 
 #: cms/static/coffee/src/views/unit.js
 msgid "Adding&hellip;"
-msgstr ""
+msgstr "जोड़ना&hellip;"
 
 #: cms/static/coffee/src/views/unit.js cms/static/js/views/pages/container.js
 msgid "Duplicating&hellip;"
-msgstr ""
+msgstr "नकल&hellip;"
 
 #: cms/static/coffee/src/views/unit.js cms/static/js/views/pages/container.js
 msgid "Delete this component?"
@@ -1719,6 +1719,9 @@ msgid ""
 "%(total_span)s%(total)s total%(end_span)s, sorted by "
 "%(order_span)s%(sort_order)s%(end_span)s %(sort_direction)s"
 msgstr ""
+"दिखा रहा है %(current_span)s%(start)s-%(end)s%(end_span)s को इन मे से "
+"%(total_span)s%(total)s कुल %(end_span)s, क्रमबद्ध का तरीका है "
+"%(order_span)s%(sort_order)s%(end_span)s %(sort_direction)s"
 
 #: cms/static/js/views/section_edit.js
 msgid "Your change could not be saved"

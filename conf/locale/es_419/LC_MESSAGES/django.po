@@ -1,11 +1,12 @@
 # #-#-#-#-#  django-partial.po (edx-platform)  #-#-#-#-#
-# edX translation file.
+# edX community translations have been downloaded from Spanish (Latin America) (http://www.transifex.com/projects/p/edx-platform/language/es_419/).
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
 # Translators:
 # apardo <apardo@alabs.org>, 2013
 # apardo <apardo@alabs.org>, 2013
+# ovnicraft <ovnicraft@gmail.com>, 2014
 # dsalazar <imdjsg@gmail.com>, 2014
 # diegobe <diegobe@iadb.org>, 2014
 # dsalazar <imdjsg@gmail.com>, 2014
@@ -26,6 +27,7 @@
 # 
 # Translators:
 # apardo <apardo@alabs.org>, 2013
+# ovnicraft <ovnicraft@gmail.com>, 2014
 # ferabra <ferabra@gmail.com>, 2014
 # juancamilom <juan.montoya@hmltda.com>, 2013-2014
 # juancamilom <juan.montoya@hmltda.com>, 2014
@@ -33,7 +35,7 @@
 # Natalia_m, 2013
 # Natalia_m, 2014
 # #-#-#-#-#  mako.po (edx-platform)  #-#-#-#-#
-# edX translation file
+# edX community translations have been downloaded from Spanish (Latin America) (http://www.transifex.com/projects/p/edx-platform/language/es_419/)
 # Copyright (C) 2014 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
@@ -48,6 +50,7 @@
 # ferabra <ferabra@gmail.com>, 2013
 # ferabra <ferabra@gmail.com>, 2013
 # Herty Nava <translation@bolmedia.ca>, 2013
+# jimenaianina <jime.ianina@gmail.com>, 2014
 # juancamilom <juan.montoya@hmltda.com>, 2013-2014
 # juancamilom <juan.montoya@hmltda.com>, 2013-2014
 # juancamilom <juan.montoya@hmltda.com>, 2013
@@ -59,6 +62,7 @@
 # Natalia_m, 2013-2014
 # ovnicraft <ovnicraft@gmail.com>, 2013
 # preteric, 2014
+# Santiagoz <salkin.santiago@gmail.com>, 2014
 # #-#-#-#-#  mako-studio.po (edx-platform)  #-#-#-#-#
 # edX translation file
 # Copyright (C) 2014 edX
@@ -98,7 +102,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: edx-platform\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2014-04-22 10:12-0400\n"
+"POT-Creation-Date: 2014-04-27 11:11-0400\n"
 "PO-Revision-Date: 2014-03-01 15:39+0000\n"
 "Last-Translator: ovnicraft <ovnicraft@gmail.com>\n"
 "Language-Team: Spanish (Latin America) (http://www.transifex.com/projects/p/edx-platform/language/es_419/)\n"
@@ -232,6 +236,16 @@ msgstr "Usted no está inscrito en este curso"
 #: common/djangoapps/student/views.py
 msgid "Enrollment action is invalid"
 msgstr "La Inscripción es inválida"
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like
+#. Google or LinkedIn).
+#: common/djangoapps/student/views.py
+msgid ""
+"There is no {platform_name} account associated with your {provider_name} "
+"account. Please use your {platform_name} credentials or pick another "
+"provider."
+msgstr ""
 
 #: common/djangoapps/student/views.py
 msgid "There was an error receiving your login information. Please email us."
@@ -904,6 +918,10 @@ msgstr ""
 "Enviado. Tan pronto se reciba una respuesta, este mensaje será reemplazado "
 "por los comentarios correspondientes."
 
+#: common/lib/capa/capa/inputtypes.py
+msgid "No response from Xqueue within {xqueue_timeout} seconds. Aborted."
+msgstr ""
+
 #: common/lib/capa/capa/responsetypes.py
 msgid "Error {err} in evaluating hint function {hintfn}."
 msgstr "Error {err} al evaluar la función de ayuda contextual {hintfn}."
@@ -919,7 +937,7 @@ msgstr "Ver la línea de código fuente {sourcenum}."
 #. Translators: 'unmask_name' is a method name and should not be translated.
 #: common/lib/capa/capa/responsetypes.py
 msgid "unmask_name called on response that is not masked"
-msgstr ""
+msgstr "unmask_name llamado en petición que no está enmascarada"
 
 #. Translators: 'shuffle' and 'answer-pool' are attribute names and should not
 #. be translated.
@@ -931,12 +949,13 @@ msgstr ""
 #. translated.
 #: common/lib/capa/capa/responsetypes.py
 msgid "answer-pool value should be an integer"
-msgstr ""
+msgstr "Valores de lista de respuestas deben ser números enteros."
 
 #. Translators: 'Choicegroup' is an input type and should not be translated.
 #: common/lib/capa/capa/responsetypes.py
 msgid "Choicegroup must include at least 1 correct and 1 incorrect choice"
 msgstr ""
+"Grupo de opciones debe incluir al menos una correcta y una incorrecta."
 
 #: common/lib/capa/capa/responsetypes.py common/lib/capa/capa/responsetypes.py
 msgid "There was a problem with the staff answer to this problem."
@@ -2019,12 +2038,12 @@ msgstr "Objetivos"
 
 #: lms/djangoapps/instructor/views/api.py
 msgid "Module does not exist."
-msgstr ""
+msgstr "No existe el módulo."
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/djangoapps/instructor/views/legacy.py
 msgid "An error occurred while deleting the score."
-msgstr ""
+msgstr "Ha ocurrido un error borrando la calificación."
 
 #: lms/djangoapps/instructor/views/api.py
 #: lms/templates/verify_student/midcourse_reverify_dash.html
@@ -2712,7 +2731,7 @@ msgstr "Intentando añadir una moneda diferente en el carrito"
 
 #: lms/djangoapps/shoppingcart/models.py
 msgid "Registration for Course: {course_name}"
-msgstr ""
+msgstr "Registro para Curso: {course_name}"
 
 #: lms/djangoapps/shoppingcart/models.py
 msgid ""
@@ -4073,7 +4092,7 @@ msgid ""
 "Special characters not allowed in organization, course number, and course "
 "run."
 msgstr ""
-"No se permiten caracteres especiales en los campos de Organización, número "
+"No se permiten caracteres especiales en los campos de organización, número "
 "del curso, y número de ejecución del curso."
 
 #: cms/djangoapps/contentstore/views/course.py
@@ -4284,7 +4303,8 @@ msgstr "¿Olvidó su contraseña?"
 #: cms/templates/login.html cms/templates/register.html
 #: lms/templates/login.html lms/templates/provider_login.html
 #: lms/templates/provider_login.html lms/templates/register.html
-#: lms/templates/signup_modal.html lms/templates/sysadmin_dashboard.html
+#: lms/templates/register.html lms/templates/signup_modal.html
+#: lms/templates/sysadmin_dashboard.html
 #: lms/templates/university_profile/edge.html
 msgid "Password"
 msgstr "Contraseña"
@@ -4682,10 +4702,46 @@ msgstr "Ocurrió un error. Por favor intente nuevamente más tarde."
 msgid "Please verify your new email"
 msgstr "Por favor verifique su correo"
 
+#. Translators: this message is displayed when a user tries to link their
+#. account with a third-party authentication provider (for example, Google or
+#. LinkedIn) with a given edX account, but their third-party account is
+#. already
+#. associated with another edX account. provider_name is the name of the
+#. third-party authentication provider, and platform_name is the name of the
+#. edX deployment.
+#: lms/templates/dashboard.html
+msgid ""
+"The selected {provider_name} account is already linked to another "
+"{platform_name} account. Please {link_start}log out{link_end}, then log in "
+"with your {provider_name} account."
+msgstr ""
+
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 #: lms/templates/dashboard/_dashboard_info_language.html
 msgid "edit"
 msgstr "editar"
+
+#. Translators: this section lists all the third-party authentication
+#. providers
+#. (for example, Google and LinkedIn) the user can link with or unlink from
+#. their edX account.
+#: lms/templates/dashboard.html
+msgid "Account Links"
+msgstr ""
+
+#. Translators: clicking on this removes the link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "unlink"
+msgstr ""
+
+#. Translators: clicking on this creates a link between a user's edX account
+#. and their account with an external authentication provider (like Google or
+#. LinkedIn).
+#: lms/templates/dashboard.html
+msgid "link"
+msgstr ""
 
 #: lms/templates/dashboard.html lms/templates/dashboard.html
 msgid "Reset Password"
@@ -5289,6 +5345,21 @@ msgstr "Preferencias de la Cuenta"
 msgid "Remember me"
 msgstr "Recordarme"
 
+#. Translators: this is the last choice of a number of choices of how to log
+#. in
+#. to the site.
+#: lms/templates/login.html
+msgid "or, if you have connected one of these providers, log in below."
+msgstr ""
+
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication provider (like Google or LinkedIn).
+#. Translators: provider_name is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/login.html lms/templates/register.html
+msgid "Sign in with {provider_name}"
+msgstr ""
+
 #: lms/templates/lti.html
 msgid "External resource"
 msgstr "Recurso externo"
@@ -5423,7 +5494,7 @@ msgstr "Salir"
 
 #: lms/templates/navigation.html
 msgid "Shopping Cart"
-msgstr ""
+msgstr "Carro de compras"
 
 #: lms/templates/navigation.html
 msgid "How it Works"
@@ -5658,6 +5729,26 @@ msgstr "Bienvenido!"
 #: lms/templates/register.html
 msgid "Register below to create your {platform_name} account"
 msgstr "Regístrese a continuación para crear su cuenta en {platform_name}"
+
+#: lms/templates/register.html
+msgid "Register to start learning today!"
+msgstr ""
+
+#: lms/templates/register.html
+msgid ""
+"or create your own {platform_name} account by completing all "
+"<strong>required*</strong> fields below."
+msgstr ""
+
+#. Translators: selected_provider is the name of an external, third-party user
+#. authentication service (like Google or LinkedIn).
+#: lms/templates/register.html
+msgid "You've successfully signed in with {selected_provider}."
+msgstr ""
+
+#: lms/templates/register.html
+msgid "Finish your account registration below to start learning."
+msgstr ""
 
 #: lms/templates/register.html
 msgid "Please complete the following fields to register for an account. "
@@ -6150,6 +6241,10 @@ msgstr "Descargar la transcripción"
 #: lms/templates/video.html lms/templates/video.html
 msgid "{file_format}"
 msgstr "{file_format}"
+
+#: lms/templates/video.html
+msgid "Download Handout"
+msgstr "Descargar folleto."
 
 #: lms/templates/word_cloud.html
 msgid "Your words:"
@@ -7161,6 +7256,10 @@ msgid "Course Progress for Student '{username}' ({email})"
 msgstr "Progreso del curso para el estudiante '{username}' ({email})"
 
 #: lms/templates/courseware/progress.html
+msgid "Download your certificate"
+msgstr ""
+
+#: lms/templates/courseware/progress.html
 msgid "{earned:.3n} of {total:.3n} possible points"
 msgstr "{earned:.3n} de {total:.3n} puntos posibles"
 
@@ -7874,10 +7973,6 @@ msgstr ""
 msgid "User Profile"
 msgstr "Perfil de Usuario"
 
-#: lms/templates/discussion/user_profile.html
-msgid "Active Threads"
-msgstr "Hilos Activos"
-
 #: lms/templates/discussion/mustache/_inline_thread.mustache
 #: lms/templates/discussion/mustache/_inline_thread_cohorted.mustache
 msgid "Expand discussion"
@@ -7900,6 +7995,10 @@ msgstr "..."
 #: lms/templates/discussion/mustache/_profile_thread.mustache
 msgid "View discussion"
 msgstr "Ver discusión"
+
+#: lms/templates/discussion/mustache/_user_profile.mustache
+msgid "Active Threads"
+msgstr "Hilos Activos"
 
 #: lms/templates/emails/activation_email.txt
 msgid ""
@@ -8609,6 +8708,8 @@ msgstr "section_display_name"
 msgid ""
 "Enter email addresses and/or usernames separated by new lines or commas."
 msgstr ""
+"Ingrese los correos electrónicos y/o nombres de usuario separados por nuevas"
+" lineas o por comas."
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid ""
@@ -8621,7 +8722,7 @@ msgstr ""
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Email Addresses/Usernames"
-msgstr ""
+msgstr "Casilla de Correo electrónico/Nombres de usuario"
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
@@ -8691,10 +8792,14 @@ msgid ""
 "If this option is <em>checked</em>, users who have not enrolled in your "
 "course will be automatically enrolled."
 msgstr ""
+"Si esta opción esta <em>marcada</em>, los usuarios que aun no se han "
+"inscrito en tu curso, serán inscritos automáticamente."
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Checking this box has no effect if 'Remove beta testers' is selected."
 msgstr ""
+"Marcar esta casilla no tiene efecto si \"Quitar los probadores beta\" está "
+"seleccionado"
 
 #: lms/templates/instructor/instructor_dashboard_2/membership.html
 msgid "Add beta testers"
@@ -9422,13 +9527,15 @@ msgstr "Registrarse para [Course Name] | Recibo (Order"
 
 #: lms/templates/shoppingcart/receipt.html
 msgid "Thank you for your Purchase!"
-msgstr ""
+msgstr "¡Gracias por su compra!"
 
 #: lms/templates/shoppingcart/receipt.html
 msgid ""
 "Please print this receipt page for your records. You should also have "
 "received a receipt in your email."
 msgstr ""
+"Por favor imprima esta página comprobante y archívela. También deberías "
+"haber recibido este comprobante en tu casilla de correo electrónico."
 
 #: lms/templates/shoppingcart/receipt.html
 msgid " () Electronic Receipt"
@@ -10897,7 +11004,7 @@ msgstr "Acciones de página"
 
 #: cms/templates/asset_index.html
 msgid "Loading&hellip;"
-msgstr "Loading&hellip;"
+msgstr "Cargando&hellip;"
 
 #: cms/templates/asset_index.html
 msgid "What files are listed here?"
@@ -12545,7 +12652,7 @@ msgstr "Ubicación"
 
 #: cms/templates/register.html
 msgid "I agree to the {a_start} Terms of Service {a_end}"
-msgstr "Acepto los {link_start}Términos del Servicio{link_end}"
+msgstr ""
 
 #: cms/templates/register.html
 msgid "Create My Account &amp; Start Authoring Courses"
@@ -13169,8 +13276,6 @@ msgstr "Tu cuenta para edX Studio"
 #: cms/templates/emails/course_creator_admin_subject.txt
 msgid "{email} has requested Studio course creator privileges on edge"
 msgstr ""
-"{Email} ha solicitado privilegios de creador de cursos Studio a través de "
-"edge."
 
 #: cms/templates/emails/course_creator_admin_user_pending.txt
 msgid ""

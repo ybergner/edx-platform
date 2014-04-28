@@ -101,5 +101,12 @@ if __name__ == '__main__':
         pull()
     elif args.command == "ltr":
         pull_all_ltr()
+        print("Now generating langugage files...")
+        print('python i18n/generate.py')
+        execute('python i18n/generate.py')
+        print("Committing translations...")
+        execute('git clean -fdX conf/locale')
+        execute('git add conf/locale')
+        execute('git commit --message="Updated LTR translations" --edit')
     else:
         raise Exception("unknown command ({cmd})".format(cmd=args.command))
