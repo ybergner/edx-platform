@@ -271,13 +271,6 @@ class LTIModule(LTIFields, LTI20ModuleMixin, XModule):
         Otherwise error message from LTI provider is generated.
     """
 
-    @property
-    def graded(self):
-        """
-        Alias of the `has_score` property
-        """
-        return self.has_score
-
     css = {'scss': [resource_string(__name__, 'css/lti/lti.scss')]}
 
     def get_input_fields(self):
