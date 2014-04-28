@@ -138,7 +138,7 @@
 
 .. _Zooming Image Tool: http://edx.readthedocs.org/projects/ca/en/latest/exercises_tools/zooming_image.html
 
-.. DATA DOCUMENATION
+.. DATA DOCUMENTATION
 
 .. _Student Info and Progress Data: http://edx.readthedocs.org/projects/devdata/en/latest/internal_data_formats/sql_schema.html#student-info
 
