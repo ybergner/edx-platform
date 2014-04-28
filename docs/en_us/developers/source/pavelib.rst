@@ -133,7 +133,7 @@ Run Servers
 
 ::
 
-   paver run_all_servers --settings=dev --worker_settings=celery --lms=dev
+   paver run_all_servers --settings=dev --worker_settings=celery
 
 ..
 
