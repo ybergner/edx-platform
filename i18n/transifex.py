@@ -22,6 +22,8 @@ def pull_all_rtl():
     # LANGUAGES_BIDI = ("en@rtl", "he", "ar", "fa", "fa-ir", "ur")
     rtl_langs = ['he', 'ar', 'fa', 'fa_IR', 'ur']
     for lang in rtl_langs:
+        print ('rm -rf conf/locale/' + lang)
+        execute('rm -rf conf/locale/' + lang)
         execute('tx pull -l ' + lang)
 
     clean_translated_locales(langs=rtl_langs)
@@ -99,5 +101,12 @@ if __name__ == '__main__':
         pull()
     elif args.command == 'rtl':
         pull_all_rtl()
+        print("Now generating langugage files...")
+        print('python i18n/generate.py')
+        execute('python i18n/generate.py')
+        print("Committing translations...")
+        execute('git clean -fdX conf/locale')
+        execute('git add conf/locale')
+        execute('git commit --message="Updated RTL translations" --edit')
     else:
         raise Exception("unknown command ({cmd})".format(cmd=args.command))
