@@ -54,6 +54,13 @@ git fetch origin master:refs/remotes/origin/master
 # Bootstrap Ruby requirements so we can run the tests
 bundle install
 
+# Reset the jenkins worker's virtualenv back to the
+# state it was in when the instance was spun up.
+if [ -e $HOME/edx-venv-clean.tar.gz ]; then
+    rm -rf $HOME/edx-venv
+    tar -xf $HOME/edx-venv-clean.tar.gz $HOME
+fi
+
 # Activate the Python virtualenv
 source $HOME/edx-venv/bin/activate
 
