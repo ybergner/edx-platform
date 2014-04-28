@@ -133,7 +133,7 @@ Run Servers
 
 ::
 
-   paver run_all_servers --settings=dev --worker_settings=celery
+   paver run_all_servers --settings=dev --worker_settings=celery --lms=dev
 
 ..
 
@@ -142,14 +142,7 @@ Run Servers
 
      *--settings=* Environment settings e.g. aws, dev
 
-
-::
-
-   paver dev
-
-..
-
-  Run LMS with 'cms.dev' and Studio with 'dev' settings with 'celery' worker.
+     *--lms=* Override django settings for LMS e.g. cms.dev
 
 
 ::
