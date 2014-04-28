@@ -142,6 +142,16 @@ Run Servers
 
      *--settings=* Environment settings e.g. aws, dev
 
+
+::
+
+   paver dev
+
+..
+
+  Run LMS with 'cms.dev' and Studio with 'dev' settings with 'celery' worker.
+
+
 ::
 
    paver celery --settings=dev
